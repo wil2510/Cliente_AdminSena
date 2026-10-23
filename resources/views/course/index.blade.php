@@ -103,29 +103,29 @@
                                 <tr>
 
                                     <td class="ps-4 fw-bold">
-                                        #{{ $course->id }}
+                                        #{{ $course['id'] }}
                                     </td>
 
 
                                     <td>
 
                                         <span class="badge bg-success">
-                                            {{ $course->code }}
+                                            {{ $course['code'] }}
                                         </span>
 
                                     </td>
 
 
                                     <td class="fw-bold">
-                                        {{ $course->name }}
+                                        {{ $course['name'] }}
                                     </td>
 
 
                                     <td>
 
-                                        @if ($course->area)
+                                        @if ($course['area_id'])
 
-                                            {{ $course->area->name }}
+                                            {{ $course['area_id'] }}
 
                                         @else
 
@@ -140,9 +140,9 @@
 
                                     <td>
 
-                                        @if ($course->trainingCenter)
+                                        @if ($course['training_center_id'])
 
-                                            {{ $course->trainingCenter->name }}
+                                            {{ $course['training_center_id'] }}
 
                                         @else
 
@@ -161,7 +161,7 @@
 
                                             {{-- VER --}}
 
-                                            <a href="{{ route('course.show', $course->id) }}"
+                                            <a href="{{ route('course.show', $course['id']) }}"
                                                class="btn btn-sm btn-info text-white">
 
                                                 Ver
@@ -171,7 +171,7 @@
 
                                             {{-- EDITAR --}}
 
-                                            <a href="{{ route('course.edit', $course->id) }}"
+                                            <a href="{{ route('course.edit', $course['id']) }}"
                                                class="btn btn-sm btn-warning text-white">
 
                                                 Editar
@@ -181,7 +181,7 @@
 
                                             {{-- ELIMINAR --}}
 
-                                            <form action="{{ route('course.destroy', $course->id) }}"
+                                            <form action="{{ route('course.destroy', $course['id']) }}"
                                                   method="POST"
                                                   class="d-inline"
                                                   onsubmit="return confirm('¿Deseas eliminar este curso?')">

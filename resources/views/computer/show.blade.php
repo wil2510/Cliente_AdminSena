@@ -10,7 +10,7 @@
                     
                     <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
                         <h4 class="mb-0 fw-bold">Detalle del Equipo</h4>
-                        <p class="mb-0 mt-1 small opacity-75">Equipo N° {{ $computer['number'] }}</p>
+                        <p class="mb-0 mt-1 small opacity-75">Equipo N° {{ $computers['number'] }}</p>
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
@@ -18,21 +18,21 @@
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID de Sistema</span>
                             <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
-                                #{{ $computer['id'] }}
+                                #{{ $computers['id'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Número de Computador</span>
                             <div class="p-3 bg-light rounded-3 fw-bold text-dark fs-5">
-                                {{ $computer['number'] }}
+                                {{ $computers['number'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fabricante / Marca</span>
                             <div class="p-3 bg-light rounded-3 fw-medium text-dark">
-                                {{ $computer['brand'] }}
+                                {{ $computers['brand'] }}
                             </div>
                         </div>
 
@@ -42,13 +42,13 @@
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($computer['created_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($computers['created_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última modificación</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($computer['updated_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($computers['updated_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                         </div>

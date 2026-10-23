@@ -1,64 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h2 fw-bold text-success mb-1">Panel de Administración: ¿Quiénes Somos?</h1>
-            <p class="text-muted mb-0">Gestión de la información institucional del SENA</p>
-        </div>
-        <a href="{{ route('quienes-somos.create') }}" class="btn btn-success fw-semibold">
-            <i class="bi bi-plus-lg me-1"></i> Crear Registro
-        </a>
-    </div>
+<div class="py-5 rounded-4" style="background-color: #f4f6f9;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    
+                    <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
+                        <h4 class="mb-0 fw-bold">Información del Centro</h4>
+                        <p class="mb-0 mt-1 small opacity-75">{{ $trainingcenters['name'] }}</p>
+                    </div>
+                    
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Código ID</span>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
+                                #{{ $trainingcenters['id'] }}
+                            </div>
+                        </div>
 
-    <div class="card border-0 shadow-sm rounded-3">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-success text-white">
-                        <tr>
-                            <th scope="col" class="ps-4 py-3">#</th>
-                            <th scope="col" class="py-3">Título</th>
-                            <th scope="col" class="py-3">Descripción Resumida</th>
-                            <th scope="col" class="py-3">Estado</th>
-                            <th scope="col" class="py-3 text-end pe-4">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($items ?? [] as $item)
-                            <tr>
-                                <td class="ps-4 fw-bold">{{ $item->id }}</td>
-                                <td class="fw-semibold">{{ $item->title }}</td>
-                                <td class="text-muted">{{ Str::limit($item->description, 50) }}</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td class="text-end pe-4">
-                                    <div class="btn-group" role="group">
-                                        <a href="{{ route('quienes-somos.show', $item->id) }}" class="btn btn-outline-primary btn-sm">
-                                            <i class="bi bi-eye"></i> Ver
-                                        </a>
-                                        <a href="{{ route('quienes-somos.edit', $item->id) }}" class="btn btn-outline-warning btn-sm">
-                                            <i class="bi bi-pencil"></i> Editar
-                                        </a>
-                                        <form action="{{ route('quienes-somos.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Desea eliminar este registro?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm rounded-start-0">
-                                                <i class="bi bi-trash"></i> Eliminar
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center py-4 text-muted">
-                                    No hay registros disponibles.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Nombre Oficial</span>
+                            <div class="p-3 bg-light rounded-3 fw-medium text-dark">
+                                {{ $trainingcenters['name'] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Ubicación</span>
+                            <div class="p-3 bg-light rounded-3 fw-medium text-dark">
+                                {{ $trainingcenters['location'] }}
+                            </div>
+                        </div>
+
+                        <hr class="my-4 opacity-25">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
+                                <div class="p-2 bg-light rounded-2 small text-secondary">
+                                    {{ \Carbon\Carbon::parse($trainingcenters['created_at'])->format('d/m/Y H:i') }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última modificación</span>
+                                <div class="p-2 bg-light rounded-2 small text-secondary">
+                                    {{ \Carbon\Carbon::parse($trainingcenters['updated_at'])->format('d/m/Y H:i') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{ url()->previous() }}" class="btn btn-dark px-4 py-2 fw-bold rounded-3">
+                                Volver al Listado
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

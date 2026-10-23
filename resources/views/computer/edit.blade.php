@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
-                        <form action="{{ route('computer.update', $computer) }}" method="POST">
+                        <form action="{{ route('computer.update', $computer['id']) }}" method="POST">
                             @csrf
                             @method('put')
 
@@ -25,7 +25,7 @@
                                     name="number" 
                                     class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-bold" 
                                     placeholder="Ej: 105"
-                                    value="{{ old('number', $computer->number) }}" 
+                                    value="{{ old('number', $computer['number']) }}" 
                                     required>
                             </div>
 
@@ -36,7 +36,7 @@
                                     name="brand" 
                                     class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
                                     placeholder="Ej: Lenovo, HP, Dell"
-                                    value="{{ old('brand', $computer->brand) }}" 
+                                    value="{{ old('brand', $computer['brand']) }}" 
                                     required>
                             </div>
 

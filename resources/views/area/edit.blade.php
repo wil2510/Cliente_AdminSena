@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
-                        <form action="{{ route('area.update', $area) }}" method="POST">
+                        <form action="{{ route('area.update', $area['id']) }}" method="POST">
                             @csrf
                             @method('put')
 
@@ -25,7 +25,7 @@
                                     name="name" 
                                     class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
                                     placeholder="Ingrese el nombre oficial"
-                                    value="{{ old('name', $area->name) }}" 
+                                    value="{{ old('name', $area['name']) }}" 
                                     required>
                             </div>
 

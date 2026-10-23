@@ -93,15 +93,15 @@
                                 <tr>
 
                                     <td class="ps-4 fw-bold">
-                                        #{{ $area->id }}
+                                        #{{ $area['id'] }}
                                     </td>
 
 
                                     <td class="fw-bold">
-                                        {{ $area->name }}
+                                        {{ $area['name'] }}
                                     </td>
                                 <td><img
-                                        src="{{ asset('storage/images/' . $area->urlFoto) }}"
+                                        src="{{ asset('storage/images/' . $area['urlFoto']) }}"
                                         alt="Imagen del area"
                                         width="80"
                                         height="80"
@@ -113,7 +113,7 @@
 
                                             {{-- VER --}}
 
-                                            <a href="{{ route('area.show', $area->id) }}"
+                                            <a href="{{ route('area.show', $area['id']) }}"
                                                 class="btn btn-sm btn-info text-white">
 
                                                 Ver
@@ -123,7 +123,7 @@
 
                                             {{-- EDITAR --}}
 
-                                            <a href="{{ route('area.edit', $area->id) }}"
+                                            <a href="{{ route('area.edit', $area['id']) }}"
                                                class="btn btn-sm btn-warning text-white">
 
                                                 Editar
@@ -133,7 +133,7 @@
 
                                             {{-- ELIMINAR --}}
 
-                                            <form action="{{ route('area.destroy', $area->id) }}"
+                                            <form action="{{ route('area.destroy', $area['id']) }}"
                                                 method="POST"
                                                   class="d-inline"
                                                   onsubmit="return confirm('¿Está completamente seguro de eliminar esta área?')">

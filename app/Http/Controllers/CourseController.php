@@ -2,170 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Area;
-use App\Models\Course;
-use App\Models\Training_center;
 
 class CourseController extends Controller
 {
-    // ==========================================
-    // LISTADO DE CURSOS
-    // ==========================================
-    public function index()
-    {
-        $courses = Course::with([
-            'area',
-            'trainingCenter'
-        ])->get();
 
+    // Método privado para manejar llamadas HTTP repetitivas
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url);
+        return $response->json();
+    }
+
+    public function index()   //http://api.codersfree.test/v1/categories?included=posts
+    {
+
+        $url = env('URL_SERVER_API');
+
+        $courses = $this->fetchDataFromApi($url . '/courses');
+        // return $categories;
         return view('course.index', compact('courses'));
     }
 
+    public function show($id)
+    {
 
-    // ==========================================
-    // FORMULARIO CREAR CURSO
-    // ==========================================
+        $url = env('URL_SERVER_API');
+
+        $courses = $this->fetchDataFromApi($url . '/courses/' . $id);
+
+        return view('course.show', compact('courses'));
+    }
+
     public function create()
     {
-        $areas = Area::all();
+        $url = env('URL_SERVER_API');
+        $posts = Http::get($url .'/posts')->json();
 
-        $training_centers = Training_center::all();
-
-        return view('course.create', compact(
-            'areas',
-            'training_centers'
-        ));
+        return view('courses.create',compact('posts'));
     }
 
-
-    // ==========================================
-    // GUARDAR CURSO
-    // ==========================================
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
+        $url = env('URL_SERVER_API');
 
-            'code' => 'required|string|max:50|unique:courses,code',
+        Http::post($url . '/courses', $request->all());
 
-            'area_id' => 'required|exists:areas,id',
-
-            'training_center_id' =>
-                'required|exists:training_centers,id',
-        ]);
-
-
-        Course::create([
-            'name' => $request->name,
-
-            'code' => $request->code,
-
-            'area_id' => $request->area_id,
-
-            'training_center_id' =>
-                $request->training_center_id,
-        ]);
-
-
-        return redirect()
-            ->route('course.index')
-            ->with(
-                'success',
-                'Curso creado exitosamente.'
-            );
+        return redirect()->route('course.index');
     }
 
-
-    // ==========================================
-    // VER CURSO
-    // ==========================================
-    public function show(Course $course)
+    public function edit($id)
     {
-        $course->load([
-            'area',
-            'trainingCenter'
-        ]);
-
-        return view('course.show', compact('course'));
+        $url = env('URL_SERVER_API');
+        $course = $this->fetchDataFromApi($url . '/courses/' . $id);
+        return view('courses.edit', compact('course'));
     }
 
-
-    // ==========================================
-    // EDITAR CURSO
-    // ==========================================
-    public function edit(Course $course)
+    public function update(Request $request, $id)
     {
-        $areas = Area::all();
+        $url = env('URL_SERVER_API');
 
-        $training_centers = Training_center::all();
+        Http::put($url . '/courses/' . $id, $request->all());
 
-        return view(
-            'course.edit',
-            compact(
-                'course',
-                'areas',
-                'training_centers'
-            )
-        );
+        return redirect()->route('course.index');
     }
 
-
-    // ==========================================
-    // ACTUALIZAR CURSO
-    // ==========================================
-    public function update(
-        Request $request,
-        Course $course
-    ) {
-        $request->validate([
-            'name' =>
-                'required|string|max:255',
-
-            'code' =>
-                'required|string|max:50|unique:courses,code,' . $course->id,
-
-            'area_id' =>
-                'required|exists:areas,id',
-
-            'training_center_id' =>
-                'required|exists:training_centers,id',
-        ]);
-
-
-        $course->update([
-            'name' => $request->name,
-
-            'code' => $request->code,
-
-            'area_id' => $request->area_id,
-
-            'training_center_id' =>
-                $request->training_center_id,
-        ]);
-
-
-        return redirect()
-            ->route('course.index')
-            ->with(
-                'success',
-                'Curso actualizado exitosamente.'
-            );
-    }
-
-
-    // ==========================================
-    // ELIMINAR CURSO
-    // ==========================================
-    public function destroy(Course $course)
+      public function destroy($id)
     {
-        $course->delete();
-
-        return redirect()
-            ->route('course.index')
-            ->with(
-                'success',
-                'Curso eliminado exitosamente.'
-            );
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/courses/' . $id);
+        return redirect()->route('course.index');
     }
 }

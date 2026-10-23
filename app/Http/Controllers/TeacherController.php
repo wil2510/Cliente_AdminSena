@@ -9,9 +9,7 @@ use App\Models\Training_center;
 
 class TeacherController extends Controller
 {
-    // ==========================================
-    // LISTADO DE INSTRUCTORES
-    // ==========================================
+
     public function index()
     {
         $teachers = Teacher::with(['area', 'training_center'])->get();
@@ -19,10 +17,6 @@ class TeacherController extends Controller
         return view('teacher.index', compact('teachers'));
     }
 
-
-    // ==========================================
-    // FORMULARIO PARA CREAR INSTRUCTOR
-    // ==========================================
     public function create()
     {
         $areas = Area::all();
@@ -35,10 +29,6 @@ class TeacherController extends Controller
         ));
     }
 
-
-    // ==========================================
-    // GUARDAR INSTRUCTOR
-    // ==========================================
     public function admin(Request $request)
     {
         $request->validate([
@@ -60,10 +50,6 @@ class TeacherController extends Controller
             ->with('success', 'Instructor registrado correctamente.');
     }
 
-
-    // ==========================================
-    // VER INSTRUCTOR
-    // ==========================================
     public function show($id)
     {
         $teacher = Teacher::with([
@@ -74,10 +60,6 @@ class TeacherController extends Controller
         return view('teacher.show', compact('teacher'));
     }
 
-
-    // ==========================================
-    // FORMULARIO EDITAR
-    // ==========================================
     public function edit(Teacher $teacher)
     {
         $areas = Area::all();
@@ -91,10 +73,6 @@ class TeacherController extends Controller
         ));
     }
 
-
-    // ==========================================
-    // ACTUALIZAR INSTRUCTOR
-    // ==========================================
     public function update(Request $request, Teacher $teacher)
     {
         $request->validate([
@@ -116,10 +94,6 @@ class TeacherController extends Controller
             ->with('success', 'Instructor actualizado correctamente.');
     }
 
-
-    // ==========================================
-    // ELIMINAR INSTRUCTOR
-    // ==========================================
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();

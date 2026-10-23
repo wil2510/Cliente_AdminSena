@@ -2,113 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Computer;
 
 class ComputerController extends Controller
 {
+    // Método privado para manejar llamadas HTTP repetitivas
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url);
+        return $response->json();
+    }
+
+    public function index()   //http://api.codersfree.test/v1/categories?included=posts
+    {
+
+        $url = env('URL_SERVER_API');
+
+        $computers = $this->fetchDataFromApi($url . '/computers');
+        return view('computer.index', compact('computers'));
+    }
+
+    public function show($id)
+    {
+
+        $url = env('URL_SERVER_API');
+
+        $computers = $this->fetchDataFromApi($url . '/computers/' . $id);
+
+        return view('computer.show', compact('computers'));
+    }
+
     public function create()
     {
         return view('computer.create');
     }
 
-    public function index(Request $request)
-    {
-        // $computers = Computer::all();
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($computers, 200);
-        // }
-
-        // return view('computer.index', compact('computers'));
-        $computers = Computer::all();
-
-        return response()->json($computers);
-    }
-
     public function admin(Request $request)
     {
-        // $computers = Computer::create($request->all());
+        $url = env('URL_SERVER_API');
 
-        $request->validate([
-            'serial_number' => 'required|max:255',
-        ]);
-        $computers = Computer::create($request->all());
+        Http::post($url . '/computers', $request->all());
 
-        if ($request->hasFile("urlFoto")) {
-            $file = $request->file("urlFoto");
-            $nombreArchivo = "foto_".time().".".$file->guessExtension();
-            $request->file('urlFoto')->storeAs('public/images', $nombreArchivo);
-
-            $computers->urlFoto = $nombreArchivo;
-            $computers->save();
-        }
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($computers, 201);
-        // }
-
-        return response()->json($computers);
-
-        // return redirect()->route('computer.index');
+        return redirect()->route('computer.index');
     }
 
-    public function show(Request $request, $id)
+    public function edit($id)
     {
-        // $computer = Computer::findOrFail($id);
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($computer, 200);
-        // }
-
-        // return view('computer.show', compact('computer'));
-
-        $computers = Computer::findOrFail($id);
-        // $computers = Computer::with(['posts.user'])->findOrFail($id);
-        // $computers = Computer::with(['posts'])->findOrFail($id);
-        return response()->json($computers);
-    }
-
-    public function edit(Computer $computer)
-    {
+        $url = env('URL_SERVER_API');
+        $computer = $this->fetchDataFromApi($url . '/computers/' . $id);
         return view('computer.edit', compact('computer'));
     }
 
-    public function update(Request $request, Computer $computer)
+    public function update(Request $request, $id)
     {
-        // $computer->update($request->all());
+        $url = env('URL_SERVER_API');
 
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($computer, 200);
-        // }
+        Http::put($url . '/computers/' . $id, $request->all());
 
-        // return redirect()->route('computer.index');
-
-        $request->validate([
-            'serial_number' => 'required|max:255',
-        ]);
-
-        $computer->update($request->all());
-
-        return $computer;
+        return redirect()->route('computer.index');
     }
 
-    public function destroy(Request $request, Computer $computer)
+    public function destroy($id)
     {
-        // $computer->delete();
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json(['message' => 'Equipo eliminado correctamente'], 200);
-        // }
-
-        // return redirect()->route('computer.index');
-
-        $computer->delete();
-        return $computer;
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/computers/' . $id);
+        return redirect()->route('computer.index');
     }
 }

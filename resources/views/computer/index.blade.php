@@ -95,19 +95,19 @@
                                 <tr>
 
                                     <td class="ps-4 fw-bold">
-                                        #{{ $computer->id }}
+                                        #{{ $computer['id'] }}
                                     </td>
 
 
                                     <td class="fw-bold">
-                                        {{ $computer->number }}
+                                        {{ $computer['number'] }}
                                     </td>
 
 
                                     <td>
 
                                         <span class="badge bg-success">
-                                            {{ $computer->brand }}
+                                            {{ $computer['brand'] }}
                                         </span>
 
                                     </td>
@@ -119,7 +119,7 @@
 
                                             {{-- VER --}}
 
-                                            <a href="{{ route('computer.show', $computer->id) }}"
+                                            <a href="{{ route('computer.show', $computer['id']) }}"
                                                class="btn btn-sm btn-info text-white">
 
                                                 Ver
@@ -129,7 +129,7 @@
 
                                             {{-- EDITAR --}}
 
-                                            <a href="{{ route('computer.edit', $computer->id) }}"
+                                            <a href="{{ route('computer.edit', $computer['id']) }}"
                                                class="btn btn-sm btn-warning text-white">
 
                                                 Editar
@@ -139,7 +139,7 @@
 
                                             {{-- ELIMINAR --}}
 
-                                            <form action="{{ route('computer.destroy', $computer->id) }}"
+                                            <form action="{{ route('computer.destroy', $computer['id']) }}"
                                                   method="POST"
                                                   class="d-inline"
                                                   onsubmit="return confirm('¿Está seguro de eliminar este computador del inventario?')">

@@ -10,7 +10,7 @@
                     
                     <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
                         <h4 class="mb-0 fw-bold">Información del Área</h4>
-                        <p class="mb-0 mt-1 small opacity-75">{{ $area['name'] }}</p>
+                        <p class="mb-0 mt-1 small opacity-75">{{ $areas['name'] }}</p>
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
@@ -18,14 +18,14 @@
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Código ID</span>
                             <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
-                                #{{ $area['id'] }}
+                                #{{ $areas['id'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Nombre Oficial</span>
                             <div class="p-3 bg-light rounded-3 fw-medium text-dark">
-                                {{ $area['name'] }}
+                                {{ $areas['name'] }}
                             </div>
                         </div>
 
@@ -35,13 +35,13 @@
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($area['created_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($areas['created_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última modificación</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($area['updated_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($areas['updated_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                         </div>

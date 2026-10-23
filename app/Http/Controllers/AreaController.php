@@ -2,58 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Area;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    public function create()
-    {
-        return view('area.create');
-    }
-
+    // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
         $response = Http::get($url);
-        return $response->json(); 
+        return $response->json();
     }
-    
-    public function index() 
+
+    public function index()   //http://api.codersfree.test/v1/categories?included=posts
     {
+
         $url = env('URL_SERVER_API');
 
         $areas = $this->fetchDataFromApi($url . '/areas');
-        
+        // return $categories;
         return view('area.index', compact('areas'));
-    }
-
-    public function admin(Request $request)
-    {
-        // $areas = Area::create($request->all());
-
-        $request->validate([
-            'name' => 'required|max:255',
-        ]);
-        $areas = Area::create($request->all());
-
-        if ($request->hasFile("urlFoto")) {
-            $file = $request->file("urlFoto");
-            $nombreArchivo = "foto_".time().".".$file->guessExtension();
-            $request->file('urlFoto')->storeAs('public/images', $nombreArchivo);
-
-            $areas->urlFoto = $nombreArchivo;
-            $areas->save();
-        }
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($areas, 201);
-        // }
-
-        return response()->json($areas);
-
-        // return redirect()->route('area.index');
     }
 
     public function show($id)
@@ -61,48 +29,45 @@ class AreaController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $area = $this->fetchDataFromApi($url . '/areas/' . $id);
+        $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
 
-        return view('area.show', compact('area'));
+        return view('area.show', compact('areas'));
     }
 
-    public function edit(Area $area)
+    public function create()
     {
+        return view('area.create');
+    }
+
+    public function admin(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/areas', $request->all());
+
+        return redirect()->route('area.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $area = $this->fetchDataFromApi($url . '/areas/' . $id);
         return view('area.edit', compact('area'));
     }
 
-    public function update(Request $request, Area $area)
+    public function update(Request $request, $id)
     {
-        // $area->update($request->all());
+        $url = env('URL_SERVER_API');
 
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json($area, 200);
-        // }
+        Http::put($url . '/areas/' . $id, $request->all());
 
-        // return redirect()->route('area.index');
-
-        $request->validate([
-            'name' => 'required|max:255',
-        ]);
-
-        $area->update($request->all());
-
-        return $area;
+        return redirect()->route('area.index');
     }
 
-    public function destroy(Request $request, Area $area)
+    public function destroy($id)
     {
-        // $area->delete();
-
-        // // Si la petición viene de Postman
-        // if ($request->wantsJson()) {
-        //     return response()->json(['message' => 'Área eliminada correctamente'], 200);
-        // }
-
-        // return redirect()->route('area.index');
-
-        $area->delete();
-        return $area;
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/areas/' . $id);
+        return redirect()->route('area.index');
     }
 }

@@ -24,8 +24,8 @@
 
 
             <a href="{{ route('trainingcenter.create') }}"
-               class="btn text-white fw-bold px-4 py-2 shadow-sm"
-               style="background-color: #198754;">
+                class="btn text-white fw-bold px-4 py-2 shadow-sm"
+                style="background-color: #198754;">
 
                 Nuevo Centro
 
@@ -38,17 +38,17 @@
 
         @if (session('success'))
 
-            <div class="alert alert-success alert-dismissible fade show"
-                 role="alert">
+        <div class="alert alert-success alert-dismissible fade show"
+            role="alert">
 
-                {{ session('success') }}
+            {{ session('success') }}
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
-                </button>
+            <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
 
-            </div>
+        </div>
 
         @endif
 
@@ -92,86 +92,86 @@
 
                             @forelse ($trainingcenters as $trainingcenter)
 
-                                <tr>
+                            <tr>
 
-                                    <td class="ps-4 fw-bold">
-                                        #{{ $trainingcenter->id }}
-                                    </td>
-
-
-                                    <td class="fw-bold">
-                                        {{ $trainingcenter->name }}
-                                    </td>
+                                <td class="ps-4 fw-bold">
+                                    #{{ $trainingcenter['id'] }}
+                                </td>
 
 
-                                    <td>
-                                        {{ $trainingcenter->location }}
-                                    </td>
+                                <td class="fw-bold">
+                                    {{ $trainingcenter['name'] }}
+                                </td>
 
 
-                                    <td class="text-center">
-
-                                        <div class="d-flex justify-content-center gap-2">
-
-                                            {{-- VER --}}
-
-                                            <a href="{{ route('trainingcenter.show', $trainingcenter->id) }}"
-                                               class="btn btn-sm btn-info text-white">
-
-                                                Ver
-
-                                            </a>
+                                <td>
+                                    {{ $trainingcenter['location'] }}
+                                </td>
 
 
-                                            {{-- EDITAR --}}
+                                <td class="text-center">
 
-                                            <a href="{{ route('trainingcenter.edit', $trainingcenter->id) }}"
-                                               class="btn btn-sm btn-warning text-white">
+                                    <div class="d-flex justify-content-center gap-2">
 
-                                                Editar
+                                        {{-- VER --}}
 
-                                            </a>
+                                        <a href="{{ route('trainingcenter.show', $trainingcenter['id']) }}"
+                                            class="btn btn-sm btn-info text-white">
+
+                                            Ver
+
+                                        </a>
 
 
-                                            {{-- ELIMINAR --}}
+                                        {{-- EDITAR --}}
 
-                                            <form action="{{ route('trainingcenter.destroy', $trainingcenter->id) }}"
-                                                  method="POST"
-                                                  class="d-inline"
-                                                  onsubmit="return confirm('¿Está completamente seguro de eliminar este centro?')">
+                                        <a href="{{ route('trainingcenter.edit', $trainingcenter['id']) }}"
+                                            class="btn btn-sm btn-warning text-white">
 
-                                                @csrf
+                                            Editar
 
-                                                @method('DELETE')
+                                        </a>
 
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-danger">
 
-                                                    Eliminar
+                                        {{-- ELIMINAR --}}
 
-                                                </button>
+                                        <form action="{{ route('trainingcenter.destroy', $trainingcenter['id']) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('¿Está completamente seguro de eliminar este centro?')">
 
-                                            </form>
+                                            @csrf
 
-                                        </div>
+                                            @method('DELETE')
 
-                                    </td>
+                                            <button type="submit"
+                                                class="btn btn-sm btn-danger">
 
-                                </tr>
+                                                Eliminar
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
 
 
                             @empty
 
-                                <tr>
+                            <tr>
 
-                                    <td colspan="4"
-                                        class="text-center py-5 text-muted">
+                                <td colspan="4"
+                                    class="text-center py-5 text-muted">
 
-                                        No hay centros de formación registrados.
+                                    No hay centros de formación registrados.
 
-                                    </td>
+                                </td>
 
-                                </tr>
+                            </tr>
 
                             @endforelse
 
