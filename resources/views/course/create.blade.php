@@ -423,8 +423,6 @@
 
                                 </div>
 
-
-                                {{-- CENTRO --}}
                                 <div class="col-md-6 mb-4">
 
                                     <label

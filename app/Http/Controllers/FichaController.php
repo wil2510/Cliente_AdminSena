@@ -2,93 +2,84 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Ficha;
-use App\Models\Oferta;
 
 class FichaController extends Controller
 {
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url);
+        return $response->json();
+    }
+
     public function index()
     {
-        $fichas = Ficha::with('oferta.programa')->get();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/fichas');
+        
+        $fichas = is_array($response) ? $response : [];
 
         return view('ficha.index', compact('fichas'));
     }
 
+    public function show($id)
+    {
+        $url = env('URL_SERVER_API');
+
+        $ficha = $this->fetchDataFromApi($url . '/fichas/' . $id);
+
+        return view('ficha.show', compact('ficha'));
+    }
+
     public function create()
     {
-        $ofertas = Oferta::with('programa')->get();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/ofertas');
+        
+        $ofertas = is_array($response) ? $response : [];
 
         return view('ficha.create', compact('ofertas'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|string|max:100|unique:fichas,code',
-            'start_date' => 'required|date',
-            'schedule' => 'required|string|max:100',
-            'oferta_id' => 'required|exists:ofertas,id',
-        ]);
+        $url = env('URL_SERVER_API');
 
-        Ficha::create([
-            'code' => $request->code,
-            'start_date' => $request->start_date,
-            'schedule' => $request->schedule,
-            'oferta_id' => $request->oferta_id,
-        ]);
+        Http::post($url . '/fichas', $request->all());
 
-        return redirect()
-            ->route('ficha.index')
-            ->with('success', 'Ficha creada correctamente.');
-    }
-
-    public function show($id)
-    {
-        $ficha = Ficha::with('oferta.programa')->findOrFail($id);
-
-        return view('ficha.show', compact('ficha'));
+        return redirect()->route('ficha.index');
     }
 
     public function edit($id)
     {
-        $ficha = Ficha::findOrFail($id);
-        $ofertas = Oferta::with('programa')->get();
+        $url = env('URL_SERVER_API');
+        
+        $ficha = $this->fetchDataFromApi($url . '/fichas/' . $id);
+        
+        $response = $this->fetchDataFromApi($url . '/ofertas');
+        $ofertas = is_array($response) ? $response : [];
 
         return view('ficha.edit', compact('ficha', 'ofertas'));
     }
 
     public function update(Request $request, $id)
     {
-        $ficha = Ficha::findOrFail($id);
+        $url = env('URL_SERVER_API');
 
-        $request->validate([
-            'code' => 'required|string|max:100|unique:fichas,code,' . $id,
-            'start_date' => 'required|date',
-            'schedule' => 'required|string|max:100',
-            'oferta_id' => 'required|exists:ofertas,id',
-        ]);
+        Http::put($url . '/fichas/' . $id, $request->all());
 
-        $ficha->update([
-            'code' => $request->code,
-            'start_date' => $request->start_date,
-            'schedule' => $request->schedule,
-            'oferta_id' => $request->oferta_id,
-        ]);
-
-        return redirect()
-            ->route('ficha.index')
-            ->with('success', 'Ficha actualizada correctamente.');
+        return redirect()->route('ficha.index');
     }
 
     public function destroy($id)
     {
-        $ficha = Ficha::findOrFail($id);
+        $url = env('URL_SERVER_API');
 
-        $ficha->delete();
+        Http::delete($url . '/fichas/' . $id);
 
-        return redirect()
-            ->route('ficha.index')
-            ->with('success', 'Ficha eliminada correctamente.');
+        return redirect()->route('ficha.index');
     }
 }

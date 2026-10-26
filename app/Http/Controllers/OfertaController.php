@@ -2,94 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Oferta;
-use App\Models\Programa;
 
 class OfertaController extends Controller
 {
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url);
+        return $response->json();
+    }
+
     public function index()
     {
-        $ofertas = Oferta::with('programa')->get();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/ofertas');
+        $ofertas = is_array($response) ? $response : [];
 
         return view('oferta.index', compact('ofertas'));
     }
 
+    public function show($id)
+    {
+        $url = env('URL_SERVER_API');
+
+        $oferta = $this->fetchDataFromApi($url . '/ofertas/' . $id);
+
+        return view('oferta.show', compact('oferta'));
+    }
+
     public function create()
     {
-        $programas = Programa::all();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/programas');
+        $programas = is_array($response) ? $response : [];
 
         return view('oferta.create', compact('programas'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'jornada' => 'required|string|max:100',
-            'registration_date' => 'required|date',
-            'capacity' => 'required|integer|min:1',
-            'programa_id' => 'required|exists:programas,id',
-        ]);
+        $url = env('URL_SERVER_API');
 
-        Oferta::create([
-            'jornada' => $request->jornada,
-            'registration_date' => $request->registration_date,
-            'capacity' => $request->capacity,
-            'programa_id' => $request->programa_id,
-        ]);
+        Http::post($url . '/ofertas', $request->all());
 
-        return redirect()
-            ->route('oferta.index')
-            ->with('success', 'Oferta creada correctamente.');
-    }
-
-    public function show($id)
-    {
-        $oferta = Oferta::with('programa')->findOrFail($id);
-
-        return view('oferta.show', compact('oferta'));
+        return redirect()->route('oferta.index');
     }
 
     public function edit($id)
     {
-        $oferta = Oferta::findOrFail($id);
-        $programas = Programa::all();
+        $url = env('URL_SERVER_API');
+        
+        $oferta = $this->fetchDataFromApi($url . '/ofertas/' . $id);
+        
+        $response = $this->fetchDataFromApi($url . '/programas');
+        $programas = is_array($response) ? $response : [];
 
         return view('oferta.edit', compact('oferta', 'programas'));
     }
 
     public function update(Request $request, $id)
     {
-        $oferta = Oferta::findOrFail($id);
+        $url = env('URL_SERVER_API');
 
-        $request->validate([
-            'jornada' => 'required|string|max:100',
-            'registration_date' => 'required|date',
-            'capacity' => 'required|integer|min:1',
-            'programa_id' => 'required|exists:programas,id',
-        ]);
+        Http::put($url . '/ofertas/' . $id, $request->all());
 
-        $oferta->update([
-            'jornada' => $request->jornada,
-            'registration_date' => $request->registration_date,
-            'capacity' => $request->capacity,
-            'programa_id' => $request->programa_id,
-        ]);
-
-        return redirect()
-            ->route('oferta.index')
-            ->with('success', 'Oferta actualizada correctamente.');
+        return redirect()->route('oferta.index');
     }
 
     public function destroy($id)
     {
-        $oferta = Oferta::findOrFail($id);
+        $url = env('URL_SERVER_API');
 
-        $oferta->delete();
+        Http::delete($url . '/ofertas/' . $id);
 
-        return redirect()
-            ->route('oferta.index')
-            ->with('success', 'Oferta eliminada correctamente.');
+        return redirect()->route('oferta.index');
     }
 }
-

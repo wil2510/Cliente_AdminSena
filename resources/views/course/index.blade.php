@@ -181,11 +181,11 @@
 
                                             {{-- ELIMINAR --}}
 
-                                            <form action="{{ route('course.destroy', $course['id']) }}"
+                                            <form action="{{ route('course.destroy', $course['id']
+                                            ) }}"
                                                   method="POST"
                                                   class="d-inline"
                                                   onsubmit="return confirm('¿Deseas eliminar este curso?')">
-
                                                 @csrf
 
                                                 @method('DELETE')
