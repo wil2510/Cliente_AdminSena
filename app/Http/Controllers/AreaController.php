@@ -10,7 +10,7 @@ class AreaController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
         return $response->json();
     }
 
@@ -19,7 +19,8 @@ class AreaController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $areas = $this->fetchDataFromApi($url . '/areas');
+        $response = $this->fetchDataFromApi($url . '/areas');
+        $areas = is_array($response) ? $response : [];
         // return $categories;
         return view('area.index', compact('areas'));
     }
@@ -43,7 +44,7 @@ class AreaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/areas', $request->all());
+        Http::post($url . '/areas', $request->all())->throw();
 
         return redirect()->route('area.index');
     }
@@ -59,7 +60,7 @@ class AreaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/areas/' . $id, $request->all());
+        Http::put($url . '/areas/' . $id, $request->all())->throw();
 
         return redirect()->route('area.index');
     }
@@ -67,7 +68,7 @@ class AreaController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/areas/' . $id);
+        Http::delete($url . '/areas/' . $id)->throw();
         return redirect()->route('area.index');
     }
 }

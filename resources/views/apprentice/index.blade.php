@@ -107,37 +107,37 @@
                                 <tr>
 
                                     <td class="ps-4 fw-bold">
-                                        #{{ $apprentice->id }}
+                                        #{{ data_get($apprentice, 'id') }}
                                     </td>
 
 
                                     <td class="fw-bold">
-                                        {{ $apprentice->name }}
+                                        {{ data_get($apprentice, 'name') }}
                                     </td>
 
 
                                     <td>
-                                        {{ $apprentice->email }}
+                                        {{ data_get($apprentice, 'email') }}
                                     </td>
 
 
                                     <td>
-                                        {{ $apprentice->cell_number }}
+                                        {{ data_get($apprentice, 'cell_number') }}
                                     </td>
 
 
                                     <td>
 
-                                        @if ($apprentice->course)
+                                        @if (data_get($apprentice, 'course'))
 
                                             <span class="badge bg-success">
-                                                {{ $apprentice->course->code }}
+                                                {{ data_get($apprentice, 'course.code', data_get($apprentice, 'course_id')) }}
                                             </span>
 
                                             <br>
 
                                             <small class="text-muted">
-                                                {{ $apprentice->course->name }}
+                                                {{ data_get($apprentice, 'course.name') }}
                                             </small>
 
                                         @else
@@ -153,10 +153,10 @@
 
                                     <td>
 
-                                        @if ($apprentice->computer)
+                                        @if (data_get($apprentice, 'computer'))
 
                                             Equipo N°
-                                            {{ $apprentice->computer->number }}
+                                            {{ data_get($apprentice, 'computer.number', data_get($apprentice, 'computer_id')) }}
 
                                         @else
                                             <span class="text-muted">
@@ -167,17 +167,17 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             {{-- VER --}}
-                                            <a href="{{ route('apprentice.show', $apprentice) }}"
+                                            <a href="{{ route('apprentice.show', data_get($apprentice, 'id')) }}"
                                             class="btn btn-sm btn-info text-white">
                                                 Ver
                                             </a>
                                             {{-- EDITAR --}}
-                                            <a href="{{ route('apprentice.edit', $apprentice) }}"
+                                            <a href="{{ route('apprentice.edit', data_get($apprentice, 'id')) }}"
                                             class="btn btn-sm btn-warning text-white">
                                                 Editar
                                             </a>
                                             {{-- ELIMINAR --}}
-                                            <form action="{{ route('apprentice.destroy', $apprentice) }}"
+                                            <form action="{{ route('apprentice.destroy', data_get($apprentice, 'id')) }}"
                                                 method="POST"
                                                 class="d-inline"
                                                 onsubmit="return confirm('¿Deseas eliminar este aprendiz?')">

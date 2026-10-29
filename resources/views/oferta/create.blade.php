@@ -319,10 +319,10 @@
                                     @foreach ($programas as $programa)
 
                                         <option
-                                            value="{{ $programa->id }}"
-                                            {{ old('programa_id') == $programa->id ? 'selected' : '' }}
+                                            value="{{ data_get($programa, 'id') }}"
+                                            {{ old('programa_id') == data_get($programa, 'id') ? 'selected' : '' }}
                                         >
-                                            {{ $programa->name }}
+                                            {{ data_get($programa, 'name') }}
                                         </option>
 
                                     @endforeach

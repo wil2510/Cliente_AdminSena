@@ -17,44 +17,44 @@
             <div class="card-body">
 
                 <h4 class="fw-bold mb-4">
-                    Ficha {{ $ficha->code }}
+                    Ficha {{ data_get($ficha, 'code') }}
                 </h4>
 
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
                         <strong>Código:</strong>
-                        <p>{{ $ficha->code }}</p>
+                        <p>{{ data_get($ficha, 'code') }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <strong>Fecha de inicio:</strong>
-                        <p>{{ $ficha->start_date }}</p>
+                        <p>{{ data_get($ficha, 'start_date') }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <strong>Horario:</strong>
-                        <p>{{ $ficha->schedule }}</p>
+                        <p>{{ data_get($ficha, 'schedule') }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <strong>Oferta:</strong>
                         <p>
-                            {{ $ficha->oferta->jornada ?? 'Sin oferta' }}
+                            {{ data_get($ficha, 'oferta.jornada') ?? 'Sin oferta' }}
                         </p>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <strong>Programa:</strong>
                         <p>
-                            {{ $ficha->oferta->programa->name ?? 'Sin programa' }}
+                            {{ data_get($ficha, 'oferta.programa.name') ?? 'Sin programa' }}
                         </p>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <strong>Capacidad de la oferta:</strong>
                         <p>
-                            {{ $ficha->oferta->capacity ?? 'No disponible' }}
+                            {{ data_get($ficha, 'oferta.capacity') ?? 'No disponible' }}
                         </p>
                     </div>
 
@@ -67,7 +67,7 @@
                         Volver
                     </a>
 
-                    <a href="{{ route('ficha.edit', $ficha->id) }}"
+                    <a href="{{ route('ficha.edit', data_get($ficha, 'id')) }}"
                        class="btn btn-warning">
                         Editar
                     </a>

@@ -42,7 +42,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('noticia.update', $noticia->id) }}"
+                <form action="{{ route('noticia.update', data_get($noticia, 'id')) }}"
                       method="POST"
                       enctype="multipart/form-data">
 
@@ -58,7 +58,7 @@
                         <input type="text"
                                name="title"
                                class="form-control"
-                               value="{{ old('title', $noticia->title) }}"
+                               value="{{ old('title', data_get($noticia, 'title')) }}"
                                required>
 
                     </div>
@@ -72,11 +72,11 @@
                         <textarea name="content"
                                   class="form-control"
                                   rows="6"
-                                  required>{{ old('content', $noticia->content) }}</textarea>
+                                  required>{{ old('content', data_get($noticia, 'content')) }}</textarea>
 
                     </div>
 
-                    @if($noticia->image)
+                    @if(data_get($noticia, 'image'))
 
                         <div class="mb-3">
 
@@ -86,8 +86,8 @@
 
                             <br>
 
-                            <img src="{{ asset('storage/' . $noticia->image) }}"
-                                 alt="{{ $noticia->title }}"
+                            <img src="{{ asset('storage/' . data_get($noticia, 'image')) }}"
+                                 alt="{{ data_get($noticia, 'title') }}"
                                  width="200"
                                  style="border-radius: 10px;">
 
@@ -121,7 +121,7 @@
                         <input type="date"
                                name="publish_date"
                                class="form-control"
-                               value="{{ old('publish_date', $noticia->publish_date) }}"
+                               value="{{ old('publish_date', data_get($noticia, 'publish_date')) }}"
                                required>
 
                     </div>
@@ -138,10 +138,10 @@
 
                             @foreach($trainingCenters as $trainingCenter)
 
-                                <option value="{{ $trainingCenter->id }}"
-                                    {{ $noticia->training_center_id == $trainingCenter->id ? 'selected' : '' }}>
+                                <option value="{{ data_get($trainingCenter, 'id') }}"
+                                    {{ data_get($noticia, 'training_center_id') == data_get($trainingCenter, 'id') ? 'selected' : '' }}>
 
-                                    {{ $trainingCenter->name }}
+                                    {{ data_get($trainingCenter, 'name') }}
 
                                 </option>
 

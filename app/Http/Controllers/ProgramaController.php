@@ -2,104 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Programa;
-use App\Models\Area;
 
 class ProgramaController extends Controller
 {
-    // Mostrar todos los programas
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url)->throw();
+        return $response->json();
+    }
+
     public function index()
     {
-        $programas = Programa::with('area')->get();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/programas');
+        $programas = is_array($response) ? $response : [];
 
         return view('programa.index', compact('programas'));
     }
 
-    // Mostrar formulario para crear
     public function create()
     {
-        $areas = Area::all();
+        $url = env('URL_SERVER_API');
+
+        $response = $this->fetchDataFromApi($url . '/areas');
+        $areas = is_array($response) ? $response : [];
 
         return view('programa.create', compact('areas'));
     }
 
-    // Guardar programa
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type' => 'required|string|max:100',
-            'duration' => 'required|integer|min:1',
-            'area_id' => 'required|exists:areas,id',
-        ]);
+        $url = env('URL_SERVER_API');
 
-        Programa::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'type' => $request->type,
-            'duration' => $request->duration,
-            'area_id' => $request->area_id,
-        ]);
+        Http::post($url . '/programas', $request->all())->throw();
 
-        return redirect()
-            ->route('programa.index')
-            ->with('success', 'Programa creado correctamente.');
+        return redirect()->route('programa.index');
     }
 
-    // Mostrar un programa
     public function show($id)
     {
-        $programa = Programa::with('area')->findOrFail($id);
+        $url = env('URL_SERVER_API');
+
+        $programa = $this->fetchDataFromApi($url . '/programas/' . $id);
 
         return view('programa.show', compact('programa'));
     }
 
-    // Mostrar formulario para editar
     public function edit($id)
     {
-        $programa = Programa::findOrFail($id);
-        $areas = Area::all();
+        $url = env('URL_SERVER_API');
+        
+        $programa = $this->fetchDataFromApi($url . '/programas/' . $id);
+        
+        $response = $this->fetchDataFromApi($url . '/areas');
+        $areas = is_array($response) ? $response : [];
 
         return view('programa.edit', compact('programa', 'areas'));
     }
 
-    // Actualizar programa
     public function update(Request $request, $id)
     {
-        $programa = Programa::findOrFail($id);
+        $url = env('URL_SERVER_API');
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type' => 'required|string|max:100',
-            'duration' => 'required|integer|min:1',
-            'area_id' => 'required|exists:areas,id',
-        ]);
+        Http::put($url . '/programas/' . $id, $request->all())->throw();
 
-        $programa->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'type' => $request->type,
-            'duration' => $request->duration,
-            'area_id' => $request->area_id,
-        ]);
-
-        return redirect()
-            ->route('programa.index')
-            ->with('success', 'Programa actualizado correctamente.');
+        return redirect()->route('programa.index');
     }
 
-    // Eliminar programa
     public function destroy($id)
     {
-        $programa = Programa::findOrFail($id);
-
-        $programa->delete();
-
-        return redirect()
-            ->route('programa.index')
-            ->with('success', 'Programa eliminado correctamente.');
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/programas/' . $id)->throw();
+        return redirect()->route('programa.index');
     }
 }

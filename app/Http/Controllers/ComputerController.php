@@ -10,7 +10,8 @@ class ComputerController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
+
         return $response->json();
     }
 
@@ -19,7 +20,9 @@ class ComputerController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $computers = $this->fetchDataFromApi($url . '/computers');
+        $response = $this->fetchDataFromApi($url . '/computers');
+        $computers = is_array($response) ? $response : [];
+
         return view('computer.index', compact('computers'));
     }
 
@@ -42,7 +45,7 @@ class ComputerController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/computers', $request->all());
+        Http::post($url . '/computers', $request->all())->throw();
 
         return redirect()->route('computer.index');
     }
@@ -58,7 +61,7 @@ class ComputerController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/computers/' . $id, $request->all());
+        Http::put($url . '/computers/' . $id, $request->all())->throw();
 
         return redirect()->route('computer.index');
     }
@@ -66,7 +69,7 @@ class ComputerController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/computers/' . $id);
+        Http::delete($url . '/computers/' . $id)->throw();
         return redirect()->route('computer.index');
     }
 }

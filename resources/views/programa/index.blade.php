@@ -59,42 +59,42 @@
                                 <tr>
 
                                     <td class="fw-bold text-secondary">
-                                        #{{ $programa->id }}
+                                        #{{ data_get($programa, 'id') }}
                                     </td>
 
                                     <td class="fw-bold">
-                                        {{ $programa->name }}
+                                        {{ data_get($programa, 'name') }}
                                     </td>
 
                                     <td>
-                                        {{ $programa->description ?? 'Sin descripción' }}
+                                        {{ data_get($programa, 'description') ?? 'Sin descripción' }}
                                     </td>
 
                                     <td>
-                                        {{ $programa->type }}
+                                        {{ data_get($programa, 'type') }}
                                     </td>
 
                                     <td>
-                                        {{ $programa->duration }} meses
+                                        {{ data_get($programa, 'duration') }} meses
                                     </td>
 
                                     <td>
-                                        {{ $programa->area->name ?? 'Sin área' }}
+                                        {{ data_get($programa, 'area.name') ?? 'Sin área' }}
                                     </td>
 
                                     <td class="text-center">
 
-                                        <a href="{{ route('programa.show', $programa->id) }}"
+                                        <a href="{{ route('programa.show', data_get($programa, 'id')) }}"
                                            class="btn btn-sm btn-info text-white">
                                             Ver
                                         </a>
 
-                                        <a href="{{ route('programa.edit', $programa->id) }}"
+                                        <a href="{{ route('programa.edit', data_get($programa, 'id')) }}"
                                            class="btn btn-sm btn-warning">
                                             Editar
                                         </a>
 
-                                        <form action="{{ route('programa.destroy', $programa->id) }}"
+                                        <form action="{{ route('programa.destroy', data_get($programa, 'id')) }}"
                                               method="POST"
                                               class="d-inline">
 

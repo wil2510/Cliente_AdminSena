@@ -10,7 +10,8 @@ class TrainingCenterController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
+
         return $response->json();
     }
 
@@ -19,8 +20,9 @@ class TrainingCenterController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenters');
-        // return $categories;
+        $response = $this->fetchDataFromApi($url . '/trainingcenters');
+        $trainingcenters = is_array($response) ? $response : [];
+
         return view('trainingcenter.index', compact('trainingcenters'));
     }
 
@@ -43,7 +45,7 @@ class TrainingCenterController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/trainingcenters', $request->all());
+        Http::post($url . '/trainingcenters', $request->all())->throw();
 
         return redirect()->route('trainingcenter.index');
     }
@@ -59,7 +61,7 @@ class TrainingCenterController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/trainingcenters/' . $id, $request->all());
+        Http::put($url . '/trainingcenters/' . $id, $request->all())->throw();
 
         return redirect()->route('trainingcenter.index');
     }
@@ -67,7 +69,7 @@ class TrainingCenterController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/trainingcenters/' . $id);
+        Http::delete($url . '/trainingcenters/' . $id)->throw();
         return redirect()->route('trainingcenter.index');
     }
 }

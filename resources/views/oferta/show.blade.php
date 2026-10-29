@@ -30,7 +30,7 @@
                         </small>
 
                         <h5 class="fw-bold">
-                            #{{ $oferta->id }}
+                            #{{ data_get($oferta, 'id') }}
                         </h5>
 
                     </div>
@@ -42,7 +42,7 @@
                         </small>
 
                         <h5 class="fw-bold">
-                            {{ $oferta->jornada }}
+                            {{ data_get($oferta, 'jornada') }}
                         </h5>
 
                     </div>
@@ -54,7 +54,7 @@
                         </small>
 
                         <h5>
-                            {{ $oferta->registration_date }}
+                            {{ data_get($oferta, 'registration_date') }}
                         </h5>
 
                     </div>
@@ -66,7 +66,7 @@
                         </small>
 
                         <h5>
-                            {{ $oferta->capacity }} aprendices
+                            {{ data_get($oferta, 'capacity') }} aprendices
                         </h5>
 
                     </div>
@@ -78,7 +78,7 @@
                         </small>
 
                         <h5 class="fw-bold">
-                            {{ $oferta->programa->name ?? 'Sin programa' }}
+                            {{ data_get($oferta, 'programa.name') ?? 'Sin programa' }}
                         </h5>
 
                     </div>
@@ -87,7 +87,7 @@
 
                 <div class="mt-4 d-flex gap-2">
 
-                    <a href="{{ route('oferta.edit', $oferta->id) }}"
+                    <a href="{{ route('oferta.edit', data_get($oferta, 'id')) }}"
                        class="btn btn-warning">
                         Editar
                     </a>

@@ -406,10 +406,10 @@
                                         @foreach (($areas ?? []) as $area)
 
                                             <option
-                                                value="{{ $area->id }}"
-                                                {{ old('area_id') == $area->id ? 'selected' : '' }}
+                                                value="{{ data_get($area, 'id') }}"
+                                                {{ old('area_id') == data_get($area, 'id') ? 'selected' : '' }}
                                             >
-                                                {{ $area->name }}
+                                                {{ data_get($area, 'name') }}
                                             </option>
 
                                         @endforeach
@@ -457,10 +457,10 @@
                                         @foreach (($trainingCenters ?? []) as $trainingCenter)
 
                                             <option
-                                                value="{{ $trainingCenter->id }}"
-                                                {{ old('training_center_id') == $trainingCenter->id ? 'selected' : '' }}
+                                                value="{{ data_get($trainingCenter, 'id') }}"
+                                                {{ old('training_center_id') == data_get($trainingCenter, 'id') ? 'selected' : '' }}
                                             >
-                                                {{ $trainingCenter->name }}
+                                                {{ data_get($trainingCenter, 'name') }}
                                             </option>
 
                                         @endforeach

@@ -41,7 +41,7 @@
 
                 @endif
 
-                <form action="{{ route('oferta.update', $oferta->id) }}"
+                <form action="{{ route('oferta.update', data_get($oferta, 'id')) }}"
                       method="POST">
 
                     @csrf
@@ -58,22 +58,22 @@
                             <select name="jornada" class="form-select" required>
 
                                 <option value="Mañana"
-                                    {{ old('jornada', $oferta->jornada) == 'Mañana' ? 'selected' : '' }}>
+                                    {{ old('jornada', data_get($oferta, 'jornada')) == 'Mañana' ? 'selected' : '' }}>
                                     Mañana
                                 </option>
 
                                 <option value="Tarde"
-                                    {{ old('jornada', $oferta->jornada) == 'Tarde' ? 'selected' : '' }}>
+                                    {{ old('jornada', data_get($oferta, 'jornada')) == 'Tarde' ? 'selected' : '' }}>
                                     Tarde
                                 </option>
 
                                 <option value="Noche"
-                                    {{ old('jornada', $oferta->jornada) == 'Noche' ? 'selected' : '' }}>
+                                    {{ old('jornada', data_get($oferta, 'jornada')) == 'Noche' ? 'selected' : '' }}>
                                     Noche
                                 </option>
 
                                 <option value="Mixta"
-                                    {{ old('jornada', $oferta->jornada) == 'Mixta' ? 'selected' : '' }}>
+                                    {{ old('jornada', data_get($oferta, 'jornada')) == 'Mixta' ? 'selected' : '' }}>
                                     Mixta
                                 </option>
 
@@ -90,7 +90,7 @@
                             <input type="date"
                                    name="registration_date"
                                    class="form-control"
-                                   value="{{ old('registration_date', $oferta->registration_date) }}"
+                                   value="{{ old('registration_date', data_get($oferta, 'registration_date')) }}"
                                    required>
 
                         </div>
@@ -106,7 +106,7 @@
                                 <input type="number"
                                        name="capacity"
                                        class="form-control"
-                                       value="{{ old('capacity', $oferta->capacity) }}"
+                                       value="{{ old('capacity', data_get($oferta, 'capacity')) }}"
                                        min="1"
                                        required>
 
@@ -128,10 +128,10 @@
 
                                 @foreach($programas as $programa)
 
-                                    <option value="{{ $programa->id }}"
-                                        {{ old('programa_id', $oferta->programa_id) == $programa->id ? 'selected' : '' }}>
+                                    <option value="{{ data_get($programa, 'id') }}"
+                                        {{ old('programa_id', data_get($oferta, 'programa_id')) == data_get($programa, 'id') ? 'selected' : '' }}>
 
-                                        {{ $programa->name }}
+                                        {{ data_get($programa, 'name') }}
 
                                     </option>
 

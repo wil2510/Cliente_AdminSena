@@ -151,7 +151,7 @@
                                     <td>
 
                                         <span class="fw-semibold">
-                                            {{ $noticia->id }}
+                                            {{ data_get($noticia, 'id') }}
                                         </span>
 
                                     </td>
@@ -160,11 +160,11 @@
                                     {{-- IMAGEN --}}
                                     <td>
 
-                                        @if($noticia->image)
+                                        @if(data_get($noticia, 'image'))
 
                                             <img
-                                                src="{{ asset('storage/' . $noticia->image) }}"
-                                                alt="{{ $noticia->title }}"
+                                                src="{{ asset('storage/' . data_get($noticia, 'image')) }}"
+                                                alt="{{ data_get($noticia, 'title') }}"
                                                 width="80"
                                                 height="60"
                                                 style="
@@ -188,7 +188,7 @@
                                     <td>
 
                                         <strong>
-                                            {{ $noticia->title }}
+                                            {{ data_get($noticia, 'title') }}
                                         </strong>
 
                                     </td>
@@ -197,7 +197,7 @@
                                     {{-- FECHA --}}
                                     <td>
 
-                                        {{ $noticia->publish_date }}
+                                        {{ data_get($noticia, 'publish_date') }}
 
                                     </td>
 
@@ -205,7 +205,7 @@
                                     {{-- CENTRO --}}
                                     <td>
 
-                                        {{ $noticia->trainingCenter->name ?? 'Sin centro' }}
+                                        {{ data_get($noticia, 'training_center.name', data_get($noticia, 'trainingCenter.name', 'Sin centro')) }}
 
                                     </td>
 
@@ -217,7 +217,7 @@
 
                                             {{-- VER --}}
                                             <a
-                                                href="{{ route('noticia.show', $noticia->id) }}"
+                                                href="{{ route('noticia.show', data_get($noticia, 'id')) }}"
                                                 class="btn btn-sm btn-info text-white"
                                             >
 
@@ -230,7 +230,7 @@
 
                                             {{-- EDITAR --}}
                                             <a
-                                                href="{{ route('noticia.edit', $noticia->id) }}"
+                                                href="{{ route('noticia.edit', data_get($noticia, 'id')) }}"
                                                 class="btn btn-sm btn-warning"
                                             >
 
@@ -243,7 +243,7 @@
 
                                             {{-- ELIMINAR --}}
                                             <form
-                                                action="{{ route('noticia.destroy', $noticia->id) }}"
+                                                action="{{ route('noticia.destroy', data_get($noticia, 'id')) }}"
                                                 method="POST"
                                                 class="d-inline"
                                             >

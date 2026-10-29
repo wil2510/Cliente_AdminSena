@@ -61,18 +61,18 @@
                             @forelse ($teachers as $teacher)
                                 <tr>
                                     <td class="ps-4 fw-bold">
-                                        #{{ $teacher->id }}
+                                        #{{ data_get($teacher, 'id') }}
                                     </td>
                                     <td class="fw-bold">
-                                        {{ $teacher->name }}
+                                        {{ data_get($teacher, 'name') }}
                                     </td>
                                     <td>
-                                        {{ $teacher->email }}
+                                        {{ data_get($teacher, 'email') }}
                                     </td>
                                     <td>
-                                        @if ($teacher->area)
+                                        @if (data_get($teacher, 'area'))
                                             <span class="badge bg-success">
-                                                {{ $teacher->area->name }}
+                                                {{ data_get($teacher, 'area.name') }}
                                             </span>
                                         @else
                                             <span class="text-muted">
@@ -81,9 +81,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($teacher->training_center)
+                                        @if (data_get($teacher, 'training_center'))
                                             <span class="badge bg-success">
-                                                {{ $teacher->training_center->name }}
+                                                {{ data_get($teacher, 'training_center.name', data_get($teacher, 'trainingCenter.name')) }}
                                             </span>
                                         @else
                                             <span class="text-muted">
@@ -94,17 +94,17 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             {{-- VER --}}
-                                            <a href="{{ route('teacher.show', $teacher->id) }}"
+                                            <a href="{{ route('teacher.show', data_get($teacher, 'id')) }}"
                                                 class="btn btn-sm btn-info text-white">
                                                 Ver
                                             </a>
                                             {{-- EDITAR --}}
-                                            <a href="{{ route('teacher.edit', $teacher->id) }}"
+                                            <a href="{{ route('teacher.edit', data_get($teacher, 'id')) }}"
                                                 class="btn btn-sm btn-warning text-white">
                                                 Editar
                                             </a>
                                             {{-- ELIMINAR --}}
-                                            <form action="{{ route('teacher.destroy', $teacher->id) }}"
+                                            <form action="{{ route('teacher.destroy', data_get($teacher, 'id')) }}"
                                                 method="POST"
                                                 class="d-inline"
                                                 onsubmit="return confirm('¿Está seguro de eliminar este instructor?')">

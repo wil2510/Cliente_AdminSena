@@ -42,7 +42,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('ambiente.update', $ambiente->id) }}"
+                <form action="{{ route('ambiente.update', data_get($ambiente, 'id')) }}"
                       method="POST">
 
                     @csrf
@@ -57,7 +57,7 @@
                         <input type="text"
                                name="name"
                                class="form-control"
-                               value="{{ old('name', $ambiente->name) }}"
+                               value="{{ old('name', data_get($ambiente, 'name')) }}"
                                required>
 
                     </div>
@@ -71,7 +71,7 @@
                         <input type="text"
                                name="location"
                                class="form-control"
-                               value="{{ old('location', $ambiente->location) }}"
+                               value="{{ old('location', data_get($ambiente, 'location')) }}"
                                required>
 
                     </div>
@@ -88,10 +88,10 @@
 
                             @foreach($trainingCenters as $trainingCenter)
 
-                                <option value="{{ $trainingCenter->id }}"
-                                    {{ $ambiente->training_center_id == $trainingCenter->id ? 'selected' : '' }}>
+                                <option value="{{ data_get($trainingCenter, 'id') }}"
+                                    {{ data_get($ambiente, 'training_center_id') == data_get($trainingCenter, 'id') ? 'selected' : '' }}>
 
-                                    {{ $trainingCenter->name }}
+                                    {{ data_get($trainingCenter, 'name') }}
 
                                 </option>
 

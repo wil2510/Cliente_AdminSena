@@ -475,14 +475,12 @@
                                     </option>
 
                                     @foreach ($areas as $area)
-
                                         <option
-                                            value="{{ $area->id }}"
-                                            {{ old('area_id') == $area->id ? 'selected' : '' }}
+                                            value="{{ is_array($area) ? $area['id'] : data_get($area, 'id') }}"
+                                            {{ old('area_id') == (is_array($area) ? $area['id'] : data_get($area, 'id')) ? 'selected' : '' }}
                                         >
-                                            {{ $area->name }}
+                                            {{ is_array($area) ? $area['name'] : data_get($area, 'name') }}
                                         </option>
-
                                     @endforeach
 
                                 </select>

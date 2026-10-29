@@ -20,11 +20,11 @@
 
         <div class="card border-0 shadow-sm">
 
-            @if($noticia->image)
+            @if(data_get($noticia, 'image'))
 
-                <img src="{{ asset('storage/' . $noticia->image) }}"
+                <img src="{{ asset('storage/' . data_get($noticia, 'image')) }}"
                      class="card-img-top"
-                     alt="{{ $noticia->title }}"
+                     alt="{{ data_get($noticia, 'title') }}"
                      style="max-height: 400px; object-fit: cover;">
 
             @endif
@@ -32,17 +32,17 @@
             <div class="card-body">
 
                 <h2 class="fw-bold mb-3">
-                    {{ $noticia->title }}
+                    {{ data_get($noticia, 'title') }}
                 </h2>
 
                 <p class="text-muted">
-                    Publicado el {{ $noticia->publish_date }}
+                    Publicado el {{ data_get($noticia, 'publish_date') }}
                 </p>
 
                 <hr>
 
                 <p>
-                    {{ $noticia->content }}
+                    {{ data_get($noticia, 'content') }}
                 </p>
 
                 <hr>
@@ -52,7 +52,7 @@
                         Centro de Formación:
                     </strong>
 
-                    {{ $noticia->trainingCenter->name ?? 'Sin centro' }}
+                    {{ data_get($noticia, 'training_center.name', data_get($noticia, 'trainingCenter.name', 'Sin centro')) }}
                 </p>
 
                 <div class="mt-4">
@@ -62,7 +62,7 @@
                         Volver
                     </a>
 
-                    <a href="{{ route('noticia.edit', $noticia->id) }}"
+                    <a href="{{ route('noticia.edit', data_get($noticia, 'id')) }}"
                        class="btn btn-warning">
                         Editar
                     </a>

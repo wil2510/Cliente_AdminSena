@@ -58,38 +58,38 @@
                                 <tr>
 
                                     <td class="fw-bold text-secondary">
-                                        #{{ $oferta->id }}
+                                        #{{ data_get($oferta, 'id') }}
                                     </td>
 
                                     <td>
-                                        {{ $oferta->jornada }}
+                                        {{ data_get($oferta, 'jornada') }}
                                     </td>
 
                                     <td>
-                                        {{ $oferta->registration_date }}
+                                        {{ data_get($oferta, 'registration_date') }}
                                     </td>
 
                                     <td>
-                                        {{ $oferta->capacity }} aprendices
+                                        {{ data_get($oferta, 'capacity') }} aprendices
                                     </td>
 
                                     <td class="fw-bold">
-                                        {{ $oferta->programa->name ?? 'Sin programa' }}
+                                        {{ data_get($oferta, 'programa.name') ?? 'Sin programa' }}
                                     </td>
 
                                     <td class="text-center">
 
-                                        <a href="{{ route('oferta.show', $oferta->id) }}"
+                                        <a href="{{ route('oferta.show', data_get($oferta, 'id')) }}"
                                            class="btn btn-sm btn-info text-white">
                                             Ver
                                         </a>
 
-                                        <a href="{{ route('oferta.edit', $oferta->id) }}"
+                                        <a href="{{ route('oferta.edit', data_get($oferta, 'id')) }}"
                                            class="btn btn-sm btn-warning">
                                             Editar
                                         </a>
 
-                                        <form action="{{ route('oferta.destroy', $oferta->id) }}"
+                                        <form action="{{ route('oferta.destroy', data_get($oferta, 'id')) }}"
                                               method="POST"
                                               class="d-inline">
 

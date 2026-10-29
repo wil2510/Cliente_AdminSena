@@ -30,7 +30,7 @@
                         </small>
 
                         <h5 class="fw-bold">
-                            #{{ $programa->id }}
+                            #{{ data_get($programa, 'id') }}
                         </h5>
 
                     </div>
@@ -42,7 +42,7 @@
                         </small>
 
                         <h5 class="fw-bold">
-                            {{ $programa->name }}
+                            {{ data_get($programa, 'name') }}
                         </h5>
 
                     </div>
@@ -54,7 +54,7 @@
                         </small>
 
                         <h5>
-                            {{ $programa->type }}
+                            {{ data_get($programa, 'type') }}
                         </h5>
 
                     </div>
@@ -66,7 +66,7 @@
                         </small>
 
                         <h5>
-                            {{ $programa->duration }} meses
+                            {{ data_get($programa, 'duration') }} meses
                         </h5>
 
                     </div>
@@ -78,7 +78,7 @@
                         </small>
 
                         <h5>
-                            {{ $programa->area->name ?? 'Sin área' }}
+                            {{ data_get($programa, 'area.name') ?? 'Sin área' }}
                         </h5>
 
                     </div>
@@ -90,7 +90,7 @@
                         </small>
 
                         <p class="mt-2">
-                            {{ $programa->description ?? 'Sin descripción.' }}
+                            {{ data_get($programa, 'description') ?? 'Sin descripción.' }}
                         </p>
 
                     </div>
@@ -99,7 +99,7 @@
 
                 <div class="mt-4 d-flex gap-2">
 
-                    <a href="{{ route('programa.edit', $programa->id) }}"
+                    <a href="{{ route('programa.edit', data_get($programa, 'id')) }}"
                        class="btn btn-warning">
                         Editar
                     </a>

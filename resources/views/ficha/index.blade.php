@@ -156,7 +156,7 @@
                                     <td>
 
                                         <span class="fw-semibold">
-                                            {{ $ficha->id }}
+                                            {{ data_get($ficha, 'id') }}
                                         </span>
 
                                     </td>
@@ -166,7 +166,7 @@
                                     <td>
 
                                         <strong>
-                                            {{ $ficha->code }}
+                                            {{ data_get($ficha, 'code') }}
                                         </strong>
 
                                     </td>
@@ -175,7 +175,7 @@
                                     {{-- FECHA --}}
                                     <td>
 
-                                        {{ $ficha->start_date }}
+                                        {{ data_get($ficha, 'start_date') }}
 
                                     </td>
 
@@ -184,7 +184,7 @@
                                     <td>
 
                                         <span class="badge bg-light text-dark border">
-                                            {{ $ficha->schedule }}
+                                            {{ data_get($ficha, 'schedule') }}
                                         </span>
 
                                     </td>
@@ -193,7 +193,7 @@
                                     {{-- OFERTA --}}
                                     <td>
 
-                                        {{ $ficha->oferta->jornada ?? 'Sin oferta' }}
+                                        {{ data_get($ficha, 'oferta.jornada') ?? 'Sin oferta' }}
 
                                     </td>
 
@@ -201,7 +201,7 @@
                                     {{-- PROGRAMA --}}
                                     <td>
 
-                                        {{ $ficha->oferta->programa->name ?? 'Sin programa' }}
+                                        {{ data_get($ficha, 'oferta.programa.name') ?? 'Sin programa' }}
 
                                     </td>
 
@@ -213,7 +213,7 @@
 
                                             {{-- VER --}}
                                             <a
-                                                href="{{ route('ficha.show', $ficha->id) }}"
+                                                href="{{ route('ficha.show', data_get($ficha, 'id')) }}"
                                                 class="btn btn-sm btn-info text-white"
                                             >
 
@@ -226,7 +226,7 @@
 
                                             {{-- EDITAR --}}
                                             <a
-                                                href="{{ route('ficha.edit', $ficha->id) }}"
+                                                href="{{ route('ficha.edit', data_get($ficha, 'id')) }}"
                                                 class="btn btn-sm btn-warning"
                                             >
 
@@ -239,7 +239,7 @@
 
                                             {{-- ELIMINAR --}}
                                             <form
-                                                action="{{ route('ficha.destroy', $ficha->id) }}"
+                                                action="{{ route('ficha.destroy', data_get($ficha, 'id')) }}"
                                                 method="POST"
                                                 class="d-inline"
                                             >

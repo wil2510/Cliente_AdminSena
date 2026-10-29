@@ -315,11 +315,11 @@
                                     @foreach ($ofertas as $oferta)
 
                                         <option
-                                            value="{{ $oferta->id }}"
-                                            {{ old('oferta_id') == $oferta->id ? 'selected' : '' }}
+                                            value="{{ data_get($oferta, 'id') }}"
+                                            {{ old('oferta_id') == data_get($oferta, 'id') ? 'selected' : '' }}
                                         >
-                                            {{ $oferta->jornada }} -
-                                            {{ $oferta->programa->name ?? 'Sin programa' }}
+                                            {{ data_get($oferta, 'jornada') }} -
+                                            {{ data_get($oferta, 'programa.name') ?? 'Sin programa' }}
                                         </option>
 
                                     @endforeach

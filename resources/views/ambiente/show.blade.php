@@ -23,7 +23,7 @@
             <div class="card-body">
 
                 <h4 class="fw-bold mb-4">
-                    {{ $ambiente->name }}
+                    {{ data_get($ambiente, 'name') }}
                 </h4>
 
                 <div class="row">
@@ -35,7 +35,7 @@
                         </strong>
 
                         <p>
-                            {{ $ambiente->id }}
+                            {{ data_get($ambiente, 'id') }}
                         </p>
 
                     </div>
@@ -47,7 +47,7 @@
                         </strong>
 
                         <p>
-                            {{ $ambiente->name }}
+                            {{ data_get($ambiente, 'name') }}
                         </p>
 
                     </div>
@@ -59,7 +59,7 @@
                         </strong>
 
                         <p>
-                            {{ $ambiente->location }}
+                            {{ data_get($ambiente, 'location') }}
                         </p>
 
                     </div>
@@ -71,7 +71,7 @@
                         </strong>
 
                         <p>
-                            {{ $ambiente->trainingCenter->name ?? 'Sin centro' }}
+                            {{ data_get($ambiente, 'training_center.name', data_get($ambiente, 'trainingCenter.name', 'Sin centro')) }}
                         </p>
 
                     </div>
@@ -83,7 +83,7 @@
                     Volver
                 </a>
 
-                <a href="{{ route('ambiente.edit', $ambiente->id) }}"
+                <a href="{{ route('ambiente.edit', data_get($ambiente, 'id')) }}"
                    class="btn btn-warning">
                     Editar
                 </a>

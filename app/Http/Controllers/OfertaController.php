@@ -9,7 +9,7 @@ class OfertaController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
         return $response->json();
     }
 
@@ -46,7 +46,7 @@ class OfertaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/ofertas', $request->all());
+        Http::post($url . '/ofertas', $request->all())->throw();
 
         return redirect()->route('oferta.index');
     }
@@ -67,7 +67,7 @@ class OfertaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/ofertas/' . $id, $request->all());
+        Http::put($url . '/ofertas/' . $id, $request->all())->throw();
 
         return redirect()->route('oferta.index');
     }
@@ -76,7 +76,7 @@ class OfertaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::delete($url . '/ofertas/' . $id);
+        Http::delete($url . '/ofertas/' . $id)->throw();
 
         return redirect()->route('oferta.index');
     }

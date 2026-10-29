@@ -25,7 +25,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-body">
 
-                <form action="{{ route('ficha.update', $ficha->id) }}"
+                <form action="{{ route('ficha.update', data_get($ficha, 'id')) }}"
                       method="POST">
 
                     @csrf
@@ -39,7 +39,7 @@
                         <input type="text"
                                name="code"
                                class="form-control"
-                               value="{{ old('code', $ficha->code) }}"
+                               value="{{ old('code', data_get($ficha, 'code')) }}"
                                required>
                     </div>
 
@@ -51,7 +51,7 @@
                         <input type="date"
                                name="start_date"
                                class="form-control"
-                               value="{{ old('start_date', $ficha->start_date) }}"
+                               value="{{ old('start_date', data_get($ficha, 'start_date')) }}"
                                required>
                     </div>
 
@@ -63,22 +63,22 @@
                         <select name="schedule" class="form-select" required>
 
                             <option value="Mañana"
-                                {{ $ficha->schedule == 'Mañana' ? 'selected' : '' }}>
+                                {{ data_get($ficha, 'schedule') == 'Mañana' ? 'selected' : '' }}>
                                 Mañana
                             </option>
 
                             <option value="Tarde"
-                                {{ $ficha->schedule == 'Tarde' ? 'selected' : '' }}>
+                                {{ data_get($ficha, 'schedule') == 'Tarde' ? 'selected' : '' }}>
                                 Tarde
                             </option>
 
                             <option value="Noche"
-                                {{ $ficha->schedule == 'Noche' ? 'selected' : '' }}>
+                                {{ data_get($ficha, 'schedule') == 'Noche' ? 'selected' : '' }}>
                                 Noche
                             </option>
 
                             <option value="Mixta"
-                                {{ $ficha->schedule == 'Mixta' ? 'selected' : '' }}>
+                                {{ data_get($ficha, 'schedule') == 'Mixta' ? 'selected' : '' }}>
                                 Mixta
                             </option>
 
@@ -94,12 +94,12 @@
 
                             @foreach($ofertas as $oferta)
 
-                                <option value="{{ $oferta->id }}"
-                                    {{ $ficha->oferta_id == $oferta->id ? 'selected' : '' }}>
+                                <option value="{{ data_get($oferta, 'id') }}"
+                                    {{ data_get($ficha, 'oferta_id') == data_get($oferta, 'id') ? 'selected' : '' }}>
 
-                                    {{ $oferta->jornada }}
+                                    {{ data_get($oferta, 'jornada') }}
                                     -
-                                    {{ $oferta->programa->name ?? 'Sin programa' }}
+                                    {{ data_get($oferta, 'programa.name') ?? 'Sin programa' }}
 
                                 </option>
 

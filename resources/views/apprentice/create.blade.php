@@ -296,14 +296,12 @@
                                         </option>
 
                                         @foreach ($courses as $course)
-
                                             <option
-                                                value="{{ $course->id }}"
-                                                {{ old('course_id') == $course->id ? 'selected' : '' }}
+                                                value="{{ data_get($course, 'id') }}"
+                                                {{ old('course_id') == data_get($course, 'id') ? 'selected' : '' }}
                                             >
-                                                {{ $course->name }}
+                                                {{ data_get($course, 'name') }}
                                             </option>
-
                                         @endforeach
 
                                     </select>
@@ -338,14 +336,12 @@
                                         </option>
 
                                         @foreach ($computers as $computer)
-
                                             <option
-                                                value="{{ $computer->id }}"
-                                                {{ old('computer_id') == $computer->id ? 'selected' : '' }}
+                                                value="{{ data_get($computer, 'id') }}"
+                                                {{ old('computer_id') == data_get($computer, 'id') ? 'selected' : '' }}
                                             >
-                                                Computador {{ $computer->number }}
+                                                Computador {{ data_get($computer, 'number') }}
                                             </option>
-
                                         @endforeach
 
                                     </select>

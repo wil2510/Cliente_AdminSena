@@ -136,7 +136,7 @@
                                     <td>
 
                                         <span class="fw-semibold">
-                                            {{ $ambiente->id }}
+                                            {{ data_get($ambiente, 'id') }}
                                         </span>
 
                                     </td>
@@ -146,7 +146,7 @@
                                     <td>
 
                                         <strong>
-                                            {{ $ambiente->name }}
+                                            {{ data_get($ambiente, 'name') }}
                                         </strong>
 
                                     </td>
@@ -160,7 +160,7 @@
                                             style="color: #198754;"
                                         ></i>
 
-                                        {{ $ambiente->location }}
+                                        {{ data_get($ambiente, 'location') }}
 
                                     </td>
 
@@ -173,7 +173,7 @@
                                             style="color: #198754;"
                                         ></i>
 
-                                        {{ $ambiente->trainingCenter->name ?? 'Sin centro' }}
+                                        {{ data_get($ambiente, 'training_center.name', data_get($ambiente, 'trainingCenter.name', 'Sin centro')) }}
 
                                     </td>
 
@@ -185,7 +185,7 @@
 
                                             {{-- VER --}}
                                             <a
-                                                href="{{ route('ambiente.show', $ambiente->id) }}"
+                                                href="{{ route('ambiente.show', data_get($ambiente, 'id')) }}"
                                                 class="btn btn-sm btn-info text-white"
                                             >
 
@@ -198,7 +198,7 @@
 
                                             {{-- EDITAR --}}
                                             <a
-                                                href="{{ route('ambiente.edit', $ambiente->id) }}"
+                                                href="{{ route('ambiente.edit', data_get($ambiente, 'id')) }}"
                                                 class="btn btn-sm btn-warning"
                                             >
 
@@ -211,7 +211,7 @@
 
                                             {{-- ELIMINAR --}}
                                             <form
-                                                action="{{ route('ambiente.destroy', $ambiente->id) }}"
+                                                action="{{ route('ambiente.destroy', data_get($ambiente, 'id')) }}"
                                                 method="POST"
                                                 class="d-inline"
                                             >

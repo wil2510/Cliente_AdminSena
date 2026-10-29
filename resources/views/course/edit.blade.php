@@ -20,26 +20,26 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('course.update', $course) }}" method="POST">
+                    <form action="{{ route('course.update', $course['id']) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre del Curso</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $course->name) }}" required>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $course['name']) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="code" class="form-label">Código del Curso</label>
-                            <input type="text" name="code" id="code" class="form-control" value="{{ old('code', $course->code) }}" required>
+                            <input type="text" name="code" id="code" class="form-control" value="{{ old('code', $course['code']) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="area_id" class="form-label">Área</label>
                             <select name="area_id" id="area_id" class="form-select" required>
                                 @foreach ($areas as $area)
-                                    <option value="{{ $area->id }}" {{ old('area_id', $course->area_id) == $area->id ? 'selected' : '' }}>
-                                        {{ $area->name }}
+                                    <option value="{{ $area['id'] }}" {{ old('area_id', $course['area_id']) == $area['id'] ? 'selected' : '' }}>
+                                        {{ $area['name']}}
                                     </option>
                                 @endforeach
                             </select>
@@ -48,9 +48,9 @@
                         <div class="mb-3">
                             <label for="training_center_id" class="form-label">Centro de Formación</label>
                             <select name="training_center_id" id="training_center_id" class="form-select" required>
-                                @foreach ($trainingCenters as $center)
-                                    <option value="{{ $center->id }}" {{ old('training_center_id', $course->training_center_id) == $center->id ? 'selected' : '' }}>
-                                        {{ $center->name }}
+                                @foreach ($trainingcenters as $center)
+                                    <option value="{{ $center['id'] }}" {{ old('training_center_id', $course['training_center_id']) == $center['id'] ? 'selected' : '' }}>
+                                        {{ $center['name'] }}
                                     </option>
                                 @endforeach
                             </select>

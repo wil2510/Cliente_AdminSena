@@ -9,7 +9,7 @@ class FichaController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
         return $response->json();
     }
 
@@ -48,7 +48,7 @@ class FichaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/fichas', $request->all());
+        Http::post($url . '/fichas', $request->all())->throw();
 
         return redirect()->route('ficha.index');
     }
@@ -69,7 +69,7 @@ class FichaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/fichas/' . $id, $request->all());
+        Http::put($url . '/fichas/' . $id, $request->all())->throw();
 
         return redirect()->route('ficha.index');
     }
@@ -78,7 +78,7 @@ class FichaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::delete($url . '/fichas/' . $id);
+        Http::delete($url . '/fichas/' . $id)->throw();
 
         return redirect()->route('ficha.index');
     }

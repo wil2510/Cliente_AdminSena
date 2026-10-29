@@ -39,7 +39,7 @@
 
                 @endif
 
-                <form action="{{ route('programa.update', $programa->id) }}"
+                <form action="{{ route('programa.update', data_get($programa, 'id')) }}"
                       method="POST">
 
                     @csrf
@@ -56,7 +56,7 @@
                             <input type="text"
                                    name="name"
                                    class="form-control"
-                                   value="{{ old('name', $programa->name) }}"
+                                   value="{{ old('name', data_get($programa, 'name')) }}"
                                    required>
 
                         </div>
@@ -70,12 +70,12 @@
                             <select name="type" class="form-select" required>
 
                                 <option value="Técnico"
-                                    {{ old('type', $programa->type) == 'Técnico' ? 'selected' : '' }}>
+                                    {{ old('type', data_get($programa, 'type')) == 'Técnico' ? 'selected' : '' }}>
                                     Técnico
                                 </option>
 
                                 <option value="Tecnólogo"
-                                    {{ old('type', $programa->type) == 'Tecnólogo' ? 'selected' : '' }}>
+                                    {{ old('type', data_get($programa, 'type')) == 'Tecnólogo' ? 'selected' : '' }}>
                                     Tecnólogo
                                 </option>
 
@@ -94,7 +94,7 @@
                                 <input type="number"
                                        name="duration"
                                        class="form-control"
-                                       value="{{ old('duration', $programa->duration) }}"
+                                       value="{{ old('duration', data_get($programa, 'duration')) }}"
                                        min="1"
                                        required>
 
@@ -116,10 +116,10 @@
 
                                 @foreach($areas as $area)
 
-                                    <option value="{{ $area->id }}"
-                                        {{ old('area_id', $programa->area_id) == $area->id ? 'selected' : '' }}>
+                                    <option value="{{ data_get($area, 'id') }}"
+                                        {{ old('area_id', data_get($programa, 'area_id')) == data_get($area, 'id') ? 'selected' : '' }}>
 
-                                        {{ $area->name }}
+                                        {{ data_get($area, 'name') }}
 
                                     </option>
 
@@ -137,7 +137,7 @@
 
                             <textarea name="description"
                                       class="form-control"
-                                      rows="4">{{ old('description', $programa->description) }}</textarea>
+                                      rows="4">{{ old('description', data_get($programa, 'description')) }}</textarea>
 
                         </div>
 

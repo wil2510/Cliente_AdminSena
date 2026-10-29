@@ -9,7 +9,7 @@ class NoticiaController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
+        $response = Http::get($url)->throw();
         return $response->json();
     }
 
@@ -27,7 +27,7 @@ class NoticiaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $response = $this->fetchDataFromApi($url . '/training-centers');
+        $response = $this->fetchDataFromApi($url . '/training_centers');
         $trainingCenters = is_array($response) ? $response : [];
 
         return view('noticia.create', compact('trainingCenters'));
@@ -42,9 +42,9 @@ class NoticiaController extends Controller
                 'image',
                 file_get_contents($request->file('image')->path()),
                 $request->file('image')->getClientOriginalName()
-            )->post($url . '/noticias', $request->except('image'));
+            )->post($url . '/noticias', $request->except('image'))->throw();
         } else {
-            Http::post($url . '/noticias', $request->all());
+            Http::post($url . '/noticias', $request->all())->throw();
         }
 
         return redirect()->route('noticia.index');
@@ -65,7 +65,7 @@ class NoticiaController extends Controller
         
         $noticia = $this->fetchDataFromApi($url . '/noticias/' . $id);
         
-        $response = $this->fetchDataFromApi($url . '/training-centers');
+        $response = $this->fetchDataFromApi($url . '/training_centers');
         $trainingCenters = is_array($response) ? $response : [];
 
         return view('noticia.edit', compact('noticia', 'trainingCenters'));
@@ -75,7 +75,7 @@ class NoticiaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/noticias/' . $id, $request->all());
+        Http::put($url . '/noticias/' . $id, $request->all())->throw();
 
         return redirect()->route('noticia.index');
     }
@@ -84,7 +84,7 @@ class NoticiaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::delete($url . '/noticias/' . $id);
+        Http::delete($url . '/noticias/' . $id)->throw();
 
         return redirect()->route('noticia.index');
     }

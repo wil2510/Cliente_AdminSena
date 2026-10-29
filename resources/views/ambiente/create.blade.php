@@ -264,10 +264,10 @@
                                     @foreach ($trainingCenters as $trainingCenter)
 
                                         <option
-                                            value="{{ $trainingCenter->id }}"
-                                            {{ old('training_center_id') == $trainingCenter->id ? 'selected' : '' }}
+                                            value="{{ data_get($trainingCenter, 'id') }}"
+                                            {{ old('training_center_id') == data_get($trainingCenter, 'id') ? 'selected' : '' }}
                                         >
-                                            {{ $trainingCenter->name }}
+                                            {{ data_get($trainingCenter, 'name') }}
                                         </option>
 
                                     @endforeach

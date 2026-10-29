@@ -3,21 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ambiente;
-use App\Models\Training_center;
+use Illuminate\Support\Facades\Http;
 
 class AmbienteController extends Controller
 {
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url)->throw();
+
+        return $response->json();
+    }
+
     public function index()
     {
-        $ambientes = Ambiente::with('trainingCenter')->get();
+        $url = env('URL_SERVER_API');
+        $response = $this->fetchDataFromApi($url . '/ambientes');
+        $ambientes = is_array($response) ? $response : [];
 
         return view('ambiente.index', compact('ambientes'));
     }
 
     public function create()
     {
-        $trainingCenters = Training_center::all();
+        $url = env('URL_SERVER_API');
+        $response = $this->fetchDataFromApi($url . '/training_centers');
+        $trainingCenters = is_array($response) ? $response : [];
 
         return view('ambiente.create', compact('trainingCenters'));
     }
@@ -27,67 +37,52 @@ class AmbienteController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'training_center_id' => 'required|exists:training_centers,id',
+            'training_center_id' => 'required|integer',
         ]);
 
-        Ambiente::create([
-            'name' => $request->name,
-            'location' => $request->location,
-            'training_center_id' => $request->training_center_id,
-        ]);
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/ambientes', $request->all())->throw();
 
-        return redirect()
-            ->route('ambiente.index')
-            ->with('success', 'Ambiente creado correctamente.');
+        return redirect()->route('ambiente.index');
     }
 
     public function show($id)
     {
-        $ambiente = Ambiente::with('trainingCenter')->findOrFail($id);
+        $url = env('URL_SERVER_API');
+        $ambiente = $this->fetchDataFromApi($url . '/ambientes/' . $id);
 
         return view('ambiente.show', compact('ambiente'));
     }
 
     public function edit($id)
     {
-        $ambiente = Ambiente::findOrFail($id);
-        $trainingCenters = Training_center::all();
+        $url = env('URL_SERVER_API');
+        $ambiente = $this->fetchDataFromApi($url . '/ambientes/' . $id);
+        $response = $this->fetchDataFromApi($url . '/training_centers');
+        $trainingCenters = is_array($response) ? $response : [];
 
-        return view('ambiente.edit', compact(
-            'ambiente',
-            'trainingCenters'
-        ));
+        return view('ambiente.edit', compact('ambiente', 'trainingCenters'));
     }
 
     public function update(Request $request, $id)
     {
-        $ambiente = Ambiente::findOrFail($id);
-
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'training_center_id' => 'required|exists:training_centers,id',
+            'training_center_id' => 'required|integer',
         ]);
 
-        $ambiente->update([
-            'name' => $request->name,
-            'location' => $request->location,
-            'training_center_id' => $request->training_center_id,
-        ]);
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/ambientes/' . $id, $request->all())->throw();
 
-        return redirect()
-            ->route('ambiente.index')
-            ->with('success', 'Ambiente actualizado correctamente.');
+        return redirect()->route('ambiente.index');
     }
 
     public function destroy($id)
     {
-        $ambiente = Ambiente::findOrFail($id);
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/ambientes/' . $id)->throw();
 
-        $ambiente->delete();
-
-        return redirect()
-            ->route('ambiente.index')
-            ->with('success', 'Ambiente eliminado correctamente.');
+        return redirect()->route('ambiente.index');
     }
 }
