@@ -9,12 +9,25 @@
 
             <div class="d-flex align-items-start gap-3">
 
-                <div style="width: 6px; height: 70px; background: #39A900; border-radius: 10px;"></div>
+                <div
+                    style="
+                        width: 6px;
+                        height: 70px;
+                        background: #39A900;
+                        border-radius: 10px;
+                    "
+                ></div>
 
                 <div>
 
-                    <div class="fw-bold text-uppercase"
-                        style="color: #39A900; font-size: 13px; letter-spacing: 1px;">
+                    <div
+                        class="fw-bold text-uppercase"
+                        style="
+                            color: #39A900;
+                            font-size: 13px;
+                            letter-spacing: 1px;
+                        "
+                    >
                         Administración Académica
                     </div>
 
@@ -30,10 +43,17 @@
 
             </div>
 
-            <div class="bg-white shadow-sm rounded-3 px-4 py-3 text-center">
+            <div
+                class="bg-white shadow-sm rounded-3 px-4 py-3 text-center"
+            >
 
-                <i class="bi bi-person-badge-fill"
-                    style="font-size: 28px; color: #39A900;"></i>
+                <i
+                    class="bi bi-person-workspace"
+                    style="
+                        font-size: 28px;
+                        color: #39A900;
+                    "
+                ></i>
 
                 <div class="small fw-bold text-muted mt-1">
                     APRENDICES
@@ -43,26 +63,36 @@
 
         </div>
 
-
         <div class="row g-4">
 
             <div class="col-lg-5">
 
-                <div class="h-100 p-4 p-lg-5 text-white"
+                <div
+                    class="h-100 p-4 p-lg-5 text-white"
                     style="
-                        background: linear-gradient(145deg, #17202a 0%, #263746 100%);
+                        background: linear-gradient(
+                            145deg,
+                            #17202a 0%,
+                            #263746 100%
+                        );
                         border-radius: 18px;
-                    ">
+                    "
+                >
 
-                    <div class="d-flex align-items-center justify-content-center mb-4"
+                    <div
+                        class="d-flex align-items-center justify-content-center mb-4"
                         style="
                             width: 60px;
                             height: 60px;
                             background: #39A900;
                             border-radius: 15px;
-                        ">
+                        "
+                    >
 
-                        <i class="bi bi-person-badge-fill" style="font-size: 28px;"></i>
+                        <i
+                            class="bi bi-person-workspace"
+                            style="font-size: 28px;"
+                        ></i>
 
                     </div>
 
@@ -70,67 +100,113 @@
                         Crear aprendiz
                     </h2>
 
-                    <p class="text-white-50" style="line-height: 1.7;">
-                        Registra la información de los aprendices
-                        para facilitar la gestión académica.
+                    <p
+                        class="text-white-50"
+                        style="line-height: 1.7;"
+                    >
+                        Registra los aprendices encargados de acompañar
+                        los procesos de formación del SENA.
                     </p>
-
 
                     <div class="mt-4">
 
                         <div class="d-flex gap-3 mb-4">
-                            <div class="fw-bold" style="color: #39A900;">01</div>
+
+                            <div
+                                class="fw-bold"
+                                style="color: #39A900;"
+                            >
+                                01
+                            </div>
 
                             <div>
-                                <div class="fw-bold">Información personal</div>
+
+                                <div class="fw-bold">
+                                    Información personal
+                                </div>
+
                                 <small class="text-white-50">
-                                    Nombre, correo y celular.
+                                    Nombre y correo electrónico.
                                 </small>
+
                             </div>
+
                         </div>
 
                         <div class="d-flex gap-3 mb-4">
-                            <div class="fw-bold" style="color: #39A900;">02</div>
+
+                            <div
+                                class="fw-bold"
+                                style="color: #39A900;"
+                            >
+                                02
+                            </div>
 
                             <div>
-                                <div class="fw-bold">Formación</div>
+
+                                <div class="fw-bold">
+                                    Área
+                                </div>
+
                                 <small class="text-white-50">
-                                    Asocia el aprendiz a un curso.
+                                    Asocia el aprendiz a un área.
                                 </small>
+
                             </div>
+
                         </div>
 
                         <div class="d-flex gap-3">
-                            <div class="fw-bold" style="color: #39A900;">03</div>
+
+                            <div
+                                class="fw-bold"
+                                style="color: #39A900;"
+                            >
+                                03
+                            </div>
 
                             <div>
-                                <div class="fw-bold">Equipo</div>
+
+                                <div class="fw-bold">
+                                    Computador
+                                </div>
+
                                 <small class="text-white-50">
-                                    Asigna un computador disponible.
+                                    Selecciona su computador asignado.
                                 </small>
+
                             </div>
+
                         </div>
 
                     </div>
 
-                    <div class="border-top border-secondary mt-5 pt-4">
+                    <div
+                        class="border-top border-secondary mt-5 pt-4"
+                    >
+
                         <small class="text-white-50">
                             Admin SENA · Gestión académica
                         </small>
+
                     </div>
 
                 </div>
 
             </div>
 
-
             <div class="col-lg-7">
 
-                <div class="bg-white shadow-sm h-100" style="border-radius: 18px;">
+                <div
+                    class="bg-white shadow-sm h-100"
+                    style="border-radius: 18px;"
+                >
 
                     <div class="p-4 border-bottom">
 
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div
+                            class="d-flex justify-content-between align-items-center"
+                        >
 
                             <div>
 
@@ -144,15 +220,22 @@
 
                             </div>
 
-                            <i class="bi bi-three-dots"
-                                style="font-size: 24px; color: #6c757d;"></i>
+                            <i
+                                class="bi bi-three-dots"
+                                style="
+                                    font-size: 24px;
+                                    color: #6c757d;
+                                "
+                            ></i>
 
                         </div>
 
                     </div>
 
-
-                    <form action="{{ route('apprentice.admin') }}" method="POST">
+                    <form
+                        action="{{ route('apprentice.admin') }}"
+                        method="POST"
+                    >
 
                         @csrf
 
@@ -160,18 +243,28 @@
 
                             @if ($errors->any())
 
-                                <div class="alert alert-danger d-flex align-items-start gap-2">
+                                <div
+                                    class="alert alert-danger d-flex align-items-start gap-2"
+                                >
 
-                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    <i
+                                        class="bi bi-exclamation-triangle-fill"
+                                    ></i>
 
                                     <div>
 
-                                        <strong>Revisa la información:</strong>
+                                        <strong>
+                                            Revisa la información:
+                                        </strong>
 
                                         <ul class="mb-0 mt-1">
 
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+
+                                                <li>
+                                                    {{ $error }}
+                                                </li>
+
                                             @endforeach
 
                                         </ul>
@@ -182,13 +275,16 @@
 
                             @endif
 
-
-                            {{-- NOMBRE --}}
                             <div class="mb-4">
 
-                                <label for="name" class="form-label fw-semibold">
+                                <label
+                                    for="name"
+                                    class="form-label fw-semibold"
+                                >
 
-                                    <i class="bi bi-person-fill me-2 text-success"></i>
+                                    <i
+                                        class="bi bi-person-fill me-2 text-success"
+                                    ></i>
 
                                     Nombre completo
 
@@ -200,171 +296,171 @@
                                     name="name"
                                     value="{{ old('name') }}"
                                     class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                    placeholder="Ej: Juan Pérez"
+                                    placeholder="Ej: Carlos Pérez"
                                     style="border-radius: 10px;"
                                 >
 
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+
                                 @enderror
 
                             </div>
 
+                            <div class="mb-4">
 
-                            <div class="row">
+                                <label
+                                    for="email"
+                                    class="form-label fw-semibold"
+                                >
 
-                                {{-- EMAIL --}}
-                                <div class="col-md-6 mb-4">
+                                    <i
+                                        class="bi bi-envelope-fill me-2 text-success"
+                                    ></i>
 
-                                    <label for="email" class="form-label fw-semibold">
+                                    Correo electrónico
 
-                                        <i class="bi bi-envelope-fill me-2 text-success"></i>
+                                </label>
 
-                                        Correo electrónico
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value="{{ old('email') }}"
+                                    class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                    placeholder="correo@ejemplo.com"
+                                    style="border-radius: 10px;"
+                                >
 
-                                    </label>
+                                @error('email')
 
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value="{{ old('email') }}"
-                                        class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                        placeholder="correo@ejemplo.com"
-                                        style="border-radius: 10px;"
-                                    >
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
 
-                                    @error('email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-
-                                </div>
-
-
-                                {{-- CELULAR --}}
-                                <div class="col-md-6 mb-4">
-
-                                    <label for="cell_number" class="form-label fw-semibold">
-
-                                        <i class="bi bi-phone-fill me-2 text-success"></i>
-
-                                        Celular
-
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        id="cell_number"
-                                        name="cell_number"
-                                        value="{{ old('cell_number') }}"
-                                        class="form-control form-control-lg @error('cell_number') is-invalid @enderror"
-                                        placeholder="Ej: 3001234567"
-                                        style="border-radius: 10px;"
-                                    >
-
-                                    @error('cell_number')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-
-                                </div>
+                                @enderror
 
                             </div>
 
-
                             <div class="row">
 
-                                {{-- CURSO --}}
                                 <div class="col-md-6 mb-4">
 
-                                    <label for="course_id" class="form-label fw-semibold">
+                                    <label
+                                        for="area_id"
+                                        class="form-label fw-semibold"
+                                    >
 
-                                        <i class="bi bi-journal-bookmark-fill me-2 text-success"></i>
+                                        <i
+                                            class="bi bi-diagram-3-fill me-2 text-success"
+                                        ></i>
 
-                                        Curso
+                                        Área
 
                                     </label>
 
                                     <select
-                                        id="course_id"
-                                        name="course_id"
-                                        class="form-select form-select-lg @error('course_id') is-invalid @enderror"
+                                        id="area_id"
+                                        name="area_id"
+                                        class="form-select form-select-lg @error('area_id') is-invalid @enderror"
                                         style="border-radius: 10px;"
                                     >
 
                                         <option value="">
-                                            Selecciona
+                                            Selecciona un área
                                         </option>
 
-                                        @foreach ($courses as $course)
+                                        @foreach (($areas ?? []) as $area)
+
                                             <option
-                                                value="{{ data_get($course, 'id') }}"
-                                                {{ old('course_id') == data_get($course, 'id') ? 'selected' : '' }}
+                                                value="{{ data_get($area, 'id') }}"
+                                                {{ old('area_id') == data_get($area, 'id') ? 'selected' : '' }}
                                             >
-                                                {{ data_get($course, 'name') }}
+                                                {{ data_get($area, 'name') }}
                                             </option>
+
                                         @endforeach
 
                                     </select>
 
-                                    @error('course_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @error('area_id')
+
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+
                                     @enderror
 
                                 </div>
 
-
-                                {{-- COMPUTADOR --}}
                                 <div class="col-md-6 mb-4">
 
-                                    <label for="computer_id" class="form-label fw-semibold">
+                                    <label
+                                        for="computer_id"
+                                        class="form-label fw-semibold"
+                                    >
 
-                                        <i class="bi bi-pc-display me-2 text-success"></i>
+                                        <i
+                                            class="bi bi-laptop me-2 text-success"
+                                        ></i>
 
                                         Computador
 
                                     </label>
 
                                     <select
-                                        id="computer_id"
-                                        name="computer_id"
-                                        class="form-select form-select-lg @error('computer_id') is-invalid @enderror"
-                                        style="border-radius: 10px;"
-                                    >
+                                            id="computer_id"
+                                            name="computer_id"
+                                            class="form-select form-select-lg @error('computer_id') is-invalid @enderror"
+                                            style="border-radius: 10px;"
+                                            required>
 
-                                        <option value="">
-                                            Selecciona
-                                        </option>
+                                            <option value="">
+                                                Selecciona
+                                            </option>
 
-                                        @foreach ($computers as $computer)
+                                            @foreach (($computers ?? []) as $computer)
                                             <option
                                                 value="{{ data_get($computer, 'id') }}"
-                                                {{ old('computer_id') == data_get($computer, 'id') ? 'selected' : '' }}
-                                            >
-                                                Computador {{ data_get($computer, 'number') }}
+                                                {{ old('computer_id') == data_get($computer, 'id') ? 'selected' : '' }}>
+                                                {{ data_get($computer, 'marca') ?? data_get($computer, 'name') ?? ('Equipo #' . data_get($computer, 'id')) }}
                                             </option>
-                                        @endforeach
+                                            @endforeach
 
                                     </select>
 
                                     @error('computer_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+
                                     @enderror
 
                                 </div>
 
                             </div>
 
-
-                            <div class="p-3 mt-2"
-                                style="background: #eef8e9; border-radius: 10px;">
+                            <div
+                                class="p-3 mt-2"
+                                style="
+                                    background: #eef8e9;
+                                    border-radius: 10px;
+                                "
+                            >
 
                                 <div class="d-flex gap-2">
 
-                                    <i class="bi bi-info-circle-fill text-success"></i>
+                                    <i
+                                        class="bi bi-info-circle-fill text-success"
+                                    ></i>
 
                                     <small>
-                                        Verifica los datos personales, curso y
-                                        computador antes de registrar al aprendiz.
+                                        Verifica los datos del aprendiz y sus
+                                        asociaciones antes de guardarlo.
                                     </small>
 
                                 </div>
@@ -373,13 +469,17 @@
 
                         </div>
 
+                        <div
+                            class="p-4 border-top d-flex justify-content-end gap-2"
+                        >
 
-                        <div class="p-4 border-top d-flex justify-content-end gap-2">
-
-                            <a href="{{ route('apprentice.index') }}"
-                                class="btn btn-light px-4">
+                            <a
+                                href="{{ route('apprentice.index') }}"
+                                class="btn btn-light px-4"
+                            >
 
                                 <i class="bi bi-x-lg me-2"></i>
+
                                 Cancelar
 
                             </a>
@@ -387,10 +487,14 @@
                             <button
                                 type="submit"
                                 class="btn btn-success px-4"
-                                style="background: #39A900; border-color: #39A900;"
+                                style="
+                                    background: #39A900;
+                                    border-color: #39A900;
+                                "
                             >
 
                                 <i class="bi bi-check-lg me-2"></i>
+
                                 Guardar aprendiz
 
                             </button>
@@ -405,11 +509,12 @@
 
         </div>
 
-
         <div class="text-center mt-4">
+
             <small class="text-muted">
                 Sistema de Administración Académica · SENA
             </small>
+
         </div>
 
     </div>

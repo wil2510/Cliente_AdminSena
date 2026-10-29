@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-
+        $response = Http::get($url);
         return $response->json();
     }
 
@@ -18,77 +17,69 @@ class TeacherController extends Controller
     {
         $url = env('URL_SERVER_API');
         $response = $this->fetchDataFromApi($url . '/teachers');
-        $teachers = is_array($response) ? $response : [];
+        
+        if (is_array($response)) {
+            $teachers = isset($response['data']) && is_array($response['data']) ? $response['data'] : $response;
+        } else {
+            $teachers = [];
+        }
 
         return view('teacher.index', compact('teachers'));
-    }
-
-    public function create()
-    {
-        $url = env('URL_SERVER_API');
-        $areasResponse = $this->fetchDataFromApi($url . '/areas');
-        $centersResponse = $this->fetchDataFromApi($url . '/training_centers');
-        $areas = is_array($areasResponse) ? $areasResponse : [];
-        $training_centers = is_array($centersResponse) ? $centersResponse : [];
-
-        return view('teacher.create', compact('areas', 'training_centers'));
-    }
-
-    public function admin(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'area_id' => 'required|integer',
-            'training_center_id' => 'required|integer',
-        ]);
-
-        $url = env('URL_SERVER_API');
-        Http::post($url . '/teachers', $request->all())->throw();
-
-        return redirect()->route('teacher.index');
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
-        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $response = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $teachers = is_array($response) && isset($response['data']) ? $response['data'] : $response;
+        return view('teacher.show', compact('teachers'));
+    }
 
-        return view('teacher.show', compact('teacher'));
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $areasResponse = Http::get($url . '/areas')->json();
+        $trainingCentersResponse = Http::get($url . '/trainingcenters')->json();
+
+        $areas = is_array($areasResponse) ? ($areasResponse['data'] ?? $areasResponse) : [];
+        $trainingcenters = is_array($trainingCentersResponse) ? ($trainingCentersResponse['data'] ?? $trainingCentersResponse) : [];
+
+        return view('teacher.create', compact('areas', 'trainingcenters'));
+    }
+
+    public function admin(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/teachers', $request->all());
+        return redirect()->route('teacher.index');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
-        $areasResponse = $this->fetchDataFromApi($url . '/areas');
-        $centersResponse = $this->fetchDataFromApi($url . '/training_centers');
-        $areas = is_array($areasResponse) ? $areasResponse : [];
-        $training_centers = is_array($centersResponse) ? $centersResponse : [];
+        $areasResponse = Http::get($url . '/areas')->json();
+        $trainingCentersResponse = Http::get($url . '/trainingcenters')->json();
+        
+        $areas = is_array($areasResponse) ? ($areasResponse['data'] ?? $areasResponse) : [];
+        $trainingcenters = is_array($trainingCentersResponse) ? ($trainingCentersResponse['data'] ?? $trainingCentersResponse) : [];
+        
+        $responseTeacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $teacher = is_array($responseTeacher) && isset($responseTeacher['data']) ? $responseTeacher['data'] : $responseTeacher;
 
-        return view('teacher.edit', compact('teacher', 'areas', 'training_centers'));
+        return view('teacher.edit', compact('teacher', 'areas', 'trainingcenters'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'area_id' => 'required|integer',
-            'training_center_id' => 'required|integer',
-        ]);
-
         $url = env('URL_SERVER_API');
-        Http::put($url . '/teachers/' . $id, $request->all())->throw();
-
+        Http::put($url . '/teachers/' . $id, $request->all());
         return redirect()->route('teacher.index');
     }
 
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/teachers/' . $id)->throw();
-
+        Http::delete($url . '/teachers/' . $id);
         return redirect()->route('teacher.index');
     }
 }

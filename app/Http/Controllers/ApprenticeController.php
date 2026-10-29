@@ -2,204 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use App\Models\Apprentice;
-use App\Models\Course;
-use App\Models\Computer;
 
 class ApprenticeController extends Controller
 {
-    // =====================================================
-    // LISTAR APRENDICES
-    // =====================================================
+    private function fetchDataFromApi($url)
+    {
+        $response = Http::get($url)->throw();
+        return $response->json();
+    }
+
     public function index()
     {
-        $apprentices = Apprentice::with([
-            'course',
-            'computer'
-        ])->get();
+        $url = env('URL_SERVER_API');
+        $response = $this->fetchDataFromApi($url . '/apprentices');
+        
+        if (is_array($response)) {
+            $apprentices = isset($response['data']) && is_array($response['data']) ? $response['data'] : $response;
+        } else {
+            $apprentices = [];
+        }
 
-        return view('apprentice.index', compact(
-            'apprentices'
-        ));
+        return view('apprentice.index', compact('apprentices'));
     }
 
+    public function show($id)
+    {
+        $url = env('URL_SERVER_API');
+        $response = $this->fetchDataFromApi($url . '/apprentices/' . $id);
+        $apprentice = is_array($response) && isset($response['data']) ? $response['data'] : $response;
+        return view('apprentice.show', compact('apprentice'));
+    }
 
-    // =====================================================
-    // FORMULARIO PARA CREAR APRENDIZ
-    // =====================================================
     public function create()
     {
-        $courses = Course::all();
+        $url = env('URL_SERVER_API');
+        $areasResponse = $this->fetchDataFromApi($url . '/areas');
+        $computersResponse = $this->fetchDataFromApi($url . '/computers');
 
-        $computers = Computer::all();
+        $areas = is_array($areasResponse) ? ($areasResponse['data'] ?? $areasResponse) : [];
+        $computers = is_array($computersResponse) ? ($computersResponse['data'] ?? $computersResponse) : [];
 
-        return view('apprentice.create', compact(
-            'courses',
-            'computers'
-        ));
+        return view('apprentice.create', compact('areas', 'computers'));
     }
 
-
-    // =====================================================
-    // GUARDAR APRENDIZ
-    // =====================================================
     public function admin(Request $request)
     {
-        $request->validate([
-
-            'name' =>
-                'required|string|max:255',
-
-            'email' =>
-                'required|email|max:255',
-
-            'cell_number' =>
-                'required|string|max:20',
-
-            'course_id' =>
-                'required|exists:courses,id',
-
-            'computer_id' =>
-                'required|exists:computers,id',
-
-        ]);
-
-
-        Apprentice::create([
-
-            'name' =>
-                $request->name,
-
-            'email' =>
-                $request->email,
-
-            'cell_number' =>
-                $request->cell_number,
-
-            'course_id' =>
-                $request->course_id,
-
-            'computer_id' =>
-                $request->computer_id,
-
-        ]);
-
-
-        return redirect()
-            ->route('apprentice.index')
-            ->with(
-                'success',
-                'Aprendiz registrado exitosamente.'
-            );
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/apprentice', $request->all())->throw();
+        return redirect()->route('apprentice.index');
     }
-
-
-    // =====================================================
-    // MOSTRAR APRENDIZ
-    // =====================================================
-    public function show(Apprentice $apprentice)
+    public function edit($id)
     {
-        $apprentice->load([
-            'course',
-            'computer'
-        ]);
+        $url = env('URL_SERVER_API');
+        $areasResponse = $this->fetchDataFromApi($url . '/areas');
+        $computersResponse = $this->fetchDataFromApi($url . '/computers');
+        
+        $areas = is_array($areasResponse) ? ($areasResponse['data'] ?? $areasResponse) : [];
+        $computers = is_array($computersResponse) ? ($computersResponse['data'] ?? $computersResponse) : [];
+        
+        $responseApprentice = $this->fetchDataFromApi($url . '/apprentices/' . $id);
+        $apprentice = is_array($responseApprentice) && isset($responseApprentice['data']) ? $responseApprentice['data'] : $responseApprentice;
 
-        return view(
-            'apprentice.show',
-            compact('apprentice')
-        );
+        return view('apprentice.edit', compact('apprentice', 'areas', 'computers'));
     }
 
-
-    // =====================================================
-    // FORMULARIO EDITAR
-    // =====================================================
-    public function edit(Apprentice $apprentice)
+    public function update(Request $request, $id)
     {
-        $courses = Course::all();
-
-        $computers = Computer::all();
-
-        return view(
-            'apprentice.edit',
-            compact(
-                'apprentice',
-                'courses',
-                'computers'
-            )
-        );
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/Apprentices/' . $id, $request->all())->throw();
+        return redirect()->route('Apprentice.index');
     }
 
-
-    // =====================================================
-    // ACTUALIZAR APRENDIZ
-    // =====================================================
-    public function update(
-        Request $request,
-        Apprentice $apprentice
-    ) {
-        $request->validate([
-
-            'name' =>
-                'required|string|max:255',
-
-            'email' =>
-                'required|email|max:255',
-
-            'cell_number' =>
-                'required|string|max:20',
-
-            'course_id' =>
-                'required|exists:courses,id',
-
-            'computer_id' =>
-                'required|exists:computers,id',
-
-        ]);
-
-
-        $apprentice->update([
-
-            'name' =>
-                $request->name,
-
-            'email' =>
-                $request->email,
-
-            'cell_number' =>
-                $request->cell_number,
-
-            'course_id' =>
-                $request->course_id,
-
-            'computer_id' =>
-                $request->computer_id,
-
-        ]);
-
-
-        return redirect()
-            ->route('apprentice.index')
-            ->with(
-                'success',
-                'Aprendiz actualizado exitosamente.'
-            );
-    }
-
-
-    // =====================================================
-    // ELIMINAR APRENDIZ
-    // =====================================================
-    public function destroy(Apprentice $apprentice)
+    public function destroy($id)
     {
-        $apprentice->delete();
-
-        return redirect()
-            ->route('apprentice.index')
-            ->with(
-                'success',
-                'Aprendiz eliminado exitosamente.'
-            );
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/apprentices/' . $id)->throw();
+        return redirect()->route('apprentice.index');
     }
 }

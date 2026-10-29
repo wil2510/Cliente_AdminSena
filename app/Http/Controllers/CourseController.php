@@ -43,7 +43,7 @@ class CourseController extends Controller
         return view('course.create', compact('areas', 'trainingcenters'));
     }
 
-    public function store(Request $request)
+    public function admin(Request $request)
     {
         $url = env('URL_SERVER_API');
 

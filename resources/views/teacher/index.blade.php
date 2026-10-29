@@ -81,9 +81,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if (data_get($teacher, 'training_center'))
+                                        @if (data_get($teacher, 'trainingcenter'))
                                             <span class="badge bg-success">
-                                                {{ data_get($teacher, 'training_center.name', data_get($teacher, 'trainingCenter.name')) }}
+                                                {{ data_get($teacher, 'trainingcenter.name', data_get($teacher, 'trainingcenter.name')) }}
                                             </span>
                                         @else
                                             <span class="text-muted">

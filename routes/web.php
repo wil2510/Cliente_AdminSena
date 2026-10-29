@@ -54,7 +54,7 @@ Route::put('computer/{computer}', [ComputerController::class, 'update'])->name('
 Route::delete('computer/{computer}', [ComputerController::class, 'destroy'])->name('computer.destroy');
 
 Route::get('course/create', [CourseController::class, 'create'])->name('course.create');
-Route::post('course/store', [CourseController::class, 'store'])->name('course.store');
+Route::post('course/store', [CourseController::class, 'store'])->name('course.admin');
 Route::get('course/list', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course/{course}/editar', [CourseController::class, 'edit'])->name('course.edit');
@@ -141,12 +141,12 @@ Route::get('oferta/{oferta}/editar',[OfertaController::class, 'edit'])->name('of
 Route::put('oferta/{oferta}',[OfertaController::class, 'update'])->name('oferta.update');
 Route::delete('oferta/{oferta}',[OfertaController::class, 'destroy'])->name('oferta.destroy');
 
-Route::get('ficha/create',[FichaController::class, 'create'])->name('ficha.create');
-Route::post('ficha/admin',[FichaController::class, 'store'])->name('ficha.store');
-Route::get('ficha/list',[FichaController::class, 'index'])->name('ficha.index');
-Route::get('ficha/{ficha}',[FichaController::class, 'show'])->name('ficha.show');
-Route::get('ficha/{ficha}/editar',[FichaController::class, 'edit'])->name('ficha.edit');
-Route::put('ficha/{ficha}',[FichaController::class, 'update'])->name('ficha.update');
+Route::get('Ficha/create',[FichaController::class, 'create'])->name('ficha.create');
+Route::post('Ficha/admin',[FichaController::class, 'store'])->name('ficha.admin');
+Route::get('Ficha/list',[FichaController::class, 'index'])->name('ficha.index');
+Route::get('Ficha/{ficha}',[FichaController::class, 'show'])->name('ficha.show');
+Route::get('Ficha/{ficha}/editar',[FichaController::class, 'edit'])->name('ficha.edit');
+Route::put('Ficha/{ficha}',[FichaController::class, 'update'])->name('ficha.update');
 Route::delete('ficha/{ficha}',[FichaController::class, 'destroy'])->name('ficha.destroy');
 
 Route::get('ambiente/create',[AmbienteController::class, 'create'])->name('ambiente.create');

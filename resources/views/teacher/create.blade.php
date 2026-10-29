@@ -448,21 +448,18 @@
                                         name="training_center_id"
                                         class="form-select form-select-lg @error('training_center_id') is-invalid @enderror"
                                         style="border-radius: 10px;"
-                                    >
+                                        required>
 
                                         <option value="">
-                                            Selecciona un centro
+                                            Selecciona
                                         </option>
 
-                                        @foreach (($trainingCenters ?? []) as $trainingCenter)
-
-                                            <option
-                                                value="{{ data_get($trainingCenter, 'id') }}"
-                                                {{ old('training_center_id') == data_get($trainingCenter, 'id') ? 'selected' : '' }}
-                                            >
-                                                {{ data_get($trainingCenter, 'name') }}
-                                            </option>
-
+                                        @foreach (($trainingcenters ?? []) as $trainingcenter)
+                                        <option
+                                            value="{{ data_get($trainingcenter, 'id') }}"
+                                            {{ old('training_center_id') == data_get($trainingcenter, 'id') ? 'selected' : '' }}>
+                                            {{ data_get($trainingcenter, 'name') }}
+                                        </option>
                                         @endforeach
 
                                     </select>

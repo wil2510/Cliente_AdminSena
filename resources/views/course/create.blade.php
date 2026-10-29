@@ -238,7 +238,7 @@
 
                     {{-- FORMULARIO --}}
                     <form
-                        action="{{ route('course.store') }}"
+                        action="{{ route('course.admin') }}"
                         method="POST">
 
                         @csrf
