@@ -10,7 +10,7 @@
                     
                     <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
                         <h4 class="mb-0 fw-bold">Perfil del Aprendiz</h4>
-                        <p class="mb-0 mt-1 small opacity-75">{{ $apprentice['name'] }}</p>
+                        <p class="mb-0 mt-1 small opacity-75">{{ $apprentices['name'] }}</p>
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
@@ -18,28 +18,28 @@
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Código ID</span>
                             <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
-                                #{{ $apprentice['id'] }}
+                                #{{ $apprentices['id'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Nombre Completo</span>
                             <div class="p-3 bg-light rounded-3 fw-medium text-dark">
-                                {{ $apprentice['name'] }}
+                                {{ $apprentices['name'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Correo Electrónico</span>
                             <div class="p-3 bg-light rounded-3 text-dark">
-                                {{ $apprentice['email'] }}
+                                {{ $apprentices['email'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Número de Teléfono / Celular</span>
                             <div class="p-3 bg-light rounded-3 text-dark font-monospace">
-                                {{ $apprentice['cell_number'] }}
+                                {{ $apprentices['cell_number'] }}
                             </div>
                         </div>
 
@@ -47,13 +47,13 @@
                             <div class="col-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID del Curso</span>
                                 <div class="p-3 bg-light rounded-3 fw-bold text-success border-start border-3 border-success">
-                                    {{ $apprentice['course_id'] }}
+                                    {{ $apprentices['course_id'] }}
                                 </div>
                             </div>
                             <div class="col-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID del Computador</span>
                                 <div class="p-3 bg-light rounded-3 fw-bold text-dark border-start border-3 border-dark">
-                                    {{ $apprentice['computer_id'] }}
+                                    {{ $apprentices['computer_id'] }}
                                 </div>
                             </div>
                         </div>
@@ -64,13 +64,13 @@
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($apprentice['created_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($apprentices['created_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última modificación</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($apprentice['updated_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($apprentices['updated_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                         </div>

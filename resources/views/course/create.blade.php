@@ -16,7 +16,8 @@
                         height: 70px;
                         background: #39A900;
                         border-radius: 10px;
-                    "></div>
+                    "
+                ></div>
 
                 <div>
 
@@ -26,7 +27,8 @@
                             color: #39A900;
                             font-size: 13px;
                             letter-spacing: 1px;
-                        ">
+                        "
+                    >
                         Administración Académica
                     </div>
 
@@ -50,7 +52,8 @@
                     style="
                         font-size: 28px;
                         color: #39A900;
-                    "></i>
+                    "
+                ></i>
 
                 <div class="small fw-bold text-muted mt-1">
                     CURSOS
@@ -76,7 +79,8 @@
                             #263746 100%
                         );
                         border-radius: 18px;
-                    ">
+                    "
+                >
 
                     {{-- ICONO --}}
                     <div
@@ -86,11 +90,13 @@
                             height: 60px;
                             background: #39A900;
                             border-radius: 15px;
-                        ">
+                        "
+                    >
 
                         <i
                             class="bi bi-journal-bookmark-fill"
-                            style="font-size: 28px;"></i>
+                            style="font-size: 28px;"
+                        ></i>
 
                     </div>
 
@@ -101,7 +107,8 @@
 
                     <p
                         class="text-white-50"
-                        style="line-height: 1.7;">
+                        style="line-height: 1.7;"
+                    >
                         Registra cursos para organizar la formación
                         académica ofrecida por la institución.
                     </p>
@@ -115,7 +122,8 @@
 
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;">
+                                style="color: #39A900;"
+                            >
                                 01
                             </div>
 
@@ -139,7 +147,8 @@
 
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;">
+                                style="color: #39A900;"
+                            >
                                 02
                             </div>
 
@@ -163,7 +172,8 @@
 
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;">
+                                style="color: #39A900;"
+                            >
                                 03
                             </div>
 
@@ -186,7 +196,8 @@
 
                     {{-- PIE --}}
                     <div
-                        class="border-top border-secondary mt-5 pt-4">
+                        class="border-top border-secondary mt-5 pt-4"
+                    >
 
                         <small class="text-white-50">
                             Admin SENA · Gestión académica
@@ -204,13 +215,15 @@
 
                 <div
                     class="bg-white shadow-sm h-100"
-                    style="border-radius: 18px;">
+                    style="border-radius: 18px;"
+                >
 
                     {{-- CABECERA --}}
                     <div class="p-4 border-bottom">
 
                         <div
-                            class="d-flex justify-content-between align-items-center">
+                            class="d-flex justify-content-between align-items-center"
+                        >
 
                             <div>
 
@@ -229,7 +242,8 @@
                                 style="
                                     font-size: 24px;
                                     color: #6c757d;
-                                "></i>
+                                "
+                            ></i>
 
                         </div>
 
@@ -239,7 +253,8 @@
                     {{-- FORMULARIO --}}
                     <form
                         action="{{ route('course.admin') }}"
-                        method="POST">
+                        method="POST"
+                    >
 
                         @csrf
 
@@ -248,33 +263,35 @@
                             {{-- ERRORES --}}
                             @if ($errors->any())
 
-                            <div
-                                class="alert alert-danger d-flex align-items-start gap-2">
+                                <div
+                                    class="alert alert-danger d-flex align-items-start gap-2"
+                                >
 
-                                <i
-                                    class="bi bi-exclamation-triangle-fill"></i>
+                                    <i
+                                        class="bi bi-exclamation-triangle-fill"
+                                    ></i>
 
-                                <div>
+                                    <div>
 
-                                    <strong>
-                                        Revisa la información:
-                                    </strong>
+                                        <strong>
+                                            Revisa la información:
+                                        </strong>
 
-                                    <ul class="mb-0 mt-1">
+                                        <ul class="mb-0 mt-1">
 
-                                        @foreach ($errors->all() as $error)
+                                            @foreach ($errors->all() as $error)
 
-                                        <li>
-                                            {{ $error }}
-                                        </li>
+                                                <li>
+                                                    {{ $error }}
+                                                </li>
 
-                                        @endforeach
+                                            @endforeach
 
-                                    </ul>
+                                        </ul>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
 
                             @endif
 
@@ -284,10 +301,15 @@
 
                                 <label
                                     for="name"
-                                    class="form-label fw-semibold">
+                                    class="form-label fw-semibold"
+                                >
+
                                     <i
-                                        class="bi bi-card-text me-2 text-success"></i>
+                                        class="bi bi-card-text me-2 text-success"
+                                    ></i>
+
                                     Nombre del curso
+
                                 </label>
 
                                 <input
@@ -297,12 +319,17 @@
                                     value="{{ old('name') }}"
                                     class="form-control form-control-lg @error('name') is-invalid @enderror"
                                     placeholder="Ej: Desarrollo Web"
-                                    style="border-radius: 10px;">
+                                    style="border-radius: 10px;"
+                                >
+
                                 @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+
                                 @enderror
+
                             </div>
 
 
@@ -311,10 +338,12 @@
 
                                 <label
                                     for="code"
-                                    class="form-label fw-semibold">
+                                    class="form-label fw-semibold"
+                                >
 
                                     <i
-                                        class="bi bi-upc-scan me-2 text-success"></i>
+                                        class="bi bi-upc-scan me-2 text-success"
+                                    ></i>
 
                                     Código
 
@@ -327,13 +356,14 @@
                                     value="{{ old('code') }}"
                                     class="form-control form-control-lg @error('code') is-invalid @enderror"
                                     placeholder="Ej: CUR-001"
-                                    style="border-radius: 10px;">
+                                    style="border-radius: 10px;"
+                                >
 
                                 @error('code')
 
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
 
                                 @enderror
 
@@ -348,10 +378,12 @@
 
                                     <label
                                         for="area_id"
-                                        class="form-label fw-semibold">
+                                        class="form-label fw-semibold"
+                                    >
 
                                         <i
-                                            class="bi bi-diagram-3-fill me-2 text-success"></i>
+                                            class="bi bi-diagram-3-fill me-2 text-success"
+                                        ></i>
 
                                         Área
 
@@ -362,44 +394,45 @@
                                         name="area_id"
                                         class="form-select form-select-lg @error('area_id') is-invalid @enderror"
                                         style="border-radius: 10px;"
-                                        required>
+                                    >
 
                                         <option value="">
                                             Selecciona
                                         </option>
 
                                         @foreach (($areas ?? []) as $area)
-                                        @php
-                                        $areaId = data_get($area, 'id');
-                                        $areaName = data_get($area, 'name');
-                                        @endphp
-                                        <option
-                                            value="{{ $areaId }}"
-                                            {{ old('area_id') == $areaId ? 'selected' : '' }}>
-                                            {{ $areaName }}
-                                        </option>
+                                            <option
+                                                value="{{ $area['id'] }}"
+                                                {{ old('area_id') == $area['id'] ? 'selected' : '' }}
+                                            >
+                                                {{ $area['name'] }}
+                                            </option>
                                         @endforeach
 
                                     </select>
 
                                     @error('area_id')
 
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
 
                                     @enderror
 
                                 </div>
 
+
+                                {{-- CENTRO --}}
                                 <div class="col-md-6 mb-4">
 
                                     <label
                                         for="training_center_id"
-                                        class="form-label fw-semibold">
+                                        class="form-label fw-semibold"
+                                    >
 
                                         <i
-                                            class="bi bi-building me-2 text-success"></i>
+                                            class="bi bi-building me-2 text-success"
+                                        ></i>
 
                                         Centro
 
@@ -410,27 +443,28 @@
                                         name="training_center_id"
                                         class="form-select form-select-lg @error('training_center_id') is-invalid @enderror"
                                         style="border-radius: 10px;"
-                                        required>
+                                    >
 
                                         <option value="">
                                             Selecciona
                                         </option>
 
                                         @foreach (($trainingcenters ?? []) as $trainingcenter)
-                                        <option
-                                            value="{{ $trainingcenter['id'] }}"
-                                            {{ old('trainingcenter_id') == $trainingcenter['id'] ? 'selected' : '' }}>
-                                            {{ $trainingcenter['name'] }}
-                                        </option>
+                                            <option
+                                                value="{{ $trainingcenter['id'] }}"
+                                                {{ old('training_center_id') == $trainingcenter['id'] ? 'selected' : '' }}
+                                            >
+                                                {{ $trainingcenter['name'] }}
+                                            </option>
                                         @endforeach
 
                                     </select>
 
-                                    @error('trainingcenter_id')
+                                    @error('training_center_id')
 
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
 
                                     @enderror
 
@@ -445,30 +479,41 @@
                                 style="
                                     background: #eef8e9;
                                     border-radius: 10px;
-                                ">
+                                "
+                            >
 
                                 <div class="d-flex gap-2">
 
                                     <i
-                                        class="bi bi-info-circle-fill text-success"></i>
+                                        class="bi bi-info-circle-fill text-success"
+                                    ></i>
 
                                     <small>
                                         Verifica el nombre, código, área y centro
                                         antes de guardar el curso.
                                     </small>
+
                                 </div>
+
                             </div>
+
                         </div>
+
 
                         {{-- BOTONES --}}
                         <div
-                            class="p-4 border-top d-flex justify-content-end gap-2">
+                            class="p-4 border-top d-flex justify-content-end gap-2"
+                        >
 
                             <a
                                 href="{{ route('course.index') }}"
-                                class="btn btn-light px-4">
+                                class="btn btn-light px-4"
+                            >
+
                                 <i class="bi bi-x-lg me-2"></i>
+
                                 Cancelar
+
                             </a>
 
                             <button
@@ -477,16 +522,25 @@
                                 style="
                                     background: #39A900;
                                     border-color: #39A900;
-                                ">
+                                "
+                            >
 
                                 <i class="bi bi-check-lg me-2"></i>
+
                                 Guardar curso
+
                             </button>
+
                         </div>
+
                     </form>
+
                 </div>
+
             </div>
+
         </div>
+
 
         {{-- PIE --}}
         <div class="text-center mt-4">

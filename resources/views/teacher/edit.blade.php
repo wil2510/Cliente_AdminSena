@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
-                        <form action="{{ route('teacher.update', data_get($teacher, 'id')) }}" method="POST">
+                        <form action="{{ route('teacher.update', $teacher['id']) }}" method="POST">
                             @csrf
                             @method('put')
 
@@ -24,7 +24,7 @@
                                         id="name"
                                         name="name" 
                                         class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
-                                        value="{{ old('name', data_get($teacher, 'name')) }}"
+                                        value="{{ old('name', $teacher['name']) }}"
                                         required>
                             </div>
 
@@ -34,7 +34,7 @@
                                         id="email"
                                         name="email" 
                                         class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
-                                        value="{{ old('email', data_get($teacher, 'email')) }}"
+                                        value="{{ old('email', $teacher['email']) }}"
                                         required>
                             </div>
 
@@ -42,8 +42,8 @@
                                 <label for="area_id" class="form-label text-muted small fw-bold text-uppercase tracking-wider">Área de Especialidad</label>
                                 <select name="area_id" id="area_id" class="form-select form-select-lg bg-light border-0 rounded-3 text-dark fw-medium" required>
                                     @foreach($areas as $area)
-                                        <option value="{{ data_get($area, 'id') }}" {{ old('area_id', data_get($teacher, 'area_id')) == data_get($area, 'id') ? 'selected' : '' }}>
-                                            {{ data_get($area, 'name') }}
+                                        <option value="{{ $area['id'] }}" {{ old('area_id', $teacher['area_id']) == $area['id'] ? 'selected' : '' }}>
+                                            {{ $area['name'] }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -52,9 +52,9 @@
                             <div class="mb-4">
                                 <label for="training_center_id" class="form-label text-muted small fw-bold text-uppercase tracking-wider">Centro de Formación Adscrito</label>
                                 <select name="training_center_id" id="training_center_id" class="form-select form-select-lg bg-light border-0 rounded-3 text-dark fw-medium" required>
-                                    @foreach($training_centers as $trainingcenter)
-                                        <option value="{{ data_get($trainingcenter, 'id') }}" {{ old('training_center_id', data_get($teacher, 'training_center_id')) == data_get($trainingcenter, 'id') ? 'selected' : '' }}>
-                                            {{ data_get($trainingcenter, 'name') }}
+                                    @foreach($trainingcenters as $trainingcenter)
+                                        <option value="{{ $trainingcenter['id'] }}" {{ old('training_center_id', $teacher['training_center_id']) == $trainingcenter['id'] ? 'selected' : '' }}>
+                                            {{ $trainingcenter['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

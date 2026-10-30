@@ -37,21 +37,11 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th class="ps-4">
-                                    ID
-                                </th>
-                                <th>
-                                    Nombre
-                                </th>
-                                <th>
-                                    Email
-                                </th>
-                                <th>
-                                    Área
-                                </th>
-                                <th>
-                                    Centro de Formación
-                                </th>
+                                <th class="ps-4">ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Área</th>
+                                <th>Centro de Formación</th>
                                 <th class="text-center">
                                     Acciones
                                 </th>
@@ -61,50 +51,34 @@
                             @forelse ($teachers as $teacher)
                                 <tr>
                                     <td class="ps-4 fw-bold">
-                                        #{{ data_get($teacher, 'id') }}
+                                        #{{ $teacher['id'] }}
                                     </td>
                                     <td class="fw-bold">
-                                        {{ data_get($teacher, 'name') }}
+                                        {{ $teacher['name'] }}
                                     </td>
                                     <td>
-                                        {{ data_get($teacher, 'email') }}
+                                        {{ $teacher['email'] }}
                                     </td>
                                     <td>
-                                        @if (data_get($teacher, 'area'))
-                                            <span class="badge bg-success">
-                                                {{ data_get($teacher, 'area.name') }}
-                                            </span>
-                                        @else
-                                            <span class="text-muted">
-                                                Sin área
-                                            </span>
-                                        @endif
+                                        {{ $teacher['area_id'] }}
                                     </td>
                                     <td>
-                                        @if (data_get($teacher, 'trainingcenter'))
-                                            <span class="badge bg-success">
-                                                {{ data_get($teacher, 'trainingcenter.name', data_get($teacher, 'trainingcenter.name')) }}
-                                            </span>
-                                        @else
-                                            <span class="text-muted">
-                                                Sin centro
-                                            </span>
-                                        @endif
+                                        {{ $teacher['training_center_id'] }}
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             {{-- VER --}}
-                                            <a href="{{ route('teacher.show', data_get($teacher, 'id')) }}"
+                                            <a href="{{ route('teacher.show', $teacher['id']) }}"
                                                 class="btn btn-sm btn-info text-white">
                                                 Ver
                                             </a>
                                             {{-- EDITAR --}}
-                                            <a href="{{ route('teacher.edit', data_get($teacher, 'id')) }}"
+                                            <a href="{{ route('teacher.edit', $teacher['id']) }}"
                                                 class="btn btn-sm btn-warning text-white">
                                                 Editar
                                             </a>
                                             {{-- ELIMINAR --}}
-                                            <form action="{{ route('teacher.destroy', data_get($teacher, 'id')) }}"
+                                            <form action="{{ route('teacher.destroy', $teacher['id']) }}"
                                                 method="POST"
                                                 class="d-inline"
                                                 onsubmit="return confirm('¿Está seguro de eliminar este instructor?')">

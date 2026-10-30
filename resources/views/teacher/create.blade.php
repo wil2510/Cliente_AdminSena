@@ -9,63 +9,46 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
 
             <div class="d-flex align-items-start gap-3">
-
                 <div
                     style="
                         width: 6px;
                         height: 70px;
                         background: #39A900;
                         border-radius: 10px;
-                    "
-                ></div>
-
+                    "></div>
                 <div>
-
                     <div
                         class="fw-bold text-uppercase"
                         style="
                             color: #39A900;
                             font-size: 13px;
                             letter-spacing: 1px;
-                        "
-                    >
+                        ">
                         Administración Académica
                     </div>
-
                     <h1 class="fw-bold mb-1">
                         Nuevo Instructor
                     </h1>
-
                     <p class="text-muted mb-0">
                         Registra un nuevo instructor en el sistema.
                     </p>
-
                 </div>
-
             </div>
-
 
             {{-- BADGE --}}
             <div
-                class="bg-white shadow-sm rounded-3 px-4 py-3 text-center"
-            >
-
+                class="bg-white shadow-sm rounded-3 px-4 py-3 text-center">
                 <i
                     class="bi bi-person-workspace"
                     style="
                         font-size: 28px;
                         color: #39A900;
-                    "
-                ></i>
-
+                    "></i>
                 <div class="small fw-bold text-muted mt-1">
                     INSTRUCTORES
                 </div>
-
             </div>
-
         </div>
-
 
         {{-- CONTENIDO --}}
         <div class="row g-4">
@@ -82,8 +65,7 @@
                             #263746 100%
                         );
                         border-radius: 18px;
-                    "
-                >
+                    ">
 
                     {{-- ICONO --}}
                     <div
@@ -93,45 +75,33 @@
                             height: 60px;
                             background: #39A900;
                             border-radius: 15px;
-                        "
-                    >
+                        ">
 
                         <i
                             class="bi bi-person-workspace"
-                            style="font-size: 28px;"
-                        ></i>
-
+                            style="font-size: 28px;"></i>
                     </div>
-
 
                     <h2 class="fw-bold">
                         Crear instructor
                     </h2>
-
                     <p
                         class="text-white-50"
-                        style="line-height: 1.7;"
-                    >
+                        style="line-height: 1.7;">
                         Registra los instructores encargados de acompañar
                         los procesos de formación del SENA.
                     </p>
 
-
                     {{-- PASOS --}}
                     <div class="mt-4">
-
                         {{-- PASO 1 --}}
                         <div class="d-flex gap-3 mb-4">
-
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;"
-                            >
+                                style="color: #39A900;">
                                 01
                             </div>
-
                             <div>
-
                                 <div class="fw-bold">
                                     Información personal
                                 </div>
@@ -139,24 +109,17 @@
                                 <small class="text-white-50">
                                     Nombre y correo electrónico.
                                 </small>
-
                             </div>
-
                         </div>
-
 
                         {{-- PASO 2 --}}
                         <div class="d-flex gap-3 mb-4">
-
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;"
-                            >
+                                style="color: #39A900;">
                                 02
                             </div>
-
                             <div>
-
                                 <div class="fw-bold">
                                     Área
                                 </div>
@@ -164,52 +127,35 @@
                                 <small class="text-white-50">
                                     Asocia el instructor a un área.
                                 </small>
-
                             </div>
-
                         </div>
-
 
                         {{-- PASO 3 --}}
                         <div class="d-flex gap-3">
 
                             <div
                                 class="fw-bold"
-                                style="color: #39A900;"
-                            >
+                                style="color: #39A900;">
                                 03
                             </div>
-
                             <div>
-
                                 <div class="fw-bold">
                                     Centro
                                 </div>
-
                                 <small class="text-white-50">
                                     Selecciona su centro de formación.
                                 </small>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
                     {{-- PIE DEL PANEL --}}
                     <div
-                        class="border-top border-secondary mt-5 pt-4"
-                    >
-
+                        class="border-top border-secondary mt-5 pt-4">
                         <small class="text-white-50">
                             Admin SENA · Gestión académica
                         </small>
-
                     </div>
-
                 </div>
-
             </div>
 
 
@@ -218,103 +164,65 @@
 
                 <div
                     class="bg-white shadow-sm h-100"
-                    style="border-radius: 18px;"
-                >
+                    style="border-radius: 18px;">
 
                     {{-- CABECERA --}}
                     <div class="p-4 border-bottom">
-
                         <div
-                            class="d-flex justify-content-between align-items-center"
-                        >
-
+                            class="d-flex justify-content-between align-items-center">
                             <div>
-
                                 <h4 class="fw-bold mb-1">
                                     Información del instructor
                                 </h4>
-
                                 <p class="text-muted mb-0 small">
                                     Completa los datos solicitados.
                                 </p>
-
                             </div>
-
                             <i
                                 class="bi bi-three-dots"
                                 style="
                                     font-size: 24px;
                                     color: #6c757d;
-                                "
-                            ></i>
-
+                                "></i>
                         </div>
-
                     </div>
-
 
                     {{-- FORM --}}
                     <form
                         action="{{ route('teacher.admin') }}"
-                        method="POST"
-                    >
-
+                        method="POST">
                         @csrf
-
                         <div class="p-4">
-
                             {{-- ERRORES --}}
                             @if ($errors->any())
-
-                                <div
-                                    class="alert alert-danger d-flex align-items-start gap-2"
-                                >
-
-                                    <i
-                                        class="bi bi-exclamation-triangle-fill"
-                                    ></i>
-
-                                    <div>
-
-                                        <strong>
-                                            Revisa la información:
-                                        </strong>
-
-                                        <ul class="mb-0 mt-1">
-
-                                            @foreach ($errors->all() as $error)
-
-                                                <li>
-                                                    {{ $error }}
-                                                </li>
-
-                                            @endforeach
-
-                                        </ul>
-
-                                    </div>
-
+                            <div
+                                class="alert alert-danger d-flex align-items-start gap-2">
+                                <i
+                                    class="bi bi-exclamation-triangle-fill"></i>
+                                <div>
+                                    <strong>
+                                        Revisa la información:
+                                    </strong>
+                                    <ul class="mb-0 mt-1">
+                                        @foreach ($errors->all() as $error)
+                                        <li>
+                                            {{ $error }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
-
+                            </div>
                             @endif
-
 
                             {{-- NOMBRE --}}
                             <div class="mb-4">
-
                                 <label
                                     for="name"
-                                    class="form-label fw-semibold"
-                                >
-
+                                    class="form-label fw-semibold">
                                     <i
-                                        class="bi bi-person-fill me-2 text-success"
-                                    ></i>
-
+                                        class="bi bi-person-fill me-2 text-success"></i>
                                     Nombre completo
-
                                 </label>
-
                                 <input
                                     type="text"
                                     id="name"
@@ -322,34 +230,23 @@
                                     value="{{ old('name') }}"
                                     class="form-control form-control-lg @error('name') is-invalid @enderror"
                                     placeholder="Ej: Carlos Pérez"
-                                    style="border-radius: 10px;"
-                                >
+                                    style="border-radius: 10px;">
 
                                 @error('name')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
-
                             </div>
-
 
                             {{-- EMAIL --}}
                             <div class="mb-4">
-
                                 <label
                                     for="email"
-                                    class="form-label fw-semibold"
-                                >
-
+                                    class="form-label fw-semibold">
                                     <i
-                                        class="bi bi-envelope-fill me-2 text-success"
-                                    ></i>
-
+                                        class="bi bi-envelope-fill me-2 text-success"></i>
                                     Correo electrónico
-
                                 </label>
 
                                 <input
@@ -359,88 +256,62 @@
                                     value="{{ old('email') }}"
                                     class="form-control form-control-lg @error('email') is-invalid @enderror"
                                     placeholder="correo@ejemplo.com"
-                                    style="border-radius: 10px;"
-                                >
+                                    style="border-radius: 10px;">
 
                                 @error('email')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
 
                             </div>
 
-
                             {{-- ÁREA Y CENTRO --}}
                             <div class="row">
-
                                 {{-- ÁREA --}}
                                 <div class="col-md-6 mb-4">
-
                                     <label
                                         for="area_id"
-                                        class="form-label fw-semibold"
-                                    >
-
+                                        class="form-label fw-semibold">
                                         <i
-                                            class="bi bi-diagram-3-fill me-2 text-success"
-                                        ></i>
-
+                                            class="bi bi-diagram-3-fill me-2 text-success"></i>
                                         Área
-
                                     </label>
 
                                     <select
                                         id="area_id"
                                         name="area_id"
                                         class="form-select form-select-lg @error('area_id') is-invalid @enderror"
-                                        style="border-radius: 10px;"
-                                    >
+                                        style="border-radius: 10px;">
 
                                         <option value="">
                                             Selecciona un área
                                         </option>
-
                                         @foreach (($areas ?? []) as $area)
-
                                             <option
-                                                value="{{ data_get($area, 'id') }}"
-                                                {{ old('area_id') == data_get($area, 'id') ? 'selected' : '' }}
+                                                value="{{ $area['id'] }}"
+                                                {{ old('area_id') == $area['id'] ? 'selected' : '' }}
                                             >
-                                                {{ data_get($area, 'name') }}
+                                                {{ $area['name'] }}
                                             </option>
-
                                         @endforeach
 
                                     </select>
-
                                     @error('area_id')
-
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
-
                                 </div>
-
 
                                 {{-- CENTRO --}}
                                 <div class="col-md-6 mb-4">
-
                                     <label
                                         for="training_center_id"
-                                        class="form-label fw-semibold"
-                                    >
-
+                                        class="form-label fw-semibold">
                                         <i
-                                            class="bi bi-building me-2 text-success"
-                                        ></i>
-
+                                            class="bi bi-building me-2 text-success"></i>
                                         Centro
-
                                     </label>
 
                                     <select
@@ -453,29 +324,22 @@
                                         <option value="">
                                             Selecciona
                                         </option>
-
                                         @foreach (($trainingcenters ?? []) as $trainingcenter)
-                                        <option
-                                            value="{{ data_get($trainingcenter, 'id') }}"
-                                            {{ old('training_center_id') == data_get($trainingcenter, 'id') ? 'selected' : '' }}>
-                                            {{ data_get($trainingcenter, 'name') }}
-                                        </option>
+                                            <option
+                                                value="{{ $trainingcenter['id'] }}"
+                                                {{ old('training_center_id') == $trainingcenter['id'] ? 'selected' : '' }}
+                                            >
+                                                {{ $trainingcenter['name'] }}
+                                            </option>
                                         @endforeach
-
                                     </select>
-
                                     @error('training_center_id')
-
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
-
                                 </div>
-
                             </div>
-
 
                             {{-- INFORMACIÓN --}}
                             <div
@@ -483,41 +347,27 @@
                                 style="
                                     background: #eef8e9;
                                     border-radius: 10px;
-                                "
-                            >
+                                ">
 
                                 <div class="d-flex gap-2">
-
                                     <i
-                                        class="bi bi-info-circle-fill text-success"
-                                    ></i>
-
+                                        class="bi bi-info-circle-fill text-success"></i>
                                     <small>
                                         Verifica los datos del instructor y sus
                                         asociaciones antes de guardarlo.
                                     </small>
-
                                 </div>
-
                             </div>
-
                         </div>
-
 
                         {{-- BOTONES --}}
                         <div
-                            class="p-4 border-top d-flex justify-content-end gap-2"
-                        >
-
+                            class="p-4 border-top d-flex justify-content-end gap-2">
                             <a
                                 href="{{ route('teacher.index') }}"
-                                class="btn btn-light px-4"
-                            >
-
+                                class="btn btn-light px-4">
                                 <i class="bi bi-x-lg me-2"></i>
-
                                 Cancelar
-
                             </a>
 
                             <button
@@ -526,35 +376,22 @@
                                 style="
                                     background: #39A900;
                                     border-color: #39A900;
-                                "
-                            >
-
+                                ">
                                 <i class="bi bi-check-lg me-2"></i>
-
                                 Guardar instructor
-
                             </button>
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
-
 
         {{-- PIE --}}
         <div class="text-center mt-4">
-
             <small class="text-muted">
                 Sistema de Administración Académica · SENA
             </small>
-
         </div>
-
     </div>
 </div>
 

@@ -10,7 +10,7 @@
                     
                     <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
                         <h4 class="mb-0 fw-bold">Detalle del Instructor</h4>
-                        <p class="mb-0 mt-1 small opacity-75">{{ $teacher['name'] }}</p>
+                        <p class="mb-0 mt-1 small opacity-75">{{ $teachers['name'] }}</p>
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
@@ -18,21 +18,21 @@
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID de Instructor</span>
                             <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
-                                #{{ $teacher['id'] }}
+                                #{{ $teachers['id'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Nombre Completo</span>
                             <div class="p-3 bg-light rounded-3 fw-medium text-dark">
-                                {{ $teacher['name'] }}
+                                {{ $teachers['name'] }}
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Correo Institucional</span>
                             <div class="p-3 bg-light rounded-3 text-dark">
-                                {{ $teacher['email'] }}
+                                {{ $teachers['email'] }}
                             </div>
                         </div>
 
@@ -40,13 +40,13 @@
                             <div class="col-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID del Área</span>
                                 <div class="p-3 bg-light rounded-3 text-secondary font-monospace">
-                                    {{ $teacher['area_id'] }}
+                                    {{ $teachers['area_id'] }}
                                 </div>
                             </div>
                             <div class="col-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID del Centro</span>
                                 <div class="p-3 bg-light rounded-3 text-secondary font-monospace">
-                                    {{ $teacher['training_center_id'] }}
+                                    {{ $teachers['training_center_id'] }}
                                 </div>
                             </div>
                         </div>
@@ -57,13 +57,13 @@
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($teacher['created_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($teachers['created_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última actualización</span>
                                 <div class="p-2 bg-light rounded-2 small text-secondary">
-                                    {{ \Carbon\Carbon::parse($teacher['updated_at'])->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($teachers['updated_at'])->format('d/m/Y H:i') }}
                                 </div>
                             </div>
                         </div>

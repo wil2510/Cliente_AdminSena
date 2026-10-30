@@ -39,7 +39,7 @@
                             <select name="area_id" id="area_id" class="form-select" required>
                                 @foreach ($areas as $area)
                                     <option value="{{ $area['id'] }}" {{ old('area_id', $course['area_id']) == $area['id'] ? 'selected' : '' }}>
-                                        {{ $area['name']}}
+                                        {{ $area['name'] }}
                                     </option>
                                 @endforeach
                             </select>

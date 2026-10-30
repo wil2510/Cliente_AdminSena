@@ -34,21 +34,11 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th class="ps-4">
-                                    ID
-                                </th>
-                                <th>
-                                    Nombre
-                                </th>
-                                <th>
-                                    Email
-                                </th>
-                                <th>
-                                    Área
-                                </th>
-                                <th>
-                                    Computador
-                                </th>
+                                <th class="ps-4">ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Curso</th>
+                                <th>Computador</th>
                                 <th class="text-center">
                                     Acciones
                                 </th>
@@ -58,47 +48,31 @@
                             @forelse (($apprentices ?? []) as $apprentice)
                                 <tr>
                                     <td class="ps-4 fw-bold">
-                                        #{{ data_get($apprentice, 'id') }}
+                                        #{{ $apprentice['id'] }}
                                     </td>
                                     <td class="fw-bold">
-                                        {{ data_get($apprentice, 'name') }}
+                                        {{ $apprentice['name'] }}
                                     </td>
                                     <td>
-                                        {{ data_get($apprentice, 'email') }}
+                                        {{ $apprentice['email'] }}
                                     </td>
                                     <td>
-                                        @if (data_get($apprentice, 'area'))
-                                            <span class="badge bg-success">
-                                                {{ data_get($apprentice, 'area.name') }}
-                                            </span>
-                                        @else
-                                            <span class="text-muted">
-                                                Sin área
-                                            </span>
-                                        @endif
+                                        {{ $apprentice['course_id'] }}
                                     </td>
                                     <td>
-                                        @if (data_get($apprentice, 'computer'))
-                                            <span class="badge bg-success">
-                                                {{ data_get($apprentice, 'computer.name') }}
-                                            </span>
-                                        @else
-                                            <span class="text-muted">
-                                                Sin computador
-                                            </span>
-                                        @endif
+                                        {{ $apprentice['computer_id'] }}
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('apprentice.show', data_get($apprentice, 'id')) }}"
+                                            <a href="{{ route('apprentice.show', $apprentice['id']) }}"
                                                 class="btn btn-sm btn-info text-white">
                                                 Ver
                                             </a>
-                                            <a href="{{ route('apprentice.edit', data_get($apprentice, 'id')) }}"
+                                            <a href="{{ route('apprentice.edit', $apprentice['id']) }}"
                                                 class="btn btn-sm btn-warning text-white">
                                                 Editar
                                             </a>
-                                            <form action="{{ route('apprentice.destroy', data_get($apprentice, 'id')) }}"
+                                            <form action="{{ route('apprentice.destroy', $apprentice['id']) }}"
                                                 method="POST"
                                                 class="d-inline"
                                                 onsubmit="return confirm('¿Está seguro de eliminar este aprendiz?')">

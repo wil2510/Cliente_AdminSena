@@ -47,55 +47,28 @@
                 class="btn-close"
                 data-bs-dismiss="alert">
             </button>
-
         </div>
-
         @endif
-
 
         {{-- TABLA --}}
 
         <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-
             <div class="card-body p-0">
-
                 <div class="table-responsive">
-
                     <table class="table table-hover align-middle mb-0">
-
                         <thead class="table-dark">
-
                             <tr>
-
-                                <th class="ps-4">
-                                    ID
-                                </th>
-
-                                <th>
-                                    Código
-                                </th>
-
-                                <th>
-                                    Nombre
-                                </th>
-
-                                <th>
-                                    Área
-                                </th>
-
-                                <th>
-                                    Centro de Formación
-                                </th>
-
-                                <th class="text-center">
-                                    Acciones
-                                </th>
+                                <th class="ps-4">ID</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Área</th>
+                                <th>Centro de Formación</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
+
                         <tbody>
-
                             @forelse ($courses as $course)
-
                             <tr>
                                 <td class="ps-4 fw-bold">
                                     #{{ $course['id'] }}
@@ -109,52 +82,31 @@
                                     {{ $course['name'] }}
                                 </td>
                                 <td>
-                                    @if ($course['area_id'])
-                                    {{ $course['area_id'] }}
-                                    @else
-
-                                    <span class="text-muted">
-                                        Sin área
-                                    </span>
-                                    @endif
+                                    {{ $course['area_id']}}
                                 </td>
+
                                 <td>
-                                    @if ($course['training_center_id'])
                                     {{ $course['training_center_id'] }}
-                                    @else
-                                    <span class="text-muted">
-                                        Sin centro
-                                    </span>
-                                    @endif
                                 </td>
 
                                 <td class="text-center">
-
                                     <div class="d-flex justify-content-center gap-2">
-
                                         {{-- VER --}}
-
                                         <a href="{{ route('course.show', $course['id']) }}"
                                             class="btn btn-sm btn-info text-white">
                                             Ver
                                         </a>
-
                                         {{-- EDITAR --}}
-
                                         <a href="{{ route('course.edit', $course['id']) }}"
                                             class="btn btn-sm btn-warning text-white">
-
                                             Editar
-
                                         </a>
 
-
                                         {{-- ELIMINAR --}}
-
                                         <form action="{{ route('course.destroy', $course['id']) }}"
                                             method="POST"
                                             class="d-inline"
-                                            onsubmit="return confirm('¿Está completamente seguro de eliminar este curso?')">
+                                            onsubmit="return confirm('¿Deseas eliminar este curso?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -166,34 +118,20 @@
                                 </td>
                             </tr>
 
-
                             @empty
-
                             <tr>
-
                                 <td colspan="6"
                                     class="text-center py-5 text-muted">
-
                                     No hay cursos registrados.
-
                                 </td>
-
                             </tr>
-
                             @endforelse
-
                         </tbody>
-
                     </table>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 @endsection

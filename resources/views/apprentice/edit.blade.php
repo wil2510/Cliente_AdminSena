@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="card-body p-4 p-md-5 bg-white">
-                        <form action="{{ route('apprentice.update', data_get($apprentice, 'id')) }}" method="POST">
+                        <form action="{{ route('apprentice.update', $apprentice['id']) }}" method="POST">
                             @csrf
                             @method('put')
 
@@ -24,7 +24,7 @@
                                         id="name"
                                         name="name" 
                                         class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
-                                        value="{{ old('name', data_get($apprentice, 'name')) }}"
+                                        value="{{ old('name', $apprentice['name']) }}"
                                         required>
                             </div>
 
@@ -34,7 +34,7 @@
                                         id="email"
                                         name="email" 
                                         class="form-control form-control-lg bg-light border-0 rounded-3 text-dark fw-medium" 
-                                        value="{{ old('email', data_get($apprentice, 'email')) }}"
+                                        value="{{ old('email', $apprentice['email']) }}"
                                         required>
                             </div>
 
@@ -44,7 +44,7 @@
                                         id="cell_number"
                                         name="cell_number" 
                                         class="form-control form-control-lg bg-light border-0 rounded-3 text-dark font-monospace" 
-                                        value="{{ old('cell_number', data_get($apprentice, 'cell_number')) }}"
+                                        value="{{ old('cell_number', $apprentice['cell_number']) }}"
                                         required>
                             </div>
 
@@ -52,8 +52,8 @@
                                 <label for="course_id" class="form-label text-muted small fw-bold text-uppercase tracking-wider">Ficha de Curso Vincular</label>
                                 <select name="course_id" id="course_id" class="form-select form-select-lg bg-light border-0 rounded-3 text-dark fw-medium" required>
                                     @foreach($courses as $course)
-                                        <option value="{{ data_get($course, 'id') }}" {{ old('course_id', data_get($apprentice, 'course_id')) == data_get($course, 'id') ? 'selected' : '' }}>
-                                            {{ data_get($course, 'course_number', data_get($course, 'name')) }}
+                                        <option value="{{ $course['id'] }}" {{ old('course_id', $apprentice['course_id']) == $course['id'] ? 'selected' : '' }}>
+                                            {{ $course['course_number'] ?? $course['name'] }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -63,8 +63,8 @@
                                 <label for="computer_id" class="form-label text-muted small fw-bold text-uppercase tracking-wider">Computador Coasociado</label>
                                 <select name="computer_id" id="computer_id" class="form-select form-select-lg bg-light border-0 rounded-3 text-dark fw-medium" required>
                                     @foreach($computers as $computer)
-                                        <option value="{{ data_get($computer, 'id') }}" {{ old('computer_id', data_get($apprentice, 'computer_id')) == data_get($computer, 'id') ? 'selected' : '' }}>
-                                            Equipo N° {{ data_get($computer, 'number') }}
+                                        <option value="{{ $computer['id'] }}" {{ old('computer_id', $apprentice['computer_id']) == $computer['id'] ? 'selected' : '' }}>
+                                            Equipo N° {{ $computer['number'] }}
                                         </option>
                                     @endforeach
                                 </select>

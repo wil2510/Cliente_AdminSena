@@ -20,7 +20,6 @@ class CourseController extends Controller
         $url = env('URL_SERVER_API');
 
         $courses = $this->fetchDataFromApi($url . '/courses');
-        // return $courses;
         return view('course.index', compact('courses'));
     }
 
@@ -58,6 +57,7 @@ class CourseController extends Controller
         $areas = Http::get($url . '/areas')->json();
         $trainingcenters = Http::get($url . '/trainingcenters')->json();
         $course = $this->fetchDataFromApi($url . '/courses/' . $id);
+        
         return view('course.edit', compact('course', 'areas', 'trainingcenters'));
     }
 
