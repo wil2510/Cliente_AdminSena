@@ -29,12 +29,12 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/auth', function () {return view('auth.login');})->name('login');
 Route::get('/register', function () {return view('auth.register');})->name('register');
 
-Route::get('area/create', [AreaController::class, 'create'])->name('area.create');
+Route::get('areas/create', [AreaController::class, 'create'])->name('area.create');
 Route::post('area/admin', [AreaController::class, 'admin'])->name('area.admin');
-Route::get('area/list', [AreaController::class, 'index'])->name('area.index');
-Route::get('area/{id}', [AreaController::class, 'show'])->name('area.show');
-Route::get('area/{area}/editar', [AreaController::class, 'edit'])->name('area.edit');
-Route::put('area/{area}', [AreaController::class, 'update'])->name('area.update');
+Route::get('areas/list', [AreaController::class, 'index'])->name('area.index');
+Route::get('areas/{id}', [AreaController::class, 'show'])->name('area.show');
+Route::get('areas/{area}/editar', [AreaController::class, 'edit'])->name('area.edit');
+Route::put('areas/{area}', [AreaController::class, 'update'])->name('area.update');
 Route::delete('area/{area}', [AreaController::class, 'destroy'])->name('area.destroy');
 
 Route::get('trainingcenter/create', [TrainingCenterController::class, 'create'])->name('trainingcenter.create');

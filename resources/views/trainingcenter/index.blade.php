@@ -33,28 +33,6 @@
 
         </div>
 
-
-        {{-- MENSAJE DE ÉXITO --}}
-
-        @if (session('success'))
-
-        <div class="alert alert-success alert-dismissible fade show"
-            role="alert">
-
-            {{ session('success') }}
-
-            <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-            </button>
-
-        </div>
-
-        @endif
-
-
-        {{-- TABLA --}}
-
         <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
 
             <div class="card-body p-0">
@@ -75,9 +53,7 @@
                                     Nombre del Centro
                                 </th>
 
-                                <th>
-                                    Ubicación
-                                </th>
+                                <th>imagen</th>
 
                                 <th class="text-center">
                                     Acciones
@@ -103,12 +79,8 @@
                                     {{ $trainingcenter['name'] }}
                                 </td>
 
-
-                                <td>
-                                    {{ $trainingcenter['location'] }}
+                                <td><img src="{{ $trainingcenter['imagen_url'] }}" alt="{{ $trainingcenter['name'] }}" width="100">
                                 </td>
-
-
                                 <td class="text-center">
 
                                     <div class="d-flex justify-content-center gap-2">
@@ -142,7 +114,7 @@
 
                                             @csrf
 
-                                            @method('DELETE')
+                                            @method('delete')
 
                                             <button type="submit"
                                                 class="btn btn-sm btn-danger">
@@ -159,7 +131,6 @@
 
                             </tr>
 
-
                             @empty
 
                             <tr>
@@ -167,7 +138,7 @@
                                 <td colspan="4"
                                     class="text-center py-5 text-muted">
 
-                                    No hay centros de formación registrados.
+                                    No hay centros registrados.
 
                                 </td>
 

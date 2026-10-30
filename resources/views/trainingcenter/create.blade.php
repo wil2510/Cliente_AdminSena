@@ -23,7 +23,7 @@
                     </h1>
 
                     <p class="text-muted mb-0">
-                        Registra un nuevo centro de formación SENA.
+                        Registra un nuevo centro de formación.
                     </p>
 
                 </div>
@@ -71,8 +71,7 @@
                     </h2>
 
                     <p class="text-white-50" style="line-height: 1.7;">
-                        Registra los centros de formación para organizar
-                        los espacios y procesos académicos.
+                        Registra un centro de formación para organizar los espacios y procesos académicos.
                     </p>
 
 
@@ -84,7 +83,7 @@
                             <div>
                                 <div class="fw-bold">Nombre</div>
                                 <small class="text-white-50">
-                                    Ingresa el nombre del centro.
+                                    Define el nombre del centro.
                                 </small>
                             </div>
                         </div>
@@ -93,9 +92,9 @@
                             <div class="fw-bold" style="color: #39A900;">02</div>
 
                             <div>
-                                <div class="fw-bold">Ubicación</div>
+                                <div class="fw-bold">Imagen</div>
                                 <small class="text-white-50">
-                                    Registra su ubicación.
+                                    Selecciona una imagen representativa.
                                 </small>
                             </div>
                         </div>
@@ -106,7 +105,7 @@
                             <div>
                                 <div class="fw-bold">Registro</div>
                                 <small class="text-white-50">
-                                    Guarda el centro en el sistema.
+                                    Guarda la información del centro.
                                 </small>
                             </div>
                         </div>
@@ -133,7 +132,6 @@
                         <div class="d-flex justify-content-between align-items-center">
 
                             <div>
-
                                 <h4 class="fw-bold mb-1">
                                     Información del centro
                                 </h4>
@@ -141,7 +139,6 @@
                                 <p class="text-muted mb-0 small">
                                     Completa los datos solicitados.
                                 </p>
-
                             </div>
 
                             <i class="bi bi-three-dots"
@@ -152,7 +149,10 @@
                     </div>
 
 
-                    <form action="{{ route('trainingcenter.admin') }}" method="POST">
+                    <form
+                        action="{{ route('trainingcenter.admin') }}"
+                        method="POST"
+                        enctype="multipart/form-data">
 
                         @csrf
 
@@ -160,25 +160,25 @@
 
                             @if ($errors->any())
 
-                                <div class="alert alert-danger d-flex align-items-start gap-2">
+                            <div class="alert alert-danger d-flex align-items-start gap-2">
 
-                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                <i class="bi bi-exclamation-triangle-fill"></i>
 
-                                    <div>
+                                <div>
 
-                                        <strong>Revisa la información:</strong>
+                                    <strong>Revisa la información:</strong>
 
-                                        <ul class="mb-0 mt-1">
+                                    <ul class="mb-0 mt-1">
 
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
 
-                                        </ul>
-
-                                    </div>
+                                    </ul>
 
                                 </div>
+
+                            </div>
 
                             @endif
 
@@ -187,11 +187,8 @@
                             <div class="mb-4">
 
                                 <label for="name" class="form-label fw-semibold">
-
-                                    <i class="bi bi-building me-2 text-success"></i>
-
+                                    <i class="bi bi-card-text me-2 text-success"></i>
                                     Nombre del centro
-
                                 </label>
 
                                 <input
@@ -201,43 +198,34 @@
                                     value="{{ old('name') }}"
                                     class="form-control form-control-lg @error('name') is-invalid @enderror"
                                     placeholder="Ej: Centro de Comercio y Servicios"
-                                    style="border-radius: 10px;"
-                                >
+                                    style="border-radius: 10px;">
 
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-
                             </div>
 
-
-                            {{-- UBICACIÓN --}}
-                            <div class="mb-3">
-
+                            <div class="mb-4">
                                 <label for="location" class="form-label fw-semibold">
-
-                                    <i class="bi bi-geo-alt-fill me-2 text-success"></i>
-
-                                    Ubicación
-
+                                    <i class="bi bi-card-text me-2 text-success"></i>
+                                    Ubicación del centro
                                 </label>
-
                                 <input
                                     type="text"
                                     id="location"
                                     name="location"
                                     value="{{ old('location') }}"
                                     class="form-control form-control-lg @error('location') is-invalid @enderror"
-                                    placeholder="Ej: Popayán, Cauca"
-                                    style="border-radius: 10px;"
-                                >
+                                    placeholder="Ej: Calle 123, Ciudad"
+                                    style="border-radius: 10px;">
 
                                 @error('location')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-
                             </div>
 
+                            <label class="form-label fw-bold">Imagen del centro</label>
+                            <input type="file" name="imagen" class="form-control" accept="image/jpeg,image/png,image/webp" required>
 
                             <div class="p-3 mt-4"
                                 style="background: #eef8e9; border-radius: 10px;">
@@ -247,8 +235,7 @@
                                     <i class="bi bi-info-circle-fill text-success"></i>
 
                                     <small>
-                                        Verifica el nombre y ubicación del centro
-                                        antes de registrarlo.
+                                        Verifica el nombre y la imagen antes de guardar el centro.
                                     </small>
 
                                 </div>
@@ -271,8 +258,7 @@
                             <button
                                 type="submit"
                                 class="btn btn-success px-4"
-                                style="background: #39A900; border-color: #39A900;"
-                            >
+                                style="background: #39A900; border-color: #39A900;">
 
                                 <i class="bi bi-check-lg me-2"></i>
                                 Guardar centro

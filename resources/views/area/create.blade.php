@@ -153,8 +153,7 @@
                     <form
                         action="{{ route('area.admin') }}"
                         method="POST"
-                        enctype="multipart/form-data"
-                    >
+                        enctype="multipart/form-data">
 
                         @csrf
 
@@ -162,25 +161,25 @@
 
                             @if ($errors->any())
 
-                                <div class="alert alert-danger d-flex align-items-start gap-2">
+                            <div class="alert alert-danger d-flex align-items-start gap-2">
 
-                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                <i class="bi bi-exclamation-triangle-fill"></i>
 
-                                    <div>
+                                <div>
 
-                                        <strong>Revisa la información:</strong>
+                                    <strong>Revisa la información:</strong>
 
-                                        <ul class="mb-0 mt-1">
+                                    <ul class="mb-0 mt-1">
 
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
 
-                                        </ul>
-
-                                    </div>
+                                    </ul>
 
                                 </div>
+
+                            </div>
 
                             @endif
 
@@ -203,46 +202,16 @@
                                     value="{{ old('name') }}"
                                     class="form-control form-control-lg @error('name') is-invalid @enderror"
                                     placeholder="Ej: Sistemas"
-                                    style="border-radius: 10px;"
-                                >
+                                    style="border-radius: 10px;">
 
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 
                             </div>
 
-
-                            {{-- IMAGEN --}}
-                            <div class="mb-3">
-
-                                <label for="urlFoto" class="form-label fw-semibold">
-
-                                    <i class="bi bi-image-fill me-2 text-success"></i>
-
-                                    Imagen del área
-
-                                </label>
-
-                                <input
-                                    type="file"
-                                    id="urlFoto"
-                                    name="urlFoto"
-                                    accept="image/*"
-                                    class="form-control form-control-lg @error('urlFoto') is-invalid @enderror"
-                                    style="border-radius: 10px;"
-                                >
-
-                                <small class="text-muted">
-                                    Selecciona una imagen para identificar el área.
-                                </small>
-
-                                @error('urlFoto')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-
+                            <label class="form-label">Imagen</label>
+                            <input type="file" name="imagen" class="form-control" accept="image/*">
 
                             <div class="p-3 mt-4"
                                 style="background: #eef8e9; border-radius: 10px;">
@@ -276,8 +245,7 @@
                             <button
                                 type="submit"
                                 class="btn btn-success px-4"
-                                style="background: #39A900; border-color: #39A900;"
-                            >
+                                style="background: #39A900; border-color: #39A900;">
 
                                 <i class="bi bi-check-lg me-2"></i>
                                 Guardar área

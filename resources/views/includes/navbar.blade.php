@@ -143,42 +143,6 @@
                                 Aprendices
                             </a>
                         </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <h6 class="dropdown-header fw-bold" style="color: #198754;">
-                                Módulos académicos
-                            </h6>
-                        </li>
-                        <li>
-                            <a href="{{ route('programa.create') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-mortarboard-fill me-2" style="color: #198754;"></i>
-                                Programas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('oferta.create') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-megaphone-fill me-2" style="color: #198754;"></i>
-                                Ofertas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('ficha.create') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-people-fill me-2" style="color: #198754;"></i>
-                                Fichas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('ambiente.create') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-house-gear-fill me-2" style="color: #198754;"></i>
-                                Ambientes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('noticia.create') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-newspaper me-2" style="color: #198754;"></i>
-                                Noticias
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
@@ -238,36 +202,6 @@
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a href="{{ route('programa.index') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-mortarboard-fill me-2" style="color: #198754;"></i>
-                                Programas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('oferta.index') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-megaphone-fill me-2" style="color: #198754;"></i>
-                                Ofertas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('ficha.index') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-people-fill me-2" style="color: #198754;"></i>
-                                Fichas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('ambiente.index') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-house-gear-fill me-2" style="color: #198754;"></i>
-                                Ambientes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('noticia.index') }}" class="dropdown-item rounded-3 py-2">
-                                <i class="bi bi-newspaper me-2" style="color: #198754;"></i>
-                                Noticias
-                            </a>
-                        </li>
                     </ul>
                 </li>
 

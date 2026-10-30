@@ -24,8 +24,8 @@
 
 
             <a href="{{ route('area.create') }}"
-               class="btn text-white fw-bold px-4 py-2 shadow-sm"
-               style="background-color: #198754;">
+                class="btn text-white fw-bold px-4 py-2 shadow-sm"
+                style="background-color: #198754;">
 
                 Nueva Área
 
@@ -38,17 +38,17 @@
 
         @if (session('success'))
 
-            <div class="alert alert-success alert-dismissible fade show"
-                role="alert">
+        <div class="alert alert-success alert-dismissible fade show"
+            role="alert">
 
-                {{ session('success') }}
+            {{ session('success') }}
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
-                </button>
+            <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
 
-            </div>
+        </div>
 
         @endif
 
@@ -90,85 +90,81 @@
 
                             @forelse ($areas as $area)
 
-                                <tr>
+                            <tr>
 
-                                    <td class="ps-4 fw-bold">
-                                        #{{ $area['id'] }}
-                                    </td>
-
-
-                                    <td class="fw-bold">
-                                        {{ $area['name'] }}
-                                    </td>
-                                <td><img
-                                        src="{{ asset('storage/images/' . $area['urlFoto']) }}"
-                                        alt="Imagen del area"
-                                        width="80"
-                                        height="80"
-                                        style="object-fit: cover; border-radius: 5px;"
-                                ></td>
-                                    <td class="text-center">
-
-                                        <div class="d-flex justify-content-center gap-2">
-
-                                            {{-- VER --}}
-
-                                            <a href="{{ route('area.show', $area['id']) }}"
-                                                class="btn btn-sm btn-info text-white">
-
-                                                Ver
-
-                                            </a>
+                                <td class="ps-4 fw-bold">
+                                    #{{ $area['id'] }}
+                                </td>
 
 
-                                            {{-- EDITAR --}}
+                                <td class="fw-bold">
+                                    {{ $area['name'] }}
+                                </td>
 
-                                            <a href="{{ route('area.edit', $area['id']) }}"
-                                               class="btn btn-sm btn-warning text-white">
+                                <td><img src="{{ $area['imagen_url'] }}" alt="{{ $area['name'] }}" width="100">
+                                </td>
+                                <td class="text-center">
 
-                                                Editar
+                                    <div class="d-flex justify-content-center gap-2">
 
-                                            </a>
+                                        {{-- VER --}}
+
+                                        <a href="{{ route('area.show', $area['id']) }}"
+                                            class="btn btn-sm btn-info text-white">
+
+                                            Ver
+
+                                        </a>
 
 
-                                            {{-- ELIMINAR --}}
+                                        {{-- EDITAR --}}
 
-                                            <form action="{{ route('area.destroy', $area['id']) }}"
-                                                method="POST"
-                                                  class="d-inline"
-                                                  onsubmit="return confirm('¿Está completamente seguro de eliminar esta área?')">
+                                        <a href="{{ route('area.edit', $area['id']) }}"
+                                            class="btn btn-sm btn-warning text-white">
 
-                                                @csrf
+                                            Editar
 
-                                                @method('delete')
+                                        </a>
 
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-danger">
 
-                                                    Eliminar
+                                        {{-- ELIMINAR --}}
 
-                                                </button>
+                                        <form action="{{ route('area.destroy', $area['id']) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('¿Está completamente seguro de eliminar esta área?')">
 
-                                            </form>
+                                            @csrf
 
-                                        </div>
+                                            @method('delete')
 
-                                    </td>
+                                            <button type="submit"
+                                                class="btn btn-sm btn-danger">
 
-                                </tr>
+                                                Eliminar
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
 
                             @empty
 
-                                <tr>
+                            <tr>
 
-                                    <td colspan="3"
-                                        class="text-center py-5 text-muted">
+                                <td colspan="3"
+                                    class="text-center py-5 text-muted">
 
-                                        No hay áreas registradas.
+                                    No hay áreas registradas.
 
-                                    </td>
+                                </td>
 
-                                </tr>
+                            </tr>
 
                             @endforelse
 
@@ -187,4 +183,3 @@
 </div>
 
 @endsection
-
