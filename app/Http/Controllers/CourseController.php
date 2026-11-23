@@ -10,8 +10,7 @@ class CourseController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()   //http://api.codersfree.test/v1/courses?included=posts
@@ -19,7 +18,7 @@ class CourseController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $courses = $this->fetchDataFromApi($url . '/courses');
+        $courses = $this->apiCollection($this->fetchDataFromApi($url . '/courses'));
         return view('course.index', compact('courses'));
     }
 
@@ -28,7 +27,11 @@ class CourseController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $courses = $this->fetchDataFromApi($url . '/courses/' . $id);
+        $courses = $this->apiRecord($this->fetchDataFromApi($url . '/courses/' . $id));
+
+        if ($courses === []) {
+            return $this->missingApiRecord('course.index');
+        }
 
         return view('course.show', compact('courses'));
     }
@@ -36,8 +39,8 @@ class CourseController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $areas = Http::get($url . '/areas')->json();
-        $trainingcenters = Http::get($url . '/trainingcenters')->json();
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
+        $trainingcenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
 
         return view('course.create', compact('areas', 'trainingcenters'));
     }
@@ -46,17 +49,24 @@ class CourseController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/courses', $request->all());
+        if (!$this->createApiRecord($url . '/courses', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('course.index');
+        return redirect()->route('course.index')->with('status', 'Curso creado correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $areas = Http::get($url . '/areas')->json();
-        $trainingcenters = Http::get($url . '/trainingcenters')->json();
-        $course = $this->fetchDataFromApi($url . '/courses/' . $id);
+        $course = $this->apiRecord($this->fetchDataFromApi($url . '/courses/' . $id));
+
+        if ($course === []) {
+            return $this->missingApiRecord('course.index');
+        }
+
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
+        $trainingcenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
         
         return view('course.edit', compact('course', 'areas', 'trainingcenters'));
     }
@@ -65,7 +75,7 @@ class CourseController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/courses/' . $id, $request->all());
+        Http::put($url . '/courses/' . $id, $request->except(['_token', '_method']))->throw();
 
         return redirect()->route('course.index');
     }
@@ -73,7 +83,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/courses/' . $id);
+        Http::delete($url . '/courses/' . $id)->throw();
         return redirect()->route('course.index');
     }
 }

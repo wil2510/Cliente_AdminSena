@@ -10,15 +10,14 @@ class AreaController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()
     {
 
         $url = env('URL_SERVER_API');
-        $areas = $this->fetchDataFromApi($url . '/areas');
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
 
         return view('area.index', compact('areas'));
     }
@@ -27,7 +26,11 @@ class AreaController extends Controller
     {
 
         $url = env('URL_SERVER_API');
-        $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
+        $areas = $this->apiRecord($this->fetchDataFromApi($url . '/areas/' . $id));
+
+        if ($areas === []) {
+            return $this->missingApiRecord('area.index');
+        }
 
         return view('area.show', compact('areas'));
     }
@@ -48,16 +51,22 @@ class AreaController extends Controller
 
         $file = $request->file('imagen');
 
-        $response = Http::attach('imagen',file_get_contents($file->getRealPath()),$file->getClientOriginalName())
-        ->post(env('URL_SERVER_API') . '/areas',['name' => $request->name,]);
+        if (!$this->createApiRecord($url . '/areas', ['name' => $request->name], $file, 'imagen')) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('area.index');
+        return redirect()->route('area.index')->with('status', 'Área creada correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $area = $this->fetchDataFromApi($url . '/areas/' . $id);
+        $area = $this->apiRecord($this->fetchDataFromApi($url . '/areas/' . $id));
+
+        if ($area === []) {
+            return $this->missingApiRecord('area.index');
+        }
+
         return view('area.edit', compact('area'));
     }
 
@@ -65,7 +74,16 @@ class AreaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/areas/' . $id, $request->all());
+        $payload = $request->except(['_token', '_method', 'imagen']);
+
+        if ($request->hasFile('imagen')) {
+            $file = $request->file('imagen');
+            Http::attach('imagen', file_get_contents($file->getRealPath()), $file->getClientOriginalName())
+                ->put($url . '/areas/' . $id, $payload)
+                ->throw();
+        } else {
+            Http::put($url . '/areas/' . $id, $payload)->throw();
+        }
 
         return redirect()->route('area.index');
     }
@@ -73,7 +91,7 @@ class AreaController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/areas/' . $id);
+        Http::delete($url . '/areas/' . $id)->throw();
         return redirect()->route('area.index');
     }
 }

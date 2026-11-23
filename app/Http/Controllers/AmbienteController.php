@@ -9,16 +9,13 @@ class AmbienteController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()
     {
         $url = env('URL_SERVER_API');
-        $response = $this->fetchDataFromApi($url . '/ambientes');
-        $ambientes = is_array($response) ? $response : [];
+        $ambientes = $this->apiCollection($this->fetchDataFromApi($url . '/ambientes'));
 
         return view('ambiente.index', compact('ambientes'));
     }
@@ -26,13 +23,12 @@ class AmbienteController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $response = $this->fetchDataFromApi($url . '/training_centers');
-        $trainingCenters = is_array($response) ? $response : [];
+        $trainingCenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
 
         return view('ambiente.create', compact('trainingCenters'));
     }
 
-    public function store(Request $request)
+    public function admin(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -41,15 +37,21 @@ class AmbienteController extends Controller
         ]);
 
         $url = env('URL_SERVER_API');
-        Http::post($url . '/ambientes', $request->all())->throw();
+        if (!$this->createApiRecord($url . '/ambientes', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('ambiente.index');
+        return redirect()->route('ambiente.index')->with('status', 'Ambiente creado correctamente.');
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
-        $ambiente = $this->fetchDataFromApi($url . '/ambientes/' . $id);
+        $ambiente = $this->apiRecord($this->fetchDataFromApi($url . '/ambientes/' . $id));
+
+        if ($ambiente === []) {
+            return $this->missingApiRecord('ambiente.index');
+        }
 
         return view('ambiente.show', compact('ambiente'));
     }
@@ -57,9 +59,13 @@ class AmbienteController extends Controller
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $ambiente = $this->fetchDataFromApi($url . '/ambientes/' . $id);
-        $response = $this->fetchDataFromApi($url . '/training_centers');
-        $trainingCenters = is_array($response) ? $response : [];
+        $ambiente = $this->apiRecord($this->fetchDataFromApi($url . '/ambientes/' . $id));
+
+        if ($ambiente === []) {
+            return $this->missingApiRecord('ambiente.index');
+        }
+
+        $trainingCenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
 
         return view('ambiente.edit', compact('ambiente', 'trainingCenters'));
     }
@@ -73,7 +79,7 @@ class AmbienteController extends Controller
         ]);
 
         $url = env('URL_SERVER_API');
-        Http::put($url . '/ambientes/' . $id, $request->all())->throw();
+        Http::put($url . '/ambientes/' . $id, $request->except(['_token', '_method']))->throw();
 
         return redirect()->route('ambiente.index');
     }

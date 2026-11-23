@@ -10,9 +10,7 @@ class TrainingCenterController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()   //http://api.codersfree.test/v1/categories?included=posts
@@ -20,8 +18,7 @@ class TrainingCenterController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $response = $this->fetchDataFromApi($url . '/trainingcenters');
-        $trainingcenters = is_array($response) ? $response : [];
+        $trainingcenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
 
         return view('trainingcenter.index', compact('trainingcenters'));
     }
@@ -31,7 +28,11 @@ class TrainingCenterController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenters/' . $id);
+        $trainingcenters = $this->apiRecord($this->fetchDataFromApi($url . '/trainingcenters/' . $id));
+
+        if ($trainingcenters === []) {
+            return $this->missingApiRecord('trainingcenter.index');
+        }
 
         return view('trainingcenter.show', compact('trainingcenters'));
     }
@@ -53,16 +54,25 @@ class TrainingCenterController extends Controller
 
         $file = $request->file('imagen');
 
-        $response = Http::attach('imagen',file_get_contents($file->getRealPath()),$file->getClientOriginalName())
-        ->post(env('URL_SERVER_API') . '/trainingcenters',['name' => $request->name, 'location' => $request->location]);
+        if (!$this->createApiRecord($url . '/trainingcenters', [
+                'name' => $request->name,
+                'location' => $request->location,
+            ], $file, 'imagen')) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('trainingcenter.index');
+        return redirect()->route('trainingcenter.index')->with('status', 'Centro creado correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $trainingcenter = $this->fetchDataFromApi($url . '/trainingcenters/' . $id);
+        $trainingcenter = $this->apiRecord($this->fetchDataFromApi($url . '/trainingcenters/' . $id));
+
+        if ($trainingcenter === []) {
+            return $this->missingApiRecord('trainingcenter.index');
+        }
+
         return view('trainingcenter.edit', compact('trainingcenter'));
     }
 
@@ -70,7 +80,15 @@ class TrainingCenterController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/trainingcenters/' . $id, $request->all())->throw();
+        $payload = $request->except(['_token', '_method', 'imagen']);
+        if ($request->hasFile('imagen')) {
+            $file = $request->file('imagen');
+            Http::attach('imagen', file_get_contents($file->getRealPath()), $file->getClientOriginalName())
+                ->put($url . '/trainingcenters/' . $id, $payload)
+                ->throw();
+        } else {
+            Http::put($url . '/trainingcenters/' . $id, $payload)->throw();
+        }
 
         return redirect()->route('trainingcenter.index');
     }

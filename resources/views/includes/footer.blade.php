@@ -111,7 +111,7 @@
 
                     {{-- LOGO --}}
                     <img
-                        src="{{ asset('storage/images/AdminSena-logo.png') }}"
+                        src="{{ asset('images/admin-sena.svg') }}"
                         alt="Admin Sena"
                         style="
                             width: 250px;

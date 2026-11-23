@@ -12,8 +12,8 @@
                     <p><strong>ID:</strong> {{ $courses['id'] }}</p>
                     <p><strong>Código:</strong> {{ $courses['code'] }}</p>
                     <p><strong>Nombre:</strong> {{ $courses['name'] }}</p>
-                    <p><strong>Área:</strong> {{ $courses['area.name'] ?? $courses['area_id'] ?? 'N/A' }}</p>
-                    <p><strong>Centro de Formación:</strong> {{ $courses['training_center.name'] ?? $courses['trainingCenter.name'] ?? $courses['training_center_id'] ?? 'N/A' }}</p>
+                    <p><strong>Área:</strong> {{ data_get($courses, 'area.name', data_get($courses, 'area_id', 'N/A')) }}</p>
+                    <p><strong>Centro de Formación:</strong> {{ data_get($courses, 'training_center.name', data_get($courses, 'trainingCenter.name', data_get($courses, 'training_center_id', 'N/A'))) }}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <a href="{{ route('course.index') }}" class="btn btn-secondary">Volver</a>

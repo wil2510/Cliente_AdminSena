@@ -149,7 +149,7 @@
                     </div>
 
 
-                    <form action="{{ route('oferta.store') }}" method="POST">
+                    <form action="{{ route('oferta.admin') }}" method="POST">
 
                         @csrf
 

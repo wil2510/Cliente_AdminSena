@@ -10,9 +10,7 @@ class ComputerController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()   //http://api.codersfree.test/v1/categories?included=posts
@@ -20,8 +18,7 @@ class ComputerController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $response = $this->fetchDataFromApi($url . '/computers');
-        $computers = is_array($response) ? $response : [];
+        $computers = $this->apiCollection($this->fetchDataFromApi($url . '/computers'));
 
         return view('computer.index', compact('computers'));
     }
@@ -31,7 +28,11 @@ class ComputerController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $computers = $this->fetchDataFromApi($url . '/computers/' . $id);
+        $computers = $this->apiRecord($this->fetchDataFromApi($url . '/computers/' . $id));
+
+        if ($computers === []) {
+            return $this->missingApiRecord('computer.index');
+        }
 
         return view('computer.show', compact('computers'));
     }
@@ -45,15 +46,22 @@ class ComputerController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/computers', $request->all())->throw();
+        if (!$this->createApiRecord($url . '/computers', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('computer.index');
+        return redirect()->route('computer.index')->with('status', 'Computador creado correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $computer = $this->fetchDataFromApi($url . '/computers/' . $id);
+        $computer = $this->apiRecord($this->fetchDataFromApi($url . '/computers/' . $id));
+
+        if ($computer === []) {
+            return $this->missingApiRecord('computer.index');
+        }
+
         return view('computer.edit', compact('computer'));
     }
 
@@ -61,7 +69,7 @@ class ComputerController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/computers/' . $id, $request->all())->throw();
+        Http::put($url . '/computers/' . $id, $request->except(['_token', '_method']))->throw();
 
         return redirect()->route('computer.index');
     }

@@ -151,7 +151,7 @@
 
 
                     <form
-                        action="{{ route('noticia.store') }}"
+                        action="{{ route('noticia.admin') }}"
                         method="POST"
                         enctype="multipart/form-data"
                     >

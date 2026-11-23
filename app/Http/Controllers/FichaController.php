@@ -9,20 +9,13 @@ class FichaController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()
     {
         $url = env('URL_SERVER_API');
-        $response = $this->fetchDataFromApi($url . '/fichas');
-        
-        if (is_array($response)) {
-            $fichas = isset($response['data']) && is_array($response['data']) ? $response['data'] : $response;
-        } else {
-            $fichas = [];
-        }
+        $fichas = $this->apiCollection($this->fetchDataFromApi($url . '/fichas'));
 
         return view('ficha.index', compact('fichas'));
     }
@@ -30,8 +23,12 @@ class FichaController extends Controller
     public function show($id)
     {
         $url = env('URL_SERVER_API');
-        $response = $this->fetchDataFromApi($url . '/fichas/' . $id);
-        $ficha = is_array($response) && isset($response['data']) ? $response['data'] : $response;
+        $ficha = $this->apiRecord($this->fetchDataFromApi($url . '/fichas/' . $id));
+
+        if ($ficha === []) {
+            return $this->missingApiRecord('ficha.index');
+        }
+
         return view('ficha.show', compact('ficha'));
     }
 
@@ -41,8 +38,8 @@ class FichaController extends Controller
         $ofertasResponse = $this->fetchDataFromApi($url . '/ofertas');
         $programasResponse = $this->fetchDataFromApi($url . '/programas');
 
-        $ofertas = is_array($ofertasResponse) ? ($ofertasResponse['data'] ?? $ofertasResponse) : [];
-        $programas = is_array($programasResponse) ? ($programasResponse['data'] ?? $programasResponse) : [];
+        $ofertas = $this->apiCollection($ofertasResponse);
+        $programas = $this->apiCollection($programasResponse);
 
         return view('ficha.create', compact('ofertas', 'programas'));
     }
@@ -50,29 +47,35 @@ class FichaController extends Controller
     public function admin(Request $request)
     {
         $url = env('URL_SERVER_API');
-        Http::post($url . '/fichas', $request->all())->throw();
-        return redirect()->route('ficha.index');
+        if (!$this->createApiRecord($url . '/fichas', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
+
+        return redirect()->route('ficha.index')->with('status', 'Ficha creada correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
+        $ficha = $this->apiRecord($this->fetchDataFromApi($url . '/fichas/' . $id));
+
+        if ($ficha === []) {
+            return $this->missingApiRecord('ficha.index');
+        }
+
         $ofertasResponse = $this->fetchDataFromApi($url . '/ofertas');
         $programasResponse = $this->fetchDataFromApi($url . '/programas');
         
-        $ofertas = is_array($ofertasResponse) ? ($ofertasResponse['data'] ?? $ofertasResponse) : [];
-        $programas = is_array($programasResponse) ? ($programasResponse['data'] ?? $programasResponse) : [];
+        $ofertas = $this->apiCollection($ofertasResponse);
+        $programas = $this->apiCollection($programasResponse);
         
-        $responseFicha = $this->fetchDataFromApi($url . '/fichas/' . $id);
-        $ficha = is_array($responseFicha) && isset($responseFicha['data']) ? $responseFicha['data'] : $responseFicha;
-
         return view('ficha.edit', compact('ficha', 'ofertas', 'programas'));
     }
 
     public function update(Request $request, $id)
     {
         $url = env('URL_SERVER_API');
-        Http::put($url . '/fichas/' . $id, $request->all())->throw();
+        Http::put($url . '/fichas/' . $id, $request->except(['_token', '_method']))->throw();
         return redirect()->route('ficha.index');
     }
 

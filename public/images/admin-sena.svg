@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180" role="img" aria-labelledby="title description">
+    <title id="title">Admin Sena</title>
+    <desc id="description">Sistema de Administración Académica</desc>
+    <rect x="4" y="4" width="172" height="172" rx="38" fill="#39A900"/>
+    <path d="M47 58h86a9 9 0 0 1 9 9v49a9 9 0 0 1-9 9H47a9 9 0 0 1-9-9V67a9 9 0 0 1 9-9Z" fill="#fff"/>
+    <path d="M58 76h64M58 91h45M58 106h54" fill="none" stroke="#39A900" stroke-linecap="round" stroke-width="8"/>
+    <circle cx="125" cy="111" r="13" fill="#202020"/>
+    <path d="m119 111 4 4 8-9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <text x="202" y="91" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Admin<tspan fill="#39A900">Sena</tspan></text>
+    <text x="205" y="128" fill="#c6c6c6" font-family="Arial, Helvetica, sans-serif" font-size="21" letter-spacing="2">GESTIÓN ACADÉMICA</text>
+</svg>

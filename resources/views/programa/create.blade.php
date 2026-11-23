@@ -260,7 +260,7 @@
 
                     {{-- FORM --}}
                     <form
-                        action="{{ route('programa.store') }}"
+                        action="{{ route('programa.admin') }}"
                         method="POST"
                     >
 

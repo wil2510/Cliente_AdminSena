@@ -143,6 +143,36 @@
                                 Aprendices
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('programa.create') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-journal-text me-2" style="color: #198754;"></i>
+                                Programas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('oferta.create') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-megaphone-fill me-2" style="color: #198754;"></i>
+                                Ofertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('ficha.create') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-card-list me-2" style="color: #198754;"></i>
+                                Fichas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('ambiente.create') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-hdd-network me-2" style="color: #198754;"></i>
+                                Ambientes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('noticia.create') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-newspaper me-2" style="color: #198754;"></i>
+                                Noticias
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -199,6 +229,36 @@
                             <a href="{{ route('apprentice.index') }}" class="dropdown-item rounded-3 py-2">
                                 <i class="bi bi-person-badge-fill me-2" style="color: #198754;"></i>
                                 Aprendices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('programa.index') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-journal-text me-2" style="color: #198754;"></i>
+                                Programas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('oferta.index') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-megaphone-fill me-2" style="color: #198754;"></i>
+                                Ofertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('ficha.index') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-card-list me-2" style="color: #198754;"></i>
+                                Fichas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('ambiente.index') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-hdd-network me-2" style="color: #198754;"></i>
+                                Ambientes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('noticia.index') }}" class="dropdown-item rounded-3 py-2">
+                                <i class="bi bi-newspaper me-2" style="color: #198754;"></i>
+                                Noticias
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>

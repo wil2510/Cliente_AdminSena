@@ -20,6 +20,20 @@
 
     <!-- Contenido Principal -->
     <main class="container my-4 flex-grow-1">
+        @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('status') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        @endif
+
+        @if (session('api_error'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('api_error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 

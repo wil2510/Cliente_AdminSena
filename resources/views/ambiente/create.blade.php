@@ -152,7 +152,7 @@
                     </div>
 
 
-                    <form action="{{ route('ambiente.store') }}" method="POST">
+                    <form action="{{ route('ambiente.admin') }}" method="POST">
 
                         @csrf
 

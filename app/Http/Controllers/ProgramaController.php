@@ -9,16 +9,14 @@ class ProgramaController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url)->throw();
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()
     {
         $url = env('URL_SERVER_API');
 
-        $response = $this->fetchDataFromApi($url . '/programas');
-        $programas = is_array($response) ? $response : [];
+        $programas = $this->apiCollection($this->fetchDataFromApi($url . '/programas'));
 
         return view('programa.index', compact('programas'));
     }
@@ -27,26 +25,31 @@ class ProgramaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $response = $this->fetchDataFromApi($url . '/areas');
-        $areas = is_array($response) ? $response : [];
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
 
         return view('programa.create', compact('areas'));
     }
 
-    public function store(Request $request)
+    public function admin(Request $request)
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/programas', $request->all())->throw();
+        if (!$this->createApiRecord($url . '/programas', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('programa.index');
+        return redirect()->route('programa.index')->with('status', 'Programa creado correctamente.');
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
 
-        $programa = $this->fetchDataFromApi($url . '/programas/' . $id);
+        $programa = $this->apiRecord($this->fetchDataFromApi($url . '/programas/' . $id));
+
+        if ($programa === []) {
+            return $this->missingApiRecord('programa.index');
+        }
 
         return view('programa.show', compact('programa'));
     }
@@ -55,10 +58,13 @@ class ProgramaController extends Controller
     {
         $url = env('URL_SERVER_API');
         
-        $programa = $this->fetchDataFromApi($url . '/programas/' . $id);
-        
-        $response = $this->fetchDataFromApi($url . '/areas');
-        $areas = is_array($response) ? $response : [];
+        $programa = $this->apiRecord($this->fetchDataFromApi($url . '/programas/' . $id));
+
+        if ($programa === []) {
+            return $this->missingApiRecord('programa.index');
+        }
+
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
 
         return view('programa.edit', compact('programa', 'areas'));
     }
@@ -67,7 +73,7 @@ class ProgramaController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/programas/' . $id, $request->all())->throw();
+        Http::put($url . '/programas/' . $id, $request->except(['_token', '_method']))->throw();
 
         return redirect()->route('programa.index');
     }

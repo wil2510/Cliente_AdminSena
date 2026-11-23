@@ -10,8 +10,7 @@ class TeacherController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
-        $response = Http::get($url);
-        return $response->json();
+        return $this->requestApi($url);
     }
 
     public function index()   //http://api.codersfree.test/v1/teachers?included=posts
@@ -19,7 +18,7 @@ class TeacherController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $teachers = $this->fetchDataFromApi($url . '/teachers');
+        $teachers = $this->apiCollection($this->fetchDataFromApi($url . '/teachers'));
         return view('teacher.index', compact('teachers'));
     }
 
@@ -28,7 +27,11 @@ class TeacherController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $teachers = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $teachers = $this->apiRecord($this->fetchDataFromApi($url . '/teachers/' . $id));
+
+        if ($teachers === []) {
+            return $this->missingApiRecord('teacher.index');
+        }
 
         return view('teacher.show', compact('teachers'));
     }
@@ -36,8 +39,8 @@ class TeacherController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $areas = Http::get($url . '/areas')->json();
-        $trainingcenters = Http::get($url . '/trainingcenters')->json();
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
+        $trainingcenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
 
         return view('teacher.create', compact('areas', 'trainingcenters'));
     }
@@ -46,17 +49,24 @@ class TeacherController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/teachers', $request->all());
+        if (!$this->createApiRecord($url . '/teachers', $request->except(['_token', '_method']))) {
+            return back()->withInput();
+        }
 
-        return redirect()->route('teacher.index');
+        return redirect()->route('teacher.index')->with('status', 'Instructor creado correctamente.');
     }
 
     public function edit($id)
     {
         $url = env('URL_SERVER_API');
-        $areas = Http::get($url . '/areas')->json();
-        $trainingcenters = Http::get($url . '/trainingcenters')->json();
-        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $teacher = $this->apiRecord($this->fetchDataFromApi($url . '/teachers/' . $id));
+
+        if ($teacher === []) {
+            return $this->missingApiRecord('teacher.index');
+        }
+
+        $areas = $this->apiCollection($this->fetchDataFromApi($url . '/areas'));
+        $trainingcenters = $this->apiCollection($this->fetchDataFromApi($url . '/trainingcenters'));
         
         return view('teacher.edit', compact('teacher', 'areas', 'trainingcenters'));
     }
@@ -65,7 +75,7 @@ class TeacherController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::put($url . '/teachers/' . $id, $request->all());
+        Http::put($url . '/teachers/' . $id, $request->except(['_token', '_method']))->throw();
 
         return redirect()->route('teacher.index');
     }
@@ -73,7 +83,7 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         $url = env('URL_SERVER_API');
-        Http::delete($url . '/teachers/' . $id);
+        Http::delete($url . '/teachers/' . $id)->throw();
         return redirect()->route('teacher.index');
     }
 }

@@ -54,7 +54,7 @@ Route::put('computer/{computer}', [ComputerController::class, 'update'])->name('
 Route::delete('computer/{computer}', [ComputerController::class, 'destroy'])->name('computer.destroy');
 
 Route::get('course/create', [CourseController::class, 'create'])->name('course.create');
-Route::post('course/store', [CourseController::class, 'store'])->name('course.admin');
+Route::post('course/admin', [CourseController::class, 'admin'])->name('course.admin');
 Route::get('course/list', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course/{course}/editar', [CourseController::class, 'edit'])->name('course.edit');
@@ -78,7 +78,7 @@ Route::put('apprentice/{apprentice}',[ApprenticeController::class, 'update'])->n
 Route::delete('apprentice/{apprentice}',[ApprenticeController::class, 'destroy'])->name('apprentice.destroy');
 
 Route::get('programa/create',[ProgramaController::class, 'create'])->name('programa.create');
-Route::post('programa/admin',[ProgramaController::class, 'store'])->name('programa.store');
+Route::post('programa/admin',[ProgramaController::class, 'admin'])->name('programa.admin');
 Route::get('programa/list',[ProgramaController::class, 'index'])->name('programa.index');
 Route::get('programa/{programa}',[ProgramaController::class, 'show'])->name('programa.show');
 Route::get('programa/{programa}/editar',[ProgramaController::class, 'edit'])->name('programa.edit');
@@ -86,23 +86,23 @@ Route::put('programa/{programa}',[ProgramaController::class, 'update'])->name('p
 Route::delete('programa/{programa}',[ProgramaController::class, 'destroy'])->name('programa.destroy');
 
 Route::get('oferta/create',[OfertaController::class, 'create'])->name('oferta.create');
-Route::post('oferta/admin',[OfertaController::class, 'store'])->name('oferta.store');
+Route::post('oferta/admin',[OfertaController::class, 'admin'])->name('oferta.admin');
 Route::get('oferta/list',[OfertaController::class, 'index'])->name('oferta.index');
 Route::get('oferta/{oferta}',[OfertaController::class, 'show'])->name('oferta.show');
 Route::get('oferta/{oferta}/editar',[OfertaController::class, 'edit'])->name('oferta.edit');
 Route::put('oferta/{oferta}',[OfertaController::class, 'update'])->name('oferta.update');
 Route::delete('oferta/{oferta}',[OfertaController::class, 'destroy'])->name('oferta.destroy');
 
-Route::get('Ficha/create',[FichaController::class, 'create'])->name('ficha.create');
-Route::post('Ficha/admin',[FichaController::class, 'store'])->name('ficha.admin');
-Route::get('Ficha/list',[FichaController::class, 'index'])->name('ficha.index');
-Route::get('Ficha/{ficha}',[FichaController::class, 'show'])->name('ficha.show');
-Route::get('Ficha/{ficha}/editar',[FichaController::class, 'edit'])->name('ficha.edit');
-Route::put('Ficha/{ficha}',[FichaController::class, 'update'])->name('ficha.update');
+Route::get('ficha/create',[FichaController::class, 'create'])->name('ficha.create');
+Route::post('ficha/admin',[FichaController::class, 'admin'])->name('ficha.admin');
+Route::get('ficha/list',[FichaController::class, 'index'])->name('ficha.index');
+Route::get('ficha/{ficha}',[FichaController::class, 'show'])->name('ficha.show');
+Route::get('ficha/{ficha}/editar',[FichaController::class, 'edit'])->name('ficha.edit');
+Route::put('ficha/{ficha}',[FichaController::class, 'update'])->name('ficha.update');
 Route::delete('ficha/{ficha}',[FichaController::class, 'destroy'])->name('ficha.destroy');
 
 Route::get('ambiente/create',[AmbienteController::class, 'create'])->name('ambiente.create');
-Route::post('ambiente/admin',[AmbienteController::class, 'store'])->name('ambiente.store');
+Route::post('ambiente/admin',[AmbienteController::class, 'admin'])->name('ambiente.admin');
 Route::get('ambiente/list',[AmbienteController::class, 'index'])->name('ambiente.index');
 Route::get('ambiente/{ambiente}',[AmbienteController::class, 'show'])->name('ambiente.show');
 Route::get('ambiente/{ambiente}/editar',[AmbienteController::class, 'edit'])->name('ambiente.edit');
@@ -110,7 +110,7 @@ Route::put('ambiente/{ambiente}',[AmbienteController::class, 'update'])->name('a
 Route::delete('ambiente/{ambiente}',[AmbienteController::class, 'destroy'])->name('ambiente.destroy');
 
 Route::get('noticia/create',[NoticiaController::class, 'create'])->name('noticia.create');
-Route::post('noticia/admin',[NoticiaController::class, 'store'])->name('noticia.store');
+Route::post('noticia/admin',[NoticiaController::class, 'admin'])->name('noticia.admin');
 Route::get('noticia/list',[NoticiaController::class, 'index'])->name('noticia.index');
 Route::get('noticia/{noticia}',[NoticiaController::class, 'show'])->name('noticia.show');
 Route::get('noticia/{noticia}/editar',[NoticiaController::class, 'edit'])->name('noticia.edit');
